@@ -1,6 +1,6 @@
 # Family Expense Tracker
-Family Expense Tracker app is my personal expense tracker app that develop for my own family, and now I decided to open source it. 
-designed to simplify tracking expense and shared expense between users effortlessly. Available on both **Android**, **iOS** and **Web** platforms.
+Family Expense Tracker is a Flutter family expense tracker app originally developed for my family’s use, which now I decided to make it open source. The app is designed to simplify tracking expense and enable effortless sharing of expenses among multiple users. It is available across **Android**, **iOS**, and **Web platforms**.
+
 
 <image src="assets/record.gif" width="220" height="480"> </image>
 <image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/ios.png" width="220" height="480"> </image>
