@@ -1,0 +1,438 @@
+import 'package:core/data/network/request/insert_expense_request.dart';
+import 'package:core/data/network/request/update_expense_request.dart';
+import 'package:core/domain/model/category_model.dart';
+import 'package:core/domain/model/expense_category_model.dart';
+import 'package:core/domain/model/sub_category_model.dart';
+import 'package:family_expense_tracker/generated/l10n.dart';
+import 'package:family_expense_tracker/presentation/bloc/category/category_bloc.dart';
+import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
+import 'package:family_expense_tracker/presentation/bloc/fcm/fcm_bloc.dart';
+import 'package:family_expense_tracker/presentation/bloc/subcategory/subcategory_bloc.dart';
+import 'package:family_expense_tracker/presentation/page/expense_form/widget/add_category_dialog.dart';
+import 'package:family_expense_tracker/presentation/page/expense_form/widget/add_subcategory_dialog.dart';
+import 'package:family_expense_tracker/presentation/page/expense_form/widget/date_picker_widget.dart';
+import 'package:family_expense_tracker/presentation/widget/category_ddl_widget.dart';
+import 'package:family_expense_tracker/presentation/widget/subcategory_ddl_widget.dart';
+import 'package:family_expense_tracker/presentation/widget/text_form_field.dart';
+import 'package:family_expense_tracker/util/app_color_util.dart';
+import 'package:family_expense_tracker/util/app_snackbar_util.dart';
+import 'package:family_expense_tracker/util/ext/date_format_util.dart';
+import 'package:family_expense_tracker/util/ext/int_util.dart';
+import 'package:family_expense_tracker/util/ext/string_util.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+
+class ExpenseFormPage extends StatefulWidget {
+  static const routeName = '/input-expense-form-page';
+  final ExpenseCategoryModel? expenseCategory;
+
+  const ExpenseFormPage({super.key, required this.expenseCategory});
+
+  @override
+  State<ExpenseFormPage> createState() => _ExpenseFormPageState();
+}
+
+class _ExpenseFormPageState extends State<ExpenseFormPage> {
+  final _formKey = GlobalKey<FormState>();
+  String note = "";
+  String price = "";
+  DateTime? date;
+  CategoryModel? categoryModel;
+  SubCategoryModel? subCategoryModel;
+  bool isSnackbarShown = false;
+  bool isFromEdit = false;
+
+  NumberFormat formatter = NumberFormat.decimalPatternDigits(
+    locale: 'en_us',
+    decimalDigits: 0,
+  );
+
+  @override
+  void initState() {
+    isFromEdit = widget.expenseCategory != null;
+    date = DateTime.now();
+
+    if (isFromEdit) {
+      note = widget.expenseCategory?.note ?? "";
+      price = formatter.format(widget.expenseCategory?.price ?? 0);
+      categoryModel = CategoryModel(
+          categoryName: widget.expenseCategory?.categoryName ?? "",
+          categoryColor: widget.expenseCategory?.categoryColor ?? -1);
+      subCategoryModel = SubCategoryModel(
+        categoryName: widget.expenseCategory?.subCategoryName ?? "",
+        categoryColor: widget.expenseCategory?.subCategoryColor ?? -1,
+      );
+      date = widget.expenseCategory?.date.toDateGlobalFormat();
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(S.of(context).form),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      ),
+      body: SafeArea(
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<ExpenseBloc, ExpenseState>(
+              listener: (context, state) {
+                if (state is ExpenseDataChanged) {
+                  Navigator.pop(context);
+                  /* TODO(JIWO), fcm call
+                   context.read<FcmBloc>().add(
+                        PostFcmEvent(SendFcmRequest(
+                            to: "/topics/all",
+                            notification: FcmNotification(
+                              title:
+                                  "$note - Rp. ${price.fromRupiah().toRupiah()}",
+                              body: "$date - ${categoryModel?.categoryName}",
+                            ))),
+                      ); */
+                } else if (state is ExpenseError) {
+                  context.show(state.message);
+                }
+              },
+            ),
+            BlocListener<FcmBloc, FcmState>(
+              listener: (context, state) {
+                if (state is FcmHasData) {
+                  Navigator.pop(context);
+                } else if (state is FcmError) {
+                  context.show(state.message);
+                }
+              },
+            ),
+          ],
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        addNote(),
+                        addDate(context),
+                        addCategory(context),
+                        addSubCategory(context),
+                        addPrice(),
+                      ],
+                    ),
+                    actionButton(context)
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget actionButton(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 50),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: OutlinedButton(
+                onPressed: () {
+                  submitForm();
+                },
+                child: Text(isFromEdit
+                    ? S.of(context).updateExpense
+                    : S.of(context).addExpense),
+              ),
+            ),
+          ),
+          if (isFromEdit)
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(width: 1.0, color: AppColors.red.primary),
+                  ),
+                  onPressed: () {
+                    if (widget.expenseCategory?.id != null) {
+                      context.read<ExpenseBloc>().add(
+                          DeleteExpenseEvent(widget.expenseCategory?.id ?? ""));
+                    }
+                  },
+                  child: Text(
+                    S.of(context).delete,
+                    style: TextStyle(color: AppColors.red.primary),
+                  ),
+                ),
+              ),
+            )
+        ],
+      ),
+    );
+  }
+
+  Widget addDate(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(S.of(context).expenseDate),
+          DatePickerWidget(callback: setDateState, initialDate: date),
+        ],
+      ),
+    );
+  }
+
+  Widget addNote() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: TextFormField(
+        initialValue: widget.expenseCategory?.note ?? "",
+        decoration: textFormFieldStyle(
+            context: context, hintText: S.of(context).expenseName),
+        validator: (val) =>
+            (val?.length ?? 0) <= 0 ? S.of(context).noteCannotBeEmpty : null,
+        onChanged: (val) {
+          setState(() => note = val);
+        },
+      ),
+    );
+  }
+
+  Widget addPrice() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Builder(builder: (context) {
+        if (kIsWeb) {
+          return TextFormField(
+            initialValue: widget.expenseCategory?.price.toRupiah() ?? "",
+            keyboardType: TextInputType.number,
+            decoration: textFormFieldStyle(
+                    context: context, hintText: S.of(context).price)
+                .copyWith(icon: Text(S.of(context).rp)),
+            validator: (val) => ((val?.fromRupiah() ?? 0) < 100)
+                ? S.of(context).priceShouldBeGraterThanRp100
+                : null,
+            onChanged: (val) {
+              setState(() {
+                price = val.toString().replaceAll(",", "");
+              });
+            },
+          );
+        } else {
+          return TextFormField(
+            initialValue: widget.expenseCategory?.price.toRupiah() ?? "",
+            inputFormatters: [textInputFormatter()],
+            keyboardType: TextInputType.number,
+            decoration: textFormFieldStyle(
+                    context: context, hintText: S.of(context).price)
+                .copyWith(icon: Text(S.of(context).rp)),
+            validator: (val) => ((val?.fromRupiah() ?? 0) < 100)
+                ? S.of(context).priceShouldBeGraterThanRp100
+                : null,
+            onChanged: (val) {
+              setState(() {
+                int priceNum = val.fromRupiah();
+                price = formatter.format(priceNum);
+              });
+            },
+          );
+        }
+      }),
+    );
+  }
+
+  Widget addCategory(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Builder(builder: (context) {
+            return CategoryDdlWidget(
+              initialData: categoryModel,
+              selectedCategory: (value) {
+                setState(() {
+                  categoryModel = value;
+                });
+              },
+            );
+          }),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: OutlinedButton(
+                  onPressed: () async {
+                    CategoryModel? result = await showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return const AddCategoryDialog();
+                      },
+                    );
+                    setState(() {
+                      categoryModel = result;
+                    });
+                    await Future.delayed(const Duration(seconds: 1));
+                    if (context.mounted) {
+                      context
+                          .read<CategoryBloc>()
+                          .add(const GetCategoryEvent());
+                    }
+                  },
+                  child: Text(S.of(context).addCategory)),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget addSubCategory(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Builder(builder: (context) {
+                  return SubCategoryDdlWidget(
+                    initialData: subCategoryModel,
+                    selectedCategory: (value) {
+                      setState(() {
+                        subCategoryModel = value;
+                      });
+                    },
+                  );
+                }),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: OutlinedButton(
+                        onPressed: () async {
+                          SubCategoryModel? result = await showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return const AddSubCategoryDialog();
+                            },
+                          );
+                          setState(() {
+                            subCategoryModel = result;
+                          });
+                          await Future.delayed(const Duration(seconds: 1));
+                          if (context.mounted) {
+                            context
+                                .read<SubcategoryBloc>()
+                                .add(const GetSubcategoryEvent());
+                          }
+                        },
+                        child: Text(
+                          S.of(context).addSubCategory,
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void setDateState(DateTime date) {
+    setState(() {
+      this.date = date;
+    });
+  }
+
+  bool submitForm() {
+    isSnackbarShown = false;
+
+    if (categoryModel?.categoryName.isEmpty == true) {
+      isSnackbarShown = true;
+      context.showSb(SnackBar(content: Text(S.of(context).categoryNameIsEmpty)),
+          isSnackbarShown);
+      return false;
+    }
+
+    if (categoryModel?.categoryColor == null) {
+      isSnackbarShown = true;
+      context.showSb(
+          SnackBar(content: Text(S.of(context).categoryColorIsEmpty)),
+          isSnackbarShown);
+      return false;
+    }
+
+    if (subCategoryModel?.categoryName.isEmpty == true) {
+      isSnackbarShown = true;
+      context.showSb(
+          SnackBar(content: Text(S.of(context).subCategoryNameIsEmpty)),
+          isSnackbarShown);
+      return false;
+    }
+
+    if (subCategoryModel?.categoryColor == null) {
+      isSnackbarShown = true;
+      context.showSb(
+          SnackBar(content: Text(S.of(context).subCategoryColorIsEmpty)),
+          isSnackbarShown);
+      return false;
+    }
+
+    if (date == null) {
+      isSnackbarShown = true;
+      context.showSb(
+          SnackBar(content: Text(S.of(context).dateIsEmpty)), isSnackbarShown);
+      return false;
+    }
+
+    if (_formKey.currentState!.validate()) {
+      if (isFromEdit) {
+        var updateDate = date?.toDateString(DateFormatUtil.ddSlashMMSlashyyyy);
+        var now = DateTime.now();
+        var updateTimeStamp =
+            "${now.hour.addZeroPref()}:${now.minute.addZeroPref()}:${now.second.addZeroPref()} ${now.day.addZeroPref()}/${now.month.addZeroPref()}/${now.year}";
+
+        context.read<ExpenseBloc>().add(UpdateExpenseEvent(UpdateExpenseRequest(
+              id: widget.expenseCategory?.id ?? "",
+              note: note,
+              price: price.fromRupiah(),
+              date: updateDate ?? '',
+              categoryName: categoryModel?.categoryName ?? "",
+              subCategoryName: subCategoryModel?.categoryName ?? "",
+              year: updateDate?.split("/")[2] ?? "",
+              month: updateDate?.split("/")[1] ?? "",
+              dayOfMonth: updateDate?.split("/")[0] ?? "",
+              timeStamp: updateTimeStamp,
+              status: "A",
+            )));
+      } else {
+        context.read<ExpenseBloc>().add(InsertExpenseEvent(InsertExpenseRequest(
+            note: note,
+            price: price.fromRupiah(),
+            date: date?.toDateString(DateFormatUtil.ddSlashMMSlashyyyy) ?? '',
+            categoryName: categoryModel?.categoryName ?? "",
+            subCategoryName: subCategoryModel?.categoryName ?? "")));
+      }
+
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
