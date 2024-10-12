@@ -1,1 +1,42 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"family-expense-tracker-da485","appId":"1:453487839018:android:59f6b6ce800bba05284053","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"family-expense-tracker-da485","appId":"1:453487839018:ios:d3c8cc2be2a4b08e284053","uploadDebugSymbols":true,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"family-expense-tracker-da485","configurations":{"android":"1:453487839018:android:59f6b6ce800bba05284053","ios":"1:453487839018:ios:d3c8cc2be2a4b08e284053","web":"1:453487839018:web:41ed1722fc3d8104284053"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "family-expense-tracker-da485",
+          "appId": "1:453487839018:android:59f6b6ce800bba05284053",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "family-expense-tracker-da485",
+          "appId": "1:453487839018:ios:d3c8cc2be2a4b08e284053",
+          "uploadDebugSymbols": true,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "family-expense-tracker-da485",
+          "configurations": {
+            "android": "1:453487839018:android:59f6b6ce800bba05284053",
+            "ios": "1:453487839018:ios:d3c8cc2be2a4b08e284053",
+            "web": "1:453487839018:web:41ed1722fc3d8104284053"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "asia-east1"
+    }
+  }
+}
