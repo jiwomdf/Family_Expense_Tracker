@@ -2,13 +2,16 @@
 Family Expense Tracker is a Flutter family expense tracker app originally developed for my family’s use, which now I decided to make it open source. The app is designed to simplify tracking expense and enable effortless sharing of expenses among multiple users. It is available across **Android**, **iOS**, and **Web platforms**.
 
 
-<image src="assets/record.gif" width="220" height="480"> </image>
-<image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/ios.png" width="220" height="480"> </image>
-<image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/Simulator%20Screenshot%20-%20iPhone%2013%20-%202024-09-04%20at%2023.03.51.png" width="220" height="480"> </image>
+<image src="assets/record.gif" width="140" height="280"> </image>
+<image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/ios.png" width="140" height="280"> </image>
+<image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/Simulator%20Screenshot%20-%20iPhone%2013%20-%202024-09-04%20at%2023.03.51.png" width="140" height="280"> </image>
+<image src="https://firebasestorage.googleapis.com/v0/b/family-expense-tracker-da485.appspot.com/o/web_expense.png?alt=media&token=3fcb6668-a57e-43a1-a7e2-f7e06af79466" width="300" height="280"> </image> 
+
+<br />
 
 ## Web link
 Firebase hosting link <br />
-https://family-expense-tracker-da485.web.app/ <br />
+https://family-expense-tracker-da485.web.app/ <br /><br />
 
 ## App Stack 🏗️
 The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics. Also the app has been thoroughly tested using bloc_test to ensure reliability and performance.
