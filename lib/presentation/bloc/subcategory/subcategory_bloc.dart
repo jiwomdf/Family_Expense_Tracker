@@ -23,6 +23,19 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
       );
     });
 
+    on<GetSubcategoryWithCacheEvent>((event, emit) async {
+      emit(SubcategoryLoading());
+      final result = await firestoreRepository.getSubCategoryWithCache();
+      result.fold(
+        (failure) {
+          emit(SubcategoryError(failure.message));
+        },
+        (data) {
+          emit(SubcategoryHasData(data));
+        },
+      );
+    });
+
     on<UpdateSubcategoryEvent>((event, emit) async {
       emit(SubcategoryLoading());
       final result = await firestoreRepository.updateSubCategory(

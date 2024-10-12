@@ -84,5 +84,6 @@
   "clickTheUpdateAllSubcategoryButtonToUpdateEachTable": "click the Update all subCategory button to update each table scheme",
   "updateAllSubcategory": "Update all subCategory",
   "chooseOne": "Choose one",
-  "importData": "Import Data"
+  "importData": "Import Data",
+  "reload": "Reload"
 }

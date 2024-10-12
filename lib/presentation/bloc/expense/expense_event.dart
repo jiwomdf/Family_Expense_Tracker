@@ -55,7 +55,8 @@ class DeleteExpenseEvent extends ExpenseEvent {
 class GetExpenseEvent extends ExpenseEvent {
   int month;
   int year;
-  GetExpenseEvent(this.month, this.year);
+  String subCategory;
+  GetExpenseEvent(this.month, this.year, this.subCategory);
 
   @override
   List<Object> get props => [month, year];

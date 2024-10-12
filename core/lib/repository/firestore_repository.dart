@@ -4,12 +4,12 @@ import 'package:core/domain/model/category_model.dart';
 import 'package:core/domain/model/expense_category_model.dart';
 import 'package:core/domain/model/failure.dart';
 import 'package:core/domain/model/sub_category_model.dart';
+import 'package:core/util/color_util.dart';
 import 'package:core/util/date_format_util.dart';
 import 'package:core/util/firestore_constants.dart';
 import 'package:core/util/int_util.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class FirestoreRepository {
   final FirebaseAuth firebaseAuth;
@@ -23,6 +23,8 @@ class FirestoreRepository {
 
   final CollectionReference _subCategoryCollection =
       FirebaseFirestore.instance.collection(SubCategoryConstants.constantName);
+
+  List<SubCategoryModel> subCategoryCache = [];
 
   Future<Either<Failure, void>> updateExpense({
     required String id,
@@ -47,13 +49,9 @@ class FirestoreRepository {
         var data = listdata[i];
         await Future.delayed(const Duration(milliseconds: 300));
         batch.update(_expenseCollection.doc(data['id']), data);
-
-        debugPrint("update data $i: $data \n");
       }
 
       batch.commit();
-      debugPrint("update data commited");
-
       return const Right(null);
     } catch (ex) {
       return Left(ServerFailure(ex.toString()));
@@ -81,15 +79,10 @@ class FirestoreRepository {
       for (var i = 0; i < listExpenseRequest.length; i++) {
         var expense = listExpenseRequest[i];
         await Future.delayed(const Duration(milliseconds: 500));
-
         batch.set(_expenseCollection.doc(), expense.toJson());
-
-        debugPrint("import data $i: ${expense.toJson()} \n");
       }
 
       batch.commit();
-      debugPrint("import data commited");
-
       return const Right(null);
     } catch (ex) {
       return Left(ServerFailure(ex.toString()));
@@ -155,12 +148,22 @@ class FirestoreRepository {
   }
 
   Future<Either<Failure, List<ExpenseCategoryModel>>> getExpense(
-      int month, int year) async {
+      int month, int year, String subCategory) async {
     try {
-      QuerySnapshot expenseSnapShoot = await _expenseCollection
-          .where('month', isEqualTo: month.addZeroPref())
-          .where('year', isEqualTo: year.toString())
-          .get();
+      QuerySnapshot? expenseSnapShoot;
+      if (subCategory.isNotEmpty) {
+        expenseSnapShoot = await _expenseCollection
+            .where('month', isEqualTo: month.addZeroPref())
+            .where('year', isEqualTo: year.toString())
+            .where('subCategoryName', isEqualTo: subCategory)
+            .get();
+      } else {
+        expenseSnapShoot = await _expenseCollection
+            .where('month', isEqualTo: month.addZeroPref())
+            .where('year', isEqualTo: year.toString())
+            .get();
+      }
+
       QuerySnapshot categorySnapShoot = await _categoryCollection.get();
       QuerySnapshot subCategorySnapShoot = await _subCategoryCollection.get();
       List<ExpenseCategoryModel> expense = [];
@@ -176,12 +179,12 @@ class FirestoreRepository {
               itm.get(SubCategoryConstants.categoryName);
         }));
 
-        var categoryColor = 4278190080;
+        var categoryColor = categoryDefaultColor;
         if (category.isNotEmpty) {
           categoryColor = category.first.get(CategoryConstants.categoryColor);
         }
 
-        var subCategoryColor = 4288585374;
+        var subCategoryColor = subCategoryDefaultColor;
         if (category.isNotEmpty) {
           subCategoryColor =
               subCategory.first.get(CategoryConstants.categoryColor);
@@ -281,14 +284,37 @@ class FirestoreRepository {
   Future<Either<Failure, List<SubCategoryModel>>> getSubCategory() async {
     try {
       QuerySnapshot categorySnapshot = await _subCategoryCollection.get();
-      return Right(categorySnapshot.docs
+      subCategoryCache = categorySnapshot.docs
           .map(
             (doc) => SubCategoryModel(
               categoryColor: doc.get(SubCategoryConstants.categoryColor),
               categoryName: doc.get(SubCategoryConstants.categoryName),
             ),
           )
-          .toList());
+          .toList();
+      return Right(subCategoryCache);
+    } catch (ex) {
+      return Left(ServerFailure(ex.toString()));
+    }
+  }
+
+  Future<Either<Failure, List<SubCategoryModel>>>
+      getSubCategoryWithCache() async {
+    try {
+      if (subCategoryCache.isNotEmpty) {
+        return Right(subCategoryCache);
+      }
+
+      QuerySnapshot categorySnapshot = await _subCategoryCollection.get();
+      subCategoryCache = categorySnapshot.docs
+          .map(
+            (doc) => SubCategoryModel(
+              categoryColor: doc.get(SubCategoryConstants.categoryColor),
+              categoryName: doc.get(SubCategoryConstants.categoryName),
+            ),
+          )
+          .toList();
+      return Right(subCategoryCache);
     } catch (ex) {
       return Left(ServerFailure(ex.toString()));
     }

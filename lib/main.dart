@@ -35,18 +35,18 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: "enter_your_api_key",
-        authDomain: "enter_your_auth_domain",
-        projectId: "enter_your_project_id",
-        storageBucket: "enter_your_storage_bucket",
-        messagingSenderId: "enter_your_messaging_sender_id",
-        appId: "enter_your_app_id",
-        measurementId: "enter_your_measurement_id",
+        apiKey: "AIzaSyBAd35wF1w6u2yXepsVctmwIGh_uI5Jhbw",
+        authDomain: "family-expense-tracker-da485.firebaseapp.com",
+        projectId: "family-expense-tracker-da485",
+        storageBucket: "family-expense-tracker-da485.appspot.com",
+        messagingSenderId: "453487839018",
+        appId: "1:453487839018:web:41ed1722fc3d8104284053",
+        measurementId: "G-NDCGWX18LC",
       ),
     );
   } else {
     await Firebase.initializeApp(
-      name: "test",
+      name: "family-expense-tracker",
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }

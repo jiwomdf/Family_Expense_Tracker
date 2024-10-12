@@ -1,7 +1,7 @@
 import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
 import 'package:family_expense_tracker/presentation/page/home/widget/list_expense/list_expense_widget.dart';
-import 'package:family_expense_tracker/presentation/widget/filter_ddl_widget.dart';
+import 'package:family_expense_tracker/presentation/widget/filter_widget.dart';
 import 'package:family_expense_tracker/util/app_assets_util.dart';
 import 'package:family_expense_tracker/util/app_color_util.dart';
 import 'package:family_expense_tracker/util/app_snackbar_util.dart';
@@ -53,6 +53,31 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
                       ),
                       textAlign: TextAlign.center,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: OutlinedButton(
+                          onPressed: () {
+                            var now = DateTime.now();
+                            context
+                                .read<ExpenseBloc>()
+                                .add(GetExpenseEvent(now.month, now.year, ""));
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(right: 8),
+                                child: Icon(Icons.refresh_sharp),
+                              ),
+                              Text(S.of(context).reload,
+                                  style: TextUtil(context).urbanist(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                  )),
+                            ],
+                          )),
+                    )
                   ],
                 ),
               );

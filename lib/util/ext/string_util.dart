@@ -17,3 +17,10 @@ extension StringExtension on String {
     }
   }
 }
+
+extension StringNullExtension on String? {
+  String ifNullOrEmpty(String defaultValue) {
+    var isNotNull = this != null;
+    return (this!.isNotEmpty && isNotNull) ? this! : defaultValue;
+  }
+}

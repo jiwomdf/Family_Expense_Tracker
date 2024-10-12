@@ -129,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "price": MessageLookupByLibrary.simpleMessage("Price.."),
         "priceShouldBeGraterThanRp100": MessageLookupByLibrary.simpleMessage(
             "Price should be grater than Rp 100"),
+        "reload": MessageLookupByLibrary.simpleMessage("Reload"),
         "rp": MessageLookupByLibrary.simpleMessage("Rp "),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("Something went wrong"),

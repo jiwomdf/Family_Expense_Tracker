@@ -1,5 +1,6 @@
 import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
+import 'package:family_expense_tracker/presentation/bloc/subcategory/subcategory_bloc.dart';
 import 'package:family_expense_tracker/presentation/page/expense_form/expense_form_page.dart';
 import 'package:family_expense_tracker/presentation/page/home/widget/card_expense_widget.dart';
 import 'package:family_expense_tracker/presentation/page/home/widget/card_income_widget.dart';
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
+    context.read<SubcategoryBloc>().add(const GetSubcategoryWithCacheEvent());
     context.read<ExpenseBloc>().add(const ResetExpenseEvent());
   }
 
@@ -78,17 +80,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(
             height: 10,
-          ),
-          FloatingActionButton(
-              heroTag: "fab_get",
-              shape: const CircleBorder(),
-              child: const Icon(Icons.refresh),
-              onPressed: () {
-                var now = DateTime.now();
-                context
-                    .read<ExpenseBloc>()
-                    .add(GetExpenseEvent(now.month, now.year));
-              })
+          )
         ],
       ),
     );

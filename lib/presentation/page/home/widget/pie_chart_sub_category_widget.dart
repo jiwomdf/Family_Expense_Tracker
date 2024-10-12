@@ -21,7 +21,7 @@ class PieChartSubCategoryWidget extends StatefulWidget {
 }
 
 class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
-  var touchedIndex = 0;
+  var touchedIndex = double.maxFinite;
   var totalExpense = 0;
   List<ExpenseCategoryModel> listExpense = [];
 
@@ -53,7 +53,7 @@ class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
                       var pieTouchIdx =
                           pieTouchResponse?.touchedSection?.touchedSectionIndex;
                       if (pieTouchIdx == null) return;
-                      touchedIndex = pieTouchIdx;
+                      touchedIndex = pieTouchIdx.toDouble();
                     });
                   },
                 ),
@@ -109,7 +109,8 @@ class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
 
     for (var i = 0; i < tempExpenseList.length; i++) {
       var data = tempExpenseList[i];
-      final isTouched = i == touchedIndex;
+      final isTouched =
+          (i == touchedIndex) && (touchedIndex != double.maxFinite);
       final fontSize = isTouched ? 16.0 : 14.0;
       final fontWeight = isTouched ? FontWeight.bold : FontWeight.w500;
       final radius = isTouched ? 16.0 : 14.0;

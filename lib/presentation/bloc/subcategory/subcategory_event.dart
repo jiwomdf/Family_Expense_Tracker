@@ -29,3 +29,10 @@ class GetSubcategoryEvent extends SubcategoryEvent {
   @override
   List<Object> get props => [];
 }
+
+class GetSubcategoryWithCacheEvent extends SubcategoryEvent {
+  const GetSubcategoryWithCacheEvent();
+
+  @override
+  List<Object> get props => [];
+}
