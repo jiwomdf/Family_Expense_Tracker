@@ -6,6 +6,10 @@ Family Expense Tracker is a Flutter family expense tracker app originally develo
 <image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/ios.png" width="220" height="480"> </image>
 <image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/Simulator%20Screenshot%20-%20iPhone%2013%20-%202024-09-04%20at%2023.03.51.png" width="220" height="480"> </image>
 
+## Web link
+Firebase hosting link <br />
+https://family-expense-tracker-da485.web.app/ <br />
+
 ## App Stack 🏗️
 The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics. Also the app has been thoroughly tested using bloc_test to ensure reliability and performance.
 - Bloc
@@ -14,7 +18,7 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 - Crashlytic
 - Cloud Messaging
 
-## [Optional] How to change the app firebase
+## [Optional] How to change the app Firebase project
 #### This app depends on Firebase Auth and Firestore, so you need to add your own Firebase project as stated below
 - first you may change the android and iOS package by replacing all string of `com.programmergabut.family_expense` on Android and `com.programmergabut.familyExpenseTracker` on iOS
 - Create your own firebase project and register the Android, iOS, and Web
