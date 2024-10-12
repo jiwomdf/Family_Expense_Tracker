@@ -32,7 +32,8 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
   -  `lib/main.dart` in `FirebaseOptions class` for Web
 - Enable Firebase Auth by email and password
 - Enable Firestore and set the rules to `allow read, write: if request.auth != null;`
-- Then run the app smoothly 🥳
+- Then to setup the new project you can use `flutterfire configure`, for more detail, you can check this link [Add firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=web)
+- After all the setup, then run the app smoothly 🥳
 
 it also open for contribution and discussion 🙏
 <br><br>
