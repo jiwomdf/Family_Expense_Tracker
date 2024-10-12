@@ -47,29 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'enter_your_api_key',
-    appId: 'enter_your_app_id',
-    messagingSenderId: 'enter_your_messaging_sender_id',
-    projectId: 'enter_your_project_id',
-    storageBucket: 'enter_your_storage_bucket',
+    apiKey: 'AIzaSyAOAPwZBPmh8yfAAO7wiiLnMTilihhI7fU',
+    appId: '1:453487839018:android:59f6b6ce800bba05284053',
+    messagingSenderId: '453487839018',
+    projectId: 'family-expense-tracker-da485',
+    storageBucket: 'family-expense-tracker-da485.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'enter_your_api_key',
-    appId: 'enter_your_app_id',
-    messagingSenderId: 'enter_your_messaging_sender_id',
-    projectId: 'enter_your_project_id',
-    storageBucket: 'enter_your_storage_bucket',
-    iosBundleId: 'enter_your_measurement_id',
+    apiKey: 'AIzaSyDkwNIq88NGnXdHsDiU4WCjfaHVgJ3oj4E',
+    appId: '1:453487839018:ios:d3c8cc2be2a4b08e284053',
+    messagingSenderId: '453487839018',
+    projectId: 'family-expense-tracker-da485',
+    storageBucket: 'family-expense-tracker-da485.appspot.com',
+    iosBundleId: 'com.programmergabut.familyExpenseTracker',
   );
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'enter_your_api_key',
-    appId: 'enter_your_app_id',
-    messagingSenderId: 'enter_your_messaging_sender_id',
-    projectId: 'enter_your_project_id',
-    authDomain: 'enter_your_auth_domain',
-    storageBucket: 'enter_your_storage_bucket',
-    measurementId: 'enter_your_measurement_id',
+    apiKey: 'AIzaSyBAd35wF1w6u2yXepsVctmwIGh_uI5Jhbw',
+    appId: '1:453487839018:web:41ed1722fc3d8104284053',
+    messagingSenderId: '453487839018',
+    projectId: 'family-expense-tracker-da485',
+    authDomain: 'family-expense-tracker-da485.firebaseapp.com',
+    storageBucket: 'family-expense-tracker-da485.appspot.com',
+    measurementId: 'G-NDCGWX18LC',
   );
+
 }

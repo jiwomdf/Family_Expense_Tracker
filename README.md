@@ -16,7 +16,7 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 
 ## How to run the app
 #### This app depends on Firebase Auth and Firestore, so you need to add your own Firebase project as stated below
-- first you may change the android and iOS package by replacing all string of `com.programmergabut.family_expense_tracker` on Android and `com.programmergabut.familyExpenseTracker` on iOS
+- first you may change the android and iOS package by replacing all string of `com.programmergabut.family_expense` on Android and `com.programmergabut.familyExpenseTracker` on iOS
 - Create your own firebase project and register the Android, iOS, and Web
 - put the `google-services.json` for Android, `GoogleService-Info.plist` for iOS, and `firebaseConfig` for web
 - Then add your google-services.json in 

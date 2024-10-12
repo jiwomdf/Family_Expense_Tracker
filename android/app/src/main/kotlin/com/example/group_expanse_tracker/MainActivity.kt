@@ -1,4 +1,4 @@
-package com.programmergabut.family_expense_tracker
+package com.programmergabut.family_expense
 
 import io.flutter.embedding.android.FlutterActivity
 
