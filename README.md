@@ -14,7 +14,7 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 - Crashlytic
 - Cloud Messaging
 
-## How to run the app
+## [Optional] How to change the app firebase
 #### This app depends on Firebase Auth and Firestore, so you need to add your own Firebase project as stated below
 - first you may change the android and iOS package by replacing all string of `com.programmergabut.family_expense` on Android and `com.programmergabut.familyExpenseTracker` on iOS
 - Create your own firebase project and register the Android, iOS, and Web
