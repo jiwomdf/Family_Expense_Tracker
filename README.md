@@ -13,6 +13,15 @@ Family Expense Tracker is a Flutter family expense tracker app originally develo
 Firebase hosting link <br />
 https://family-expense-tracker-da485.web.app/ <br /><br />
 
+## Feature
+- Insert and Update expense, category, ect data
+- Insert data can be together as group
+- Modify firestore scheme
+- Export to Json and Spread Sheets
+- Holiday Information
+- Light and Dark theme <br /><br />
+
+
 ## App Stack 🏗️
 The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics. Also the app has been thoroughly tested using bloc_test to ensure reliability and performance.
 - Bloc
@@ -20,6 +29,9 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 - Fire Store
 - Crashlytic
 - Cloud Messaging
+- Dio
+- Fl Chart
+- Get It <br /><br />
 
 ## [Optional] How to change the app Firebase project
 #### This app depends on Firebase Auth and Firestore, so you need to add your own Firebase project as stated below
