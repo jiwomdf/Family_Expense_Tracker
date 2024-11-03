@@ -5,12 +5,12 @@ import 'package:core/domain/model/failure.dart';
 import 'package:core/domain/model/user_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   final FirebaseAuth firebaseAuth;
+  final AuthPref authPref;
 
-  AuthRepository({required this.firebaseAuth});
+  AuthRepository({required this.firebaseAuth, required this.authPref});
 
   Stream<UserModel?> get user {
     return firebaseAuth.authStateChanges().map((User? user) {
@@ -27,10 +27,6 @@ class AuthRepository {
       );
 
       if (credential.user != null) {
-        /** TODO JIWO, move this to injection */
-        AuthPref authPref =
-            AuthPref(prefs: await SharedPreferences.getInstance());
-
         bool isSuccess = await authPref.setUserDataModel(UserDataModel(
           uid: credential.user?.uid ?? '',
           email: credential.user?.email ?? '',
@@ -72,8 +68,6 @@ class AuthRepository {
   }
 
   Future<Either<Failure, UserDataModel>> getUserDataModel() async {
-    /** TODO JIWO, move this to injection */
-    AuthPref authPref = AuthPref(prefs: await SharedPreferences.getInstance());
     return authPref.getUserDataModel();
   }
 }

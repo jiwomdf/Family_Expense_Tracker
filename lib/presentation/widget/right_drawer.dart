@@ -1,13 +1,14 @@
-import 'package:family_expense_tracker/generated/l10n.dart';
-import 'package:family_expense_tracker/main.dart';
+import 'package:family_expense_tracker/presentation/app/app.dart';
 import 'package:family_expense_tracker/presentation/bloc/logout/logout_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/usermodel/userdatamodel_bloc.dart';
 import 'package:family_expense_tracker/presentation/page/export_expense/export_expense_page.dart';
+import 'package:family_expense_tracker/presentation/page/holiday/holiday_page.dart';
 import 'package:family_expense_tracker/presentation/page/home/widget/profile_widget.dart';
 import 'package:family_expense_tracker/presentation/page/import_expense/import_expense_page.dart';
 import 'package:family_expense_tracker/presentation/page/update_table/update_table_page.dart';
 import 'package:family_expense_tracker/util/app_color_util.dart';
 import 'package:family_expense_tracker/util/ext/text_util.dart';
+import 'package:family_expense_tracker/util/version_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,7 +27,7 @@ class _RightDrawerState extends State<RightDrawer> {
   void initState() {
     super.initState();
     context.read<UserDataModelBloc>().add(const GetUserDataModelEvent());
-    isLight = MyApp.of(context).isLightMode();
+    isLight = App.of(context).isLightMode();
   }
 
   @override
@@ -56,11 +57,15 @@ class _RightDrawerState extends State<RightDrawer> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    exportData(context),
-                    importData(context),
-                    updateTable(context),
-                    logout(context),
-                    version(context)
+                    _heading("Features"),
+                    _holiday(context),
+                    _heading("Data Management"),
+                    _exportData(context),
+                    _importData(context),
+                    _updateTable(context),
+                    _heading("Account"),
+                    _logout(context),
+                    _version(context)
                   ],
                 ),
               )
@@ -86,7 +91,7 @@ class _RightDrawerState extends State<RightDrawer> {
     );
   }
 
-  Padding importData(BuildContext context) {
+  Padding _importData(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10, left: 10),
       child: InkWell(
@@ -102,7 +107,7 @@ class _RightDrawerState extends State<RightDrawer> {
                 padding: EdgeInsets.only(right: 4),
                 child: Icon(Icons.file_upload),
               ),
-              Text(S.of(context).importData,
+              Text("Import Data",
                   style: TextUtil(context)
                       .urbanist(fontSize: 16, fontWeight: FontWeight.w600)),
             ],
@@ -112,7 +117,7 @@ class _RightDrawerState extends State<RightDrawer> {
     );
   }
 
-  Padding exportData(BuildContext context) {
+  Padding _exportData(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10, left: 10),
       child: InkWell(
@@ -152,16 +157,16 @@ class _RightDrawerState extends State<RightDrawer> {
             setState(() {
               isLight = value;
               if (isLight) {
-                MyApp.of(context).changeTheme(ThemeMode.light);
+                App.of(context).changeTheme(ThemeMode.light);
               } else {
-                MyApp.of(context).changeTheme(ThemeMode.dark);
+                App.of(context).changeTheme(ThemeMode.dark);
               }
             });
           }),
     );
   }
 
-  Padding logout(BuildContext context) {
+  Padding _logout(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16, left: 10),
       child: InkWell(
@@ -189,7 +194,7 @@ class _RightDrawerState extends State<RightDrawer> {
     );
   }
 
-  Widget updateTable(BuildContext context) {
+  Widget _updateTable(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, top: 10, left: 10),
       child: InkWell(
@@ -215,17 +220,54 @@ class _RightDrawerState extends State<RightDrawer> {
     );
   }
 
-  Widget version(BuildContext context) {
+  Widget _version(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: SizedBox(
         width: double.infinity,
         child: Text(
-          "Version 1.1.0",
+          "Version ${VersionUtil.version}",
           style: TextStyle(color: AppColors.grey.lightGray),
           textAlign: TextAlign.center,
         ),
       ),
+    );
+  }
+
+  _holiday(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10, top: 10, left: 10),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, HolidayPage.routeName);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 4),
+                child: Icon(Icons.sports_baseball_outlined),
+              ),
+              Text("Holiday",
+                  style: TextUtil(context)
+                      .urbanist(fontSize: 16, fontWeight: FontWeight.w600)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _heading(String s) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, top: 20),
+      child: Text(s,
+          style: TextUtil(context).plusJakarta(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          )),
     );
   }
 }

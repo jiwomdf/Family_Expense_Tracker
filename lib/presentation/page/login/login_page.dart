@@ -47,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               loginScreen(),
-              SvgPicture.asset(AppAssetsUtil.imgLoginIllustration, height: 200),
+              SvgPicture.asset(AppAssetsUtil.imgGroup, height: 200),
             ],
           ),
         ),
@@ -73,10 +73,22 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                       )),
-                  Text(S.of(context).loginToAccessYourAccountBelow,
-                      style: TextUtil(context).urbanist(
-                        fontSize: 16,
-                      )),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                        'Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \nof expenses among multiple users. It is available across Android, iOS, and Web platforms.',
+                        style: TextUtil(context).urbanist(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 40),
+                    child: Text(S.of(context).loginToAccessYourAccountBelow,
+                        style: TextUtil(context).urbanist(
+                          fontSize: 16,
+                        )),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16, bottom: 10),
                     child: TextFormField(

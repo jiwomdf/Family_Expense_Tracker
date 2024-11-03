@@ -1,6 +1,7 @@
 import 'package:family_expense_tracker/presentation/bloc/category/category_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/fcm/fcm_bloc.dart';
+import 'package:family_expense_tracker/presentation/bloc/holidays/holiday_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/login/login_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/logout/logout_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/register/register_bloc.dart';
@@ -19,4 +20,5 @@ void init() {
   locator.registerFactory(() => CategoryBloc(locator()));
   locator.registerFactory(() => SubcategoryBloc(locator()));
   locator.registerFactory(() => FcmBloc(locator()));
+  locator.registerFactory(() => HolidayBloc(locator()));
 }

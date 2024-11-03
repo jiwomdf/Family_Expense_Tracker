@@ -5,11 +5,13 @@ class DateFormatUtil {
   static const ddSlashMMSlashyyyy = "dd/MM/yyyy";
   static const ddMMMyyyy = "dd MMM yyyy";
   static const ddMMMMyyyy = "dd MMMM yyyy";
+  static const yyyyDashMMDashDD = "yyyy-MM-dd";
 
   static const listFormat = [
     ddSlashMMSlashyyyy,
     ddMMMyyyy,
     ddMMMMyyyy,
+    yyyyDashMMDashDD
   ];
 }
 
