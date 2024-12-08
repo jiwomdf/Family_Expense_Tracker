@@ -1,6 +1,5 @@
 import 'package:core/domain/model/expense_category_model.dart';
 import 'package:core/domain/model/pie_model.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
 import 'package:family_expense_tracker/util/app_color_util.dart';
 import 'package:family_expense_tracker/util/ext/color_util.dart';
@@ -20,8 +19,7 @@ class PieChartWidget extends StatefulWidget {
 }
 
 class _PieChartWidgetState extends State<PieChartWidget> {
-  var touchedIndex = double.maxFinite;
-  var totalExpense = 0;
+  var _touchedIndex = double.maxFinite;
   List<ExpenseCategoryModel> listExpense = [];
 
   @override
@@ -30,13 +28,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       if (state is ExpenseInitiated) {
         return const Row();
       } else if (state is ExpenseLoading) {
-        totalExpense = 0;
         return showPieShimmer();
       } else if (state is ExpenseHasData) {
         listExpense = state.result;
-        for (var action in state.result) {
-          totalExpense += action.price;
-        }
       }
 
       return Column(
@@ -52,7 +46,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                       var pieTouchIdx =
                           pieTouchResponse?.touchedSection?.touchedSectionIndex;
                       if (pieTouchIdx == null) return;
-                      touchedIndex = pieTouchIdx.toDouble();
+                      _touchedIndex = pieTouchIdx.toDouble();
                     });
                   },
                 ),
@@ -65,7 +59,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 15),
-            child: Text(S.of(context).category,
+            child: Text("Type",
                 style: TextUtil(context)
                     .urbanist(fontSize: 14, fontWeight: FontWeight.bold)),
           )
@@ -110,7 +104,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
     for (var i = 0; i < tempExpenseList.length; i++) {
       var data = tempExpenseList[i];
       final isTouched =
-          (i == touchedIndex) && (touchedIndex != double.maxFinite);
+          (i == _touchedIndex) && (_touchedIndex != double.maxFinite);
       final fontSize = isTouched ? 16.0 : 14.0;
       final fontWeight = isTouched ? FontWeight.bold : FontWeight.w500;
       final radius = isTouched ? 16.0 : 14.0;

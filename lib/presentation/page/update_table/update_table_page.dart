@@ -2,7 +2,7 @@ import 'package:core/domain/model/expense_category_model.dart';
 import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
 import 'package:family_expense_tracker/util/ext/text_util.dart';
-import 'package:family_expense_tracker/util/scheme/update_expense_scheme.dart';
+import 'package:family_expense_tracker/util/scheme/update_expanse_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +18,7 @@ class _UpdateTablePageState extends State<UpdateTablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(S.of(context).updateCollectionScheme)),
+      appBar: AppBar(title: const Text("Update Collection Scheme")),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -49,9 +49,7 @@ class _UpdateTablePageState extends State<UpdateTablePage> {
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
             child: Text(
-                S
-                    .of(context)
-                    .youCanUpdateSchemeObjectsInTheFirestoreCollectionBy,
+                "You can update scheme objects in the Firestore collection by modifying the content of the func() in lib/util/scheme/ classes",
                 textAlign: TextAlign.center,
                 style: TextUtil(context)
                     .urbanist(fontSize: 14, fontWeight: FontWeight.bold)),
@@ -95,7 +93,7 @@ class _UpdateTablePageState extends State<UpdateTablePage> {
           UpdateExpenseScheme.updateExpenseSchemeCollection(action);
       newListOfExpense.add(updateData);
     }
-    if (mounted) {
+    if (context.mounted) {
       context
           .read<ExpenseBloc>()
           .add(UpdateBatchExpenseEvent(newListOfExpense));
@@ -103,23 +101,23 @@ class _UpdateTablePageState extends State<UpdateTablePage> {
   }
 
   Widget categoryScheme() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
+    return const Padding(
+      padding: EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
       child: Column(
         children: [
           Text(
-            S.of(context).clickTheUpdateAllCategoryButtonToUpdateEachTable,
+            "click the Update all category button to update each table scheme",
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 13),
+            style: TextStyle(fontSize: 13),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6),
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
               onPressed: null
               /**TODO: update category scheme*/
               ,
-              child: Text(S.of(context).updateAllCategory),
+              child: Text("Update all category"),
             ),
           ),
         ],
@@ -132,8 +130,8 @@ class _UpdateTablePageState extends State<UpdateTablePage> {
       padding: const EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 20),
       child: Column(
         children: [
-          Text(
-            S.of(context).clickTheUpdateAllSubcategoryButtonToUpdateEachTable,
+          const Text(
+            "click the Update all subCategory button to update each table scheme",
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 6),

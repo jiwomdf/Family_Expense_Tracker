@@ -1,5 +1,4 @@
 import 'package:core/domain/model/category_model.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/category/category_bloc.dart';
 import 'package:family_expense_tracker/presentation/widget/text_form_field.dart';
 import 'package:family_expense_tracker/util/app_snackbar_util.dart';
@@ -16,7 +15,7 @@ class AddCategoryDialog extends StatefulWidget {
 }
 
 class _AddCategoryDialogState extends State<AddCategoryDialog> {
-  CategoryModel ddlValue = CategoryModel(
+  final CategoryModel _ddlValue = CategoryModel(
     categoryColor: 0xff443a49,
     categoryName: "",
   );
@@ -27,8 +26,8 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
     return BlocBuilder<CategoryBloc, CategoryState>(
       builder: (context, state) {
         if (state is CategoryUpdated) {
-          context.show(S.of(context).categoryInserted);
-          Navigator.of(context, rootNavigator: true).pop(ddlValue);
+          context.show("Type Inserted");
+          Navigator.of(context, rootNavigator: true).pop(_ddlValue);
         } else if (state is CategoryError) {
           context.show(state.message);
         }
@@ -51,7 +50,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                  child: Text(S.of(context).addCategory,
+                  child: Text('Add Type',
                       style: TextUtil(context).urbanist(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -62,21 +61,21 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration: textFormFieldStyle(
-                        context: context, hintText: S.of(context).categoryName),
-                    validator: (val) => (val?.isEmpty ?? true)
-                        ? S.of(context).categoryCannotBeEmpty
-                        : null,
+                        context: context, hintText: "Type name.."),
+                    validator: (val) =>
+                        (val?.isEmpty ?? true) ? 'Type cannot be empty' : null,
                     onChanged: (val) {
-                      setState(() => ddlValue.categoryName = val.toLowerCase());
+                      setState(
+                          () => _ddlValue.categoryName = val.toLowerCase());
                     },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
                   child: BlockPicker(
-                    pickerColor: Color(ddlValue.categoryColor),
+                    pickerColor: Color(_ddlValue.categoryColor),
                     onColorChanged: (color) {
-                      setState(() => ddlValue.categoryColor = color.value);
+                      setState(() => _ddlValue.categoryColor = color.value);
                     },
                   ),
                 ),
@@ -91,7 +90,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text(S.of(context).close),
+                      child: const Text('Close'),
                     ),
                     TextButton(
                       onPressed: () {
@@ -100,12 +99,12 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                               .read<CategoryBloc>()
                               .add(UpdateCategoryEvent(CategoryModel(
                                 categoryName:
-                                    ddlValue.categoryName.toLowerCase(),
-                                categoryColor: ddlValue.categoryColor,
+                                    _ddlValue.categoryName.toLowerCase(),
+                                categoryColor: _ddlValue.categoryColor,
                               )));
                         }
                       },
-                      child: Text(S.of(context).insert),
+                      child: const Text('Insert'),
                     ),
                   ],
                 ),

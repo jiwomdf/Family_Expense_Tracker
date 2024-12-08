@@ -34,7 +34,7 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   ThemeMode _themeMode = ThemeMode.light;
-  final getIt = GetIt.instance;
+  final _getIt = GetIt.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class AppState extends State<App> {
         : SystemUiOverlayStyle.light);
 
     return StreamProvider<UserModel?>.value(
-      value: getIt<AuthRepository>().user,
+      value: _getIt<AuthRepository>().user,
       initialData: null,
       child: MultiProvider(
         providers: [

@@ -1,7 +1,6 @@
 import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
-import 'package:family_expense_tracker/presentation/page/home/widget/list_expense/list_expense_widget.dart';
-import 'package:family_expense_tracker/presentation/widget/filter_widget.dart';
+import 'package:family_expense_tracker/presentation/page/home/widget/list_expense/list_expanse_widget.dart';
 import 'package:family_expense_tracker/util/app_assets_util.dart';
 import 'package:family_expense_tracker/util/app_color_util.dart';
 import 'package:family_expense_tracker/util/app_snackbar_util.dart';
@@ -10,7 +9,6 @@ import 'package:family_expense_tracker/util/ext/text_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get_it/get_it.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ExpenseWidget extends StatefulWidget {
@@ -21,16 +19,10 @@ class ExpenseWidget extends StatefulWidget {
 }
 
 class _ExpenseWidgetState extends State<ExpenseWidget> {
-  final getIt = GetIt.instance;
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 10),
-          child: FilterWidget(),
-        ),
         BlocBuilder<ExpenseBloc, ExpenseState>(
           builder: (context, state) {
             if (state is ExpenseInitiated) {
@@ -70,7 +62,7 @@ class _ExpenseWidgetState extends State<ExpenseWidget> {
                                 padding: EdgeInsets.only(right: 8),
                                 child: Icon(Icons.refresh_sharp),
                               ),
-                              Text(S.of(context).reload,
+                              Text("Reload",
                                   style: TextUtil(context).urbanist(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w700,

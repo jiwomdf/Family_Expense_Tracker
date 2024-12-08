@@ -47,7 +47,7 @@ class _CardIncomeWidgetState extends State<CardIncomeWidget> {
                     fontWeight: FontWeight.bold,
                     color: AppColors.white.primary,
                   )),
-              Text("${S.of(context).rp}${(budget - totalExpense).toRupiah()}",
+              Text("Rp ${(budget - totalExpense).toRupiah()}",
                   style: TextUtil(context).urbanist(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,

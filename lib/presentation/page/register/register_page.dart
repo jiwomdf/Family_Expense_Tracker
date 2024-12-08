@@ -15,9 +15,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  String email = "";
-  String password = "";
-  String confirmPassword = "";
+  String _email = "";
+  String _password = "";
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -81,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ? S.of(context).enterAnEmail
                           : null,
                       onChanged: (val) {
-                        setState(() => email = val);
+                        setState(() => _email = val);
                       },
                     ),
                   ),
@@ -96,19 +95,17 @@ class _RegisterPageState extends State<RegisterPage> {
                           ? S.of(context).enterAPassword6CharsLong
                           : null,
                       onChanged: (val) {
-                        setState(() => password = val);
+                        setState(() => _password = val);
                       },
                     ),
                   ),
                   TextFormField(
                     decoration: textFormFieldStyle(
                         context: context,
-                        hintText: S.of(context).confirmYourPassword),
+                        hintText: S.of(context).enterYourPassword),
                     obscureText: true,
-                    onChanged: (val) {
-                      setState(() => confirmPassword = val);
-                    },
-                    validator: (val) => (val != password)
+                    onChanged: (val) {},
+                    validator: (val) => (val != _password)
                         ? S.of(context).confirmPasswordIsNotSameAsPassword
                         : null,
                   ),
@@ -121,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           if (_formKey.currentState?.validate() == true) {
                             context
                                 .read<RegisterBloc>()
-                                .add(GetRegisterEvent(email, password));
+                                .add(GetRegisterEvent(_email, _password));
                           }
                         },
                         child: Text(

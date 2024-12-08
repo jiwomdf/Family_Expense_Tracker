@@ -21,8 +21,7 @@ class PieChartSubCategoryWidget extends StatefulWidget {
 }
 
 class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
-  var touchedIndex = double.maxFinite;
-  var totalExpense = 0;
+  var _touchedIndex = double.maxFinite;
   List<ExpenseCategoryModel> listExpense = [];
 
   @override
@@ -31,13 +30,9 @@ class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
       if (state is ExpenseInitiated) {
         return const Row();
       } else if (state is ExpenseLoading) {
-        totalExpense = 0;
         return showPieShimmer();
       } else if (state is ExpenseHasData) {
         listExpense = state.result;
-        for (var action in state.result) {
-          totalExpense += action.price;
-        }
       }
 
       return Column(
@@ -53,7 +48,7 @@ class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
                       var pieTouchIdx =
                           pieTouchResponse?.touchedSection?.touchedSectionIndex;
                       if (pieTouchIdx == null) return;
-                      touchedIndex = pieTouchIdx.toDouble();
+                      _touchedIndex = pieTouchIdx.toDouble();
                     });
                   },
                 ),
@@ -66,7 +61,7 @@ class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
           ),
           Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Text(S.of(context).subCategory,
+              child: Text(S.of(context).category,
                   style: TextUtil(context)
                       .urbanist(fontSize: 14, fontWeight: FontWeight.bold)))
         ],
@@ -110,7 +105,7 @@ class _PieChartSubCategoryWidgetState extends State<PieChartSubCategoryWidget> {
     for (var i = 0; i < tempExpenseList.length; i++) {
       var data = tempExpenseList[i];
       final isTouched =
-          (i == touchedIndex) && (touchedIndex != double.maxFinite);
+          (i == _touchedIndex) && (_touchedIndex != double.maxFinite);
       final fontSize = isTouched ? 16.0 : 14.0;
       final fontWeight = isTouched ? FontWeight.bold : FontWeight.w500;
       final radius = isTouched ? 16.0 : 14.0;

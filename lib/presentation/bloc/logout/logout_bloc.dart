@@ -6,12 +6,12 @@ part 'logout_event.dart';
 part 'logout_state.dart';
 
 class LogoutBloc extends Bloc<LogoutEvent, LogoutState> {
-  final AuthRepository authRepository;
+  final AuthRepository _authRepository;
 
-  LogoutBloc(this.authRepository) : super(LogoutInitial()) {
+  LogoutBloc(this._authRepository) : super(LogoutInitial()) {
     on<GetLogoutEvent>((event, emit) async {
       emit(LogoutLoading());
-      await authRepository.logout();
+      await _authRepository.logout();
       emit(const LogoutHasData());
     });
   }

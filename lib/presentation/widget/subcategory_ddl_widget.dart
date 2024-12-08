@@ -1,31 +1,28 @@
 import 'package:core/domain/model/sub_category_model.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/subcategory/subcategory_bloc.dart';
 import 'package:family_expense_tracker/util/app_snackbar_util.dart';
 import 'package:family_expense_tracker/util/ext/int_util.dart';
 import 'package:family_expense_tracker/util/ext/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 class SubCategoryDdlWidget extends StatefulWidget {
-  final SubCategoryModel? initialData;
+  final SubCategoryModel? _initialData;
   final ValueChanged<SubCategoryModel> selectedCategory;
 
   const SubCategoryDdlWidget({
     super.key,
-    required this.initialData,
+    required SubCategoryModel? initialData,
     required this.selectedCategory,
-  });
+  }) : _initialData = initialData;
 
   @override
   State<SubCategoryDdlWidget> createState() => _SubCategoryDdlWidgetState();
 }
 
 class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
-  final getIt = GetIt.instance;
-  List<SubCategoryModel> subcategories = SubCategoryModel.emptyList();
-  SubCategoryModel ddlValue = SubCategoryModel(
+  List<SubCategoryModel> _subcategories = SubCategoryModel.emptyList();
+  SubCategoryModel _ddlValue = SubCategoryModel(
     categoryColor: 0xff443a49,
     categoryName: "",
   );
@@ -33,7 +30,7 @@ class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
   @override
   void initState() {
     context.read<SubcategoryBloc>().add(const GetSubcategoryEvent());
-    ddlValue = widget.initialData ??
+    _ddlValue = widget._initialData ??
         SubCategoryModel(categoryColor: 0xff443a49, categoryName: "");
     super.initState();
   }
@@ -43,7 +40,7 @@ class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
     return BlocBuilder<SubcategoryBloc, SubcategoryState>(
       builder: (context, state) {
         if (state is SubcategoryHasData) {
-          subcategories = state.result;
+          _subcategories = state.result;
         } else if (state is SubcategoryError) {
           context.show(state.message);
         }
@@ -54,12 +51,12 @@ class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
               SizedBox(
                 height: 15,
                 child: CircleAvatar(
-                    backgroundColor: ddlValue.categoryColor.toColor()),
+                    backgroundColor: _ddlValue.categoryColor.toColor()),
               ),
-              Text((ddlValue.categoryName).ifEmpty(S.of(context).chooseOne)),
+              Text((_ddlValue.categoryName).ifEmpty("Choose one")),
             ],
           ),
-          items: subcategories.map((SubCategoryModel value) {
+          items: _subcategories.map((SubCategoryModel value) {
             return DropdownMenuItem(
                 value: value,
                 child: Row(
@@ -75,10 +72,10 @@ class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
           }).toList(),
           onChanged: (value) {
             setState(() {
-              ddlValue.categoryName = value?.categoryName ?? "";
-              ddlValue.categoryColor = value?.categoryColor ?? 0;
+              _ddlValue.categoryName = value?.categoryName ?? "";
+              _ddlValue.categoryColor = value?.categoryColor ?? 0;
             });
-            widget.selectedCategory(ddlValue);
+            widget.selectedCategory(_ddlValue);
           },
         );
       },

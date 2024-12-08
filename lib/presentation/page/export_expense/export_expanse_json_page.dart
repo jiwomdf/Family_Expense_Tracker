@@ -37,7 +37,7 @@ class _ExportExpenseJsonPageState extends State<ExportExpenseJsonPage> {
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Export Expense to Json"),
+            title: Text(S.of(context).exportExpenseToJson),
           ),
           body: SafeArea(
             child: Padding(
@@ -61,8 +61,9 @@ class _ExportExpenseJsonPageState extends State<ExportExpenseJsonPage> {
                         child: Text.rich(
                           TextSpan(children: [
                             TextSpan(
-                                text:
-                                    "Easily track and manage your expenses with our “Export to Spreadsheet” feature! This tool allows you to export all recorded expenses into a structured Excel spreadsheet, ensuring seamless organization and accessibility. Each expense entry, including details like date, name, category, amount, and parent category, is automatically formatted into a readable table.",
+                                text: S
+                                    .of(context)
+                                    .easilyTrackAndManageYourExpensesWithOurExportTo,
                                 style: TextUtil(context).urbanist(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -90,7 +91,8 @@ class _ExportExpenseJsonPageState extends State<ExportExpenseJsonPage> {
                                   .theFeatureCurrentlyOnlyWorksOnWeb);
                             }
                           },
-                          child: const Text("Export the expense data")),
+                          child: Text(
+                              S.of(context).exportTheJsonFormattedExpense)),
                     ),
                   )
                 ],

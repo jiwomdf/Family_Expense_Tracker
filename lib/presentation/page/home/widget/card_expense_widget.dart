@@ -16,22 +16,22 @@ class CardExpenseWidget extends StatefulWidget {
 }
 
 class _CardExpenseWidgetState extends State<CardExpenseWidget> {
-  int totalExpense = 0;
-  int totalData = 0;
+  int _totalExpense = 0;
+  int _totalData = 0;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ExpenseBloc, ExpenseState>(builder: (context, state) {
-      totalExpense = 0;
-      totalData = 0;
+      _totalExpense = 0;
+      _totalData = 0;
       if (state is ExpenseInitiated) {
         return const Row();
       } else if (state is ExpenseLoading) {
         return showExpenseShimmer();
       } else if (state is ExpenseHasData) {
-        totalData = state.result.length;
+        _totalData = state.result.length;
         for (var action in state.result) {
-          totalExpense += action.price;
+          _totalExpense += action.price;
         }
       }
 
@@ -51,7 +51,7 @@ class _CardExpenseWidgetState extends State<CardExpenseWidget> {
                     fontWeight: FontWeight.bold,
                     color: AppColors.white.primary,
                   )),
-              Text("- Rp. ${totalExpense.toRupiah()}",
+              Text("- Rp. ${_totalExpense.toRupiah()}",
                   style: TextUtil(context).urbanist(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -60,21 +60,21 @@ class _CardExpenseWidgetState extends State<CardExpenseWidget> {
               Text.rich(
                 TextSpan(children: [
                   TextSpan(
-                      text: "${S.of(context).totalData} ",
+                      text: S.of(context).totalData,
                       style: TextUtil(context).fontStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
                         color: AppColors.white.primary,
                       )),
                   TextSpan(
-                      text: totalData.toString(),
+                      text: _totalData.toString(),
                       style: TextUtil(context).fontStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                         color: AppColors.white.primary,
                       )),
                   TextSpan(
-                      text: " ${S.of(context).data}",
+                      text: S.of(context).data,
                       style: TextUtil(context).fontStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,

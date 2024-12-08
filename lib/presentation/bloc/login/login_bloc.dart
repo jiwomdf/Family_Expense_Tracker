@@ -7,12 +7,12 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final AuthRepository authRepository;
+  final AuthRepository _authRepository;
 
-  LoginBloc(this.authRepository) : super(LoginInitial()) {
+  LoginBloc(this._authRepository) : super(LoginInitial()) {
     on<GetLoginEvent>((event, emit) async {
       emit(LoginLoading());
-      final result = await authRepository.login(event.email, event.password);
+      final result = await _authRepository.login(event.email, event.password);
 
       result.fold(
         (failure) {

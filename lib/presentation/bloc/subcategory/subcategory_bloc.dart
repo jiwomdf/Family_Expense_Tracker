@@ -7,12 +7,12 @@ part 'subcategory_event.dart';
 part 'subcategory_state.dart';
 
 class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
-  final FirestoreRepository firestoreRepository;
+  final FirestoreRepository _firestoreRepository;
 
-  SubcategoryBloc(this.firestoreRepository) : super(SubcategoryInitial()) {
+  SubcategoryBloc(this._firestoreRepository) : super(SubcategoryInitial()) {
     on<GetSubcategoryEvent>((event, emit) async {
       emit(SubcategoryLoading());
-      final result = await firestoreRepository.getSubCategory();
+      final result = await _firestoreRepository.getSubCategory();
       result.fold(
         (failure) {
           emit(SubcategoryError(failure.message));
@@ -25,7 +25,7 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
 
     on<GetSubcategoryWithCacheEvent>((event, emit) async {
       emit(SubcategoryLoading());
-      final result = await firestoreRepository.getSubCategoryWithCache();
+      final result = await _firestoreRepository.getSubCategoryWithCache();
       result.fold(
         (failure) {
           emit(SubcategoryError(failure.message));
@@ -38,7 +38,7 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
 
     on<UpdateSubcategoryEvent>((event, emit) async {
       emit(SubcategoryLoading());
-      final result = await firestoreRepository.updateSubCategory(
+      final result = await _firestoreRepository.updateSubCategory(
           categoryName: event.subCategoryModel.categoryName,
           categoryColor: event.subCategoryModel.categoryColor);
       result.fold(

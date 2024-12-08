@@ -7,12 +7,12 @@ part 'userdatamodel_event.dart';
 part 'userdatamodel_state.dart';
 
 class UserDataModelBloc extends Bloc<UserDataModelEvent, UserDataModelState> {
-  final AuthRepository authRepository;
+  final AuthRepository _authRepository;
 
-  UserDataModelBloc(this.authRepository) : super(UserDataModelLoading()) {
+  UserDataModelBloc(this._authRepository) : super(UserDataModelLoading()) {
     on<GetUserDataModelEvent>((event, emit) async {
       emit(UserDataModelLoading());
-      final result = await authRepository.getUserDataModel();
+      final result = await _authRepository.getUserDataModel();
       result.fold(
         (failure) {
           emit(UserDataModelError(failure.message));

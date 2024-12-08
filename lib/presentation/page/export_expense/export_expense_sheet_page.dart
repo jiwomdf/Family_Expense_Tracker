@@ -31,7 +31,7 @@ class _ExportExpenseSheetPageState extends State<ExportExpenseSheetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Export Expense as Spread Sheet"),
+          title: Text(S.of(context).exportExpenseAsSpreadSheet),
         ),
         body: BlocBuilder<ExpenseBloc, ExpenseState>(builder: (context, state) {
           if (state is ExpenseInitiated) {
@@ -48,13 +48,15 @@ class _ExportExpenseSheetPageState extends State<ExportExpenseSheetPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text("Export Expense Data to Spreadsheet",
+                  Text(S.of(context).exportExpenseDataToSpreadsheet,
                       style: TextUtil(context)
                           .urbanist(fontSize: 18, fontWeight: FontWeight.w500)),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Text(
-                        "Easily track and manage your expenses with our “Export to Spreadsheet” feature! This tool allows you to export all recorded expenses into a structured Excel spreadsheet, ensuring seamless organization and accessibility. Each expense entry, including details like date, name, category, amount, and parent category, is automatically formatted into a readable table.",
+                        S
+                            .of(context)
+                            .easilyTrackAndManageYourExpensesWithOurExportTo,
                         style: TextUtil(context).urbanist(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -71,7 +73,7 @@ class _ExportExpenseSheetPageState extends State<ExportExpenseSheetPage> {
                   child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      child: const Text("Download Spread Sheet"),
+                      child: Text(S.of(context).downloadSpreadSheet),
                       onPressed: () {
                         if (kIsWeb) {
                           context

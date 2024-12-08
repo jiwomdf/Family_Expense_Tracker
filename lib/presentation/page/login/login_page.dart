@@ -19,8 +19,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String email = "";
-  String password = "";
+  String _email = "";
+  String _password = "";
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -76,7 +76,9 @@ class _LoginPageState extends State<LoginPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Text(
-                        'Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \nof expenses among multiple users. It is available across Android, iOS, and Web platforms.',
+                        S
+                            .of(context)
+                            .welcomeToFamilyExpenseTrackerThisAppIsDesignedTo,
                         style: TextUtil(context).urbanist(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -99,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                           ? S.of(context).enterAnEmail
                           : null,
                       onChanged: (val) {
-                        setState(() => email = val);
+                        setState(() => _email = val);
                       },
                     ),
                   ),
@@ -112,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                         ? S.of(context).enterAPassword6CharsLong
                         : null,
                     onChanged: (val) {
-                      setState(() => password = val);
+                      setState(() => _password = val);
                     },
                   ),
                   Padding(
@@ -126,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                             if (_formKey.currentState?.validate() == true) {
                               context
                                   .read<LoginBloc>()
-                                  .add(GetLoginEvent(email, password));
+                                  .add(GetLoginEvent(_email, _password));
                             }
                           },
                           child: Text(S.of(context).login,
@@ -148,8 +150,8 @@ class _LoginPageState extends State<LoginPage> {
                             InkWell(
                               onTap: () {
                                 setState(() {
-                                  email = "";
-                                  password = "";
+                                  _email = "";
+                                  _password = "";
                                 });
                                 Navigator.pushNamed(
                                     context, RegisterPage.routeName);

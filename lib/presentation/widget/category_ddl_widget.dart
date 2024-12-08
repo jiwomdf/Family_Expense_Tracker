@@ -1,12 +1,10 @@
 import 'package:core/domain/model/category_model.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/category/category_bloc.dart';
 import 'package:family_expense_tracker/util/app_snackbar_util.dart';
 import 'package:family_expense_tracker/util/ext/int_util.dart';
 import 'package:family_expense_tracker/util/ext/string_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 
 class CategoryDdlWidget extends StatefulWidget {
   final CategoryModel? initialData;
@@ -23,16 +21,15 @@ class CategoryDdlWidget extends StatefulWidget {
 }
 
 class _CategoryDdlWidgetState extends State<CategoryDdlWidget> {
-  final getIt = GetIt.instance;
-  List<CategoryModel> categories = CategoryModel.emptyList();
-  CategoryModel ddlValue =
+  List<CategoryModel> _categories = CategoryModel.emptyList();
+  CategoryModel _ddlValue =
       CategoryModel(categoryColor: 0xff443a49, categoryName: "");
 
   @override
   void initState() {
     context.read<CategoryBloc>().add(const GetCategoryEvent());
 
-    ddlValue = widget.initialData ??
+    _ddlValue = widget.initialData ??
         CategoryModel(categoryColor: 0xff443a49, categoryName: "");
     super.initState();
   }
@@ -42,7 +39,7 @@ class _CategoryDdlWidgetState extends State<CategoryDdlWidget> {
     return BlocBuilder<CategoryBloc, CategoryState>(
       builder: (context, state) {
         if (state is CategoryHasData) {
-          categories = state.result;
+          _categories = state.result;
         } else if (state is CategoryError) {
           context.show(state.message);
         }
@@ -53,12 +50,12 @@ class _CategoryDdlWidgetState extends State<CategoryDdlWidget> {
               SizedBox(
                 height: 15,
                 child: CircleAvatar(
-                    backgroundColor: ddlValue.categoryColor.toColor()),
+                    backgroundColor: _ddlValue.categoryColor.toColor()),
               ),
-              Text((ddlValue.categoryName).ifEmpty(S.of(context).chooseOne)),
+              Text((_ddlValue.categoryName).ifEmpty("Choose one")),
             ],
           ),
-          items: categories.map((CategoryModel value) {
+          items: _categories.map((CategoryModel value) {
             return DropdownMenuItem(
                 value: value,
                 child: Row(
@@ -74,10 +71,10 @@ class _CategoryDdlWidgetState extends State<CategoryDdlWidget> {
           }).toList(),
           onChanged: (value) {
             setState(() {
-              ddlValue.categoryName = value?.categoryName ?? "";
-              ddlValue.categoryColor = value?.categoryColor ?? 0;
+              _ddlValue.categoryName = value?.categoryName ?? "";
+              _ddlValue.categoryColor = value?.categoryColor ?? 0;
             });
-            widget.selectedCategory(ddlValue);
+            widget.selectedCategory(_ddlValue);
           },
         );
       },

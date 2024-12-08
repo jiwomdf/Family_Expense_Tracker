@@ -10,13 +10,13 @@ part 'expense_event.dart';
 part 'expense_state.dart';
 
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
-  final FirestoreRepository firestoreRepository;
+  final FirestoreRepository _firestoreRepository;
 
   List<ExpenseCategoryModel> _tempExpense = [];
 
-  ExpenseBloc(this.firestoreRepository) : super(ExpenseLoading()) {
+  ExpenseBloc(this._firestoreRepository) : super(ExpenseLoading()) {
     on<InsertExpenseEvent>((event, emit) async {
-      var expenses = await firestoreRepository
+      var expenses = await _firestoreRepository
           .insertExpense(event.expenseRequest.toInsertJson());
 
       expenses.fold((failure) {
@@ -27,7 +27,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     });
 
     on<InsertBatchExpenseEvent>((event, emit) async {
-      var expenses = await firestoreRepository.insertBatchExpense(
+      var expenses = await _firestoreRepository.insertBatchExpense(
           listExpenseRequest: event.listExpenseRequest);
 
       expenses.fold((failure) {
@@ -36,7 +36,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     });
 
     on<UpdateBatchExpenseEvent>((event, emit) async {
-      var expenses = await firestoreRepository.updateBatchExpense(
+      var expenses = await _firestoreRepository.updateBatchExpense(
         listdata: event.updateBatchExpense,
       );
 
@@ -46,7 +46,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     });
 
     on<UpdateExpenseEvent>((event, emit) async {
-      var expenses = await firestoreRepository.updateExpense(
+      var expenses = await _firestoreRepository.updateExpense(
         id: event.expenseRequest.id,
         expenseRequest: event.expenseRequest.toJson(),
       );
@@ -59,7 +59,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     });
 
     on<DeleteExpenseEvent>((event, emit) async {
-      var expenses = await firestoreRepository.deleteExpense(event.id);
+      var expenses = await _firestoreRepository.deleteExpense(event.id);
       expenses.fold((failure) {
         emit(ExpenseError(failure.message));
       }, (data) {
@@ -69,7 +69,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
     on<GetExpenseEvent>((event, emit) async {
       emit(ExpenseLoading());
-      var expenses = await firestoreRepository.getExpense(
+      var expenses = await _firestoreRepository.getExpense(
           event.month, event.year, event.subCategory);
       expenses.fold((failure) {
         emit(ExpenseError(failure.message));
@@ -85,7 +85,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
     on<GetAllExpenseEvent>((event, emit) async {
       emit(ExpenseLoading());
-      var expenses = await firestoreRepository.getAllExpense();
+      var expenses = await _firestoreRepository.getAllExpense();
       expenses.fold((failure) {
         emit(ExpenseError(failure.message));
       }, (data) {

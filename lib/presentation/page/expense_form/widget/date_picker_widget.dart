@@ -6,14 +6,14 @@ import 'package:intl/intl.dart';
 class DatePickerWidget extends StatefulWidget {
   final ValueChanged<DateTime> callback;
   final DateTime? initialDate;
-  final String? restorationId;
+  final String? _restorationId;
 
   const DatePickerWidget({
     super.key,
-    this.restorationId,
+    String? restorationId,
     this.initialDate,
     required this.callback,
-  });
+  }) : _restorationId = restorationId;
 
   @override
   State<DatePickerWidget> createState() => _DatePickerWidgetState();
@@ -22,7 +22,7 @@ class DatePickerWidget extends StatefulWidget {
 class _DatePickerWidgetState extends State<DatePickerWidget>
     with RestorationMixin {
   @override
-  String? get restorationId => widget.restorationId;
+  String? get restorationId => widget._restorationId;
 
   RestorableDateTime _selectedDate = RestorableDateTime(DateTime.now());
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =

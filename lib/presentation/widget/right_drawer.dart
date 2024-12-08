@@ -1,4 +1,4 @@
-import 'package:family_expense_tracker/presentation/app/app.dart';
+import 'package:family_expense_tracker/app/app.dart';
 import 'package:family_expense_tracker/presentation/bloc/logout/logout_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/usermodel/userdatamodel_bloc.dart';
 import 'package:family_expense_tracker/presentation/page/export_expense/export_expense_page.dart';
@@ -20,14 +20,14 @@ class RightDrawer extends StatefulWidget {
 }
 
 class _RightDrawerState extends State<RightDrawer> {
-  String username = "";
-  bool isLight = false;
+  String _username = "";
+  bool _isLight = false;
 
   @override
   void initState() {
     super.initState();
     context.read<UserDataModelBloc>().add(const GetUserDataModelEvent());
-    isLight = App.of(context).isLightMode();
+    _isLight = App.of(context).isLightMode();
   }
 
   @override
@@ -39,7 +39,7 @@ class _RightDrawerState extends State<RightDrawer> {
           if (state is UserDataModelLoading) {
             const Center(child: CircularProgressIndicator());
           } else if (state is UserDataModelHasData) {
-            username = state.result.getDisplayName();
+            _username = state.result.getDisplayName();
           } else if (state is UserDataModelError) {}
 
           return Column(
@@ -87,7 +87,7 @@ class _RightDrawerState extends State<RightDrawer> {
             ]),
       ),
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
-      child: ProfileWidget(userName: username),
+      child: ProfileWidget(userName: _username),
     );
   }
 
@@ -149,14 +149,14 @@ class _RightDrawerState extends State<RightDrawer> {
       child: Switch(
           activeTrackColor: AppColors.purple.purpleGradienVideo,
           inactiveTrackColor: AppColors.purple.purpleDarker,
-          activeColor: isLight
+          activeColor: _isLight
               ? AppColors.purple.purpleSoftLight
               : AppColors.purple.purpleSoftLight,
-          value: isLight,
+          value: _isLight,
           onChanged: (value) {
             setState(() {
-              isLight = value;
-              if (isLight) {
+              _isLight = value;
+              if (_isLight) {
                 App.of(context).changeTheme(ThemeMode.light);
               } else {
                 App.of(context).changeTheme(ThemeMode.dark);

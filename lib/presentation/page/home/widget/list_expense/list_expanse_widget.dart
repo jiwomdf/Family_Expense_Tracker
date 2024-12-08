@@ -56,9 +56,9 @@ class _ListExpenseWidgetState extends State<ListExpenseWidget> {
               ExpenseFormPage.routeName,
               arguments: expenseCategoryModel,
             ).then((completion) {
-              if (mounted) {
-                context.show(
-                    "${expenseCategoryModel.note} ${S.of(context).hasBeenModifiedDataNotShowedYetInorderToSave}");
+              if (context.mounted) {
+                context.show(expenseCategoryModel.note +
+                    S.of(context).hasBeenModifiedDataNotShowedYetInorderToSave);
                 context.read<ExpenseBloc>().add(const ResetExpenseEvent());
               }
             }),
@@ -92,7 +92,7 @@ class _ListExpenseWidgetState extends State<ListExpenseWidget> {
           Padding(
             padding: const EdgeInsets.only(bottom: 5),
             child: Text(
-              "${S.of(context).rp}${expenseCategoryModel.price.toRupiah()}",
+              "Rp ${expenseCategoryModel.price.toRupiah()}",
               style: const TextStyle(fontSize: 14),
             ),
           ),

@@ -3,7 +3,6 @@ import 'package:core/data/network/request/update_expense_request.dart';
 import 'package:core/domain/model/category_model.dart';
 import 'package:core/domain/model/expense_category_model.dart';
 import 'package:core/domain/model/sub_category_model.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/category/category_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/fcm/fcm_bloc.dart';
@@ -26,9 +25,11 @@ import 'package:intl/intl.dart';
 
 class ExpenseFormPage extends StatefulWidget {
   static const routeName = '/input-expense-form-page';
-  final ExpenseCategoryModel? expenseCategory;
+  final ExpenseCategoryModel? _expenseCategory;
 
-  const ExpenseFormPage({super.key, required this.expenseCategory});
+  const ExpenseFormPage(
+      {super.key, required ExpenseCategoryModel? expenseCategory})
+      : _expenseCategory = expenseCategory;
 
   @override
   State<ExpenseFormPage> createState() => _ExpenseFormPageState();
@@ -51,20 +52,20 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
 
   @override
   void initState() {
-    isFromEdit = widget.expenseCategory != null;
+    isFromEdit = widget._expenseCategory != null;
     date = DateTime.now();
 
     if (isFromEdit) {
-      note = widget.expenseCategory?.note ?? "";
-      price = formatter.format(widget.expenseCategory?.price ?? 0);
+      note = widget._expenseCategory?.note ?? "";
+      price = formatter.format(widget._expenseCategory?.price ?? 0);
       categoryModel = CategoryModel(
-          categoryName: widget.expenseCategory?.categoryName ?? "",
-          categoryColor: widget.expenseCategory?.categoryColor ?? -1);
+          categoryName: widget._expenseCategory?.categoryName ?? "",
+          categoryColor: widget._expenseCategory?.categoryColor ?? -1);
       subCategoryModel = SubCategoryModel(
-        categoryName: widget.expenseCategory?.subCategoryName ?? "",
-        categoryColor: widget.expenseCategory?.subCategoryColor ?? -1,
+        categoryName: widget._expenseCategory?.subCategoryName ?? "",
+        categoryColor: widget._expenseCategory?.subCategoryColor ?? -1,
       );
-      date = widget.expenseCategory?.date.toDateGlobalFormat();
+      date = widget._expenseCategory?.date.toDateGlobalFormat();
     }
     super.initState();
   }
@@ -73,7 +74,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).form),
+        title: const Text("Form"),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: SafeArea(
@@ -121,8 +122,8 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                       children: [
                         addNote(),
                         addDate(context),
+                        addType(context),
                         addCategory(context),
-                        addSubCategory(context),
                         addPrice(),
                       ],
                     ),
@@ -150,9 +151,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                 onPressed: () {
                   submitForm();
                 },
-                child: Text(isFromEdit
-                    ? S.of(context).updateExpense
-                    : S.of(context).addExpense),
+                child: Text(isFromEdit ? "Update expense" : "Add expense"),
               ),
             ),
           ),
@@ -166,13 +165,13 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                     side: BorderSide(width: 1.0, color: AppColors.red.primary),
                   ),
                   onPressed: () {
-                    if (widget.expenseCategory?.id != null) {
-                      context.read<ExpenseBloc>().add(
-                          DeleteExpenseEvent(widget.expenseCategory?.id ?? ""));
+                    if (widget._expenseCategory?.id != null) {
+                      context.read<ExpenseBloc>().add(DeleteExpenseEvent(
+                          widget._expenseCategory?.id ?? ""));
                     }
                   },
                   child: Text(
-                    S.of(context).delete,
+                    "Delete",
                     style: TextStyle(color: AppColors.red.primary),
                   ),
                 ),
@@ -189,7 +188,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(S.of(context).expenseDate),
+          const Text("Expense date"),
           DatePickerWidget(callback: setDateState, initialDate: date),
         ],
       ),
@@ -200,11 +199,11 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
-        initialValue: widget.expenseCategory?.note ?? "",
-        decoration: textFormFieldStyle(
-            context: context, hintText: S.of(context).expenseName),
+        initialValue: widget._expenseCategory?.note ?? "",
+        decoration:
+            textFormFieldStyle(context: context, hintText: "Expense Name.."),
         validator: (val) =>
-            (val?.length ?? 0) <= 0 ? S.of(context).noteCannotBeEmpty : null,
+            (val?.length ?? 0) <= 0 ? "Note cannot be empty" : null,
         onChanged: (val) {
           setState(() => note = val);
         },
@@ -218,13 +217,13 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
       child: Builder(builder: (context) {
         if (kIsWeb) {
           return TextFormField(
-            initialValue: widget.expenseCategory?.price.toRupiah() ?? "",
+            initialValue: widget._expenseCategory?.price.toRupiah() ?? "",
             keyboardType: TextInputType.number,
-            decoration: textFormFieldStyle(
-                    context: context, hintText: S.of(context).price)
-                .copyWith(icon: Text(S.of(context).rp)),
+            decoration:
+                textFormFieldStyle(context: context, hintText: "Price..")
+                    .copyWith(icon: const Text("Rp ")),
             validator: (val) => ((val?.fromRupiah() ?? 0) < 100)
-                ? S.of(context).priceShouldBeGraterThanRp100
+                ? "Price should be grater than Rp 100"
                 : null,
             onChanged: (val) {
               setState(() {
@@ -234,14 +233,14 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
           );
         } else {
           return TextFormField(
-            initialValue: widget.expenseCategory?.price.toRupiah() ?? "",
+            initialValue: widget._expenseCategory?.price.toRupiah() ?? "",
             inputFormatters: [textInputFormatter()],
             keyboardType: TextInputType.number,
-            decoration: textFormFieldStyle(
-                    context: context, hintText: S.of(context).price)
-                .copyWith(icon: Text(S.of(context).rp)),
+            decoration:
+                textFormFieldStyle(context: context, hintText: "Price..")
+                    .copyWith(icon: const Text("Rp ")),
             validator: (val) => ((val?.fromRupiah() ?? 0) < 100)
-                ? S.of(context).priceShouldBeGraterThanRp100
+                ? "Price should be grater than Rp 100"
                 : null,
             onChanged: (val) {
               setState(() {
@@ -255,7 +254,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     );
   }
 
-  Widget addCategory(BuildContext context) {
+  Widget addType(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: Row(
@@ -292,7 +291,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                           .add(const GetCategoryEvent());
                     }
                   },
-                  child: Text(S.of(context).addCategory)),
+                  child: const Text("Add Type")),
             ),
           )
         ],
@@ -300,7 +299,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     );
   }
 
-  Widget addSubCategory(BuildContext context) {
+  Widget addCategory(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: Row(
@@ -340,8 +339,8 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
                                 .add(const GetSubcategoryEvent());
                           }
                         },
-                        child: Text(
-                          S.of(context).addSubCategory,
+                        child: const Text(
+                          "Add Category",
                           overflow: TextOverflow.ellipsis,
                         )),
                   ),
@@ -365,15 +364,14 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
 
     if (categoryModel?.categoryName.isEmpty == true) {
       isSnackbarShown = true;
-      context.showSb(SnackBar(content: Text(S.of(context).categoryNameIsEmpty)),
+      context.showSb(const SnackBar(content: Text("Category name is empty")),
           isSnackbarShown);
       return false;
     }
 
     if (categoryModel?.categoryColor == null) {
       isSnackbarShown = true;
-      context.showSb(
-          SnackBar(content: Text(S.of(context).categoryColorIsEmpty)),
+      context.showSb(const SnackBar(content: Text("Category color is empty")),
           isSnackbarShown);
       return false;
     }
@@ -381,7 +379,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     if (subCategoryModel?.categoryName.isEmpty == true) {
       isSnackbarShown = true;
       context.showSb(
-          SnackBar(content: Text(S.of(context).subCategoryNameIsEmpty)),
+          const SnackBar(content: Text("Sub Category name is empty")),
           isSnackbarShown);
       return false;
     }
@@ -389,7 +387,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     if (subCategoryModel?.categoryColor == null) {
       isSnackbarShown = true;
       context.showSb(
-          SnackBar(content: Text(S.of(context).subCategoryColorIsEmpty)),
+          const SnackBar(content: Text("Sub Category color is empty")),
           isSnackbarShown);
       return false;
     }
@@ -397,7 +395,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     if (date == null) {
       isSnackbarShown = true;
       context.showSb(
-          SnackBar(content: Text(S.of(context).dateIsEmpty)), isSnackbarShown);
+          const SnackBar(content: Text("Date is empty")), isSnackbarShown);
       return false;
     }
 
@@ -409,7 +407,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
             "${now.hour.addZeroPref()}:${now.minute.addZeroPref()}:${now.second.addZeroPref()} ${now.day.addZeroPref()}/${now.month.addZeroPref()}/${now.year}";
 
         context.read<ExpenseBloc>().add(UpdateExpenseEvent(UpdateExpenseRequest(
-              id: widget.expenseCategory?.id ?? "",
+              id: widget._expenseCategory?.id ?? "",
               note: note,
               price: price.fromRupiah(),
               date: updateDate ?? '',

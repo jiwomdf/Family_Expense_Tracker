@@ -50,26 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Family Expense Tracker`
-  String get appTitle {
-    return Intl.message(
-      'Family Expense Tracker',
-      name: 'appTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Family Expense Tracker`
-  String get familyExpenseTracker {
-    return Intl.message(
-      'Family Expense Tracker',
-      name: 'familyExpenseTracker',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Home`
   String get home {
     return Intl.message(
@@ -80,311 +60,11 @@ class S {
     );
   }
 
-  /// `Export Expense`
-  String get exportExpense {
+  /// `Category`
+  String get category {
     return Intl.message(
-      'Export Expense',
-      name: 'exportExpense',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Export the expense data`
-  String get exportTheExpenseData {
-    return Intl.message(
-      'Export the expense data',
-      name: 'exportTheExpenseData',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Click the button below to export the expense data`
-  String get clickTheButtonBelowToExportTheExpenseData {
-    return Intl.message(
-      'Click the button below to export the expense data',
-      name: 'clickTheButtonBelowToExportTheExpenseData',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `The feature currently only works on web`
-  String get theFeatureCurrentlyOnlyWorksOnWeb {
-    return Intl.message(
-      'The feature currently only works on web',
-      name: 'theFeatureCurrentlyOnlyWorksOnWeb',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Export the download expense`
-  String get exportTheDownloadExpense {
-    return Intl.message(
-      'Export the download expense',
-      name: 'exportTheDownloadExpense',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category Inserted`
-  String get categoryInserted {
-    return Intl.message(
-      'Category Inserted',
-      name: 'categoryInserted',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add Category`
-  String get addCategory {
-    return Intl.message(
-      'Add Category',
-      name: 'addCategory',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category name..`
-  String get categoryName {
-    return Intl.message(
-      'Category name..',
-      name: 'categoryName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category cannot be empty`
-  String get categoryCannotBeEmpty {
-    return Intl.message(
-      'Category cannot be empty',
-      name: 'categoryCannotBeEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Close`
-  String get close {
-    return Intl.message(
-      'Close',
-      name: 'close',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Insert`
-  String get insert {
-    return Intl.message(
-      'Insert',
-      name: 'insert',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sub Category Inserted`
-  String get subCategoryInserted {
-    return Intl.message(
-      'Sub Category Inserted',
-      name: 'subCategoryInserted',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add Sub Category`
-  String get addSubCategory {
-    return Intl.message(
-      'Add Sub Category',
-      name: 'addSubCategory',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Choose color`
-  String get chooseColor {
-    return Intl.message(
-      'Choose color',
-      name: 'chooseColor',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sub Category name..`
-  String get subCategoryName {
-    return Intl.message(
-      'Sub Category name..',
-      name: 'subCategoryName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sub Category cannot be empty`
-  String get subCategoryCannotBeEmpty {
-    return Intl.message(
-      'Sub Category cannot be empty',
-      name: 'subCategoryCannotBeEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Form`
-  String get form {
-    return Intl.message(
-      'Form',
-      name: 'form',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Update expense`
-  String get updateExpense {
-    return Intl.message(
-      'Update expense',
-      name: 'updateExpense',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add expense`
-  String get addExpense {
-    return Intl.message(
-      'Add expense',
-      name: 'addExpense',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Delete`
-  String get delete {
-    return Intl.message(
-      'Delete',
-      name: 'delete',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Expense date`
-  String get expenseDate {
-    return Intl.message(
-      'Expense date',
-      name: 'expenseDate',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Expense Name..`
-  String get expenseName {
-    return Intl.message(
-      'Expense Name..',
-      name: 'expenseName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Note cannot be empty`
-  String get noteCannotBeEmpty {
-    return Intl.message(
-      'Note cannot be empty',
-      name: 'noteCannotBeEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Price..`
-  String get price {
-    return Intl.message(
-      'Price..',
-      name: 'price',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Rp `
-  String get rp {
-    return Intl.message(
-      'Rp ',
-      name: 'rp',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Price should be grater than Rp 100`
-  String get priceShouldBeGraterThanRp100 {
-    return Intl.message(
-      'Price should be grater than Rp 100',
-      name: 'priceShouldBeGraterThanRp100',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category name is empty`
-  String get categoryNameIsEmpty {
-    return Intl.message(
-      'Category name is empty',
-      name: 'categoryNameIsEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Category color is empty`
-  String get categoryColorIsEmpty {
-    return Intl.message(
-      'Category color is empty',
-      name: 'categoryColorIsEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sub Category name is empty`
-  String get subCategoryNameIsEmpty {
-    return Intl.message(
-      'Sub Category name is empty',
-      name: 'subCategoryNameIsEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sub Category color is empty`
-  String get subCategoryColorIsEmpty {
-    return Intl.message(
-      'Sub Category color is empty',
-      name: 'subCategoryColorIsEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Date is empty`
-  String get dateIsEmpty {
-    return Intl.message(
-      'Date is empty',
-      name: 'dateIsEmpty',
+      'Category',
+      name: 'category',
       desc: '',
       args: [],
     );
@@ -395,6 +75,16 @@ class S {
     return Intl.message(
       'For saving the firestore usage, we\'re not showing any data yet, you may press the reload button or change the filter to load the data',
       name: 'forSavingTheFirestoreUsageWereNotShowingAnyData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Family Expense Tracker`
+  String get appTitle {
+    return Intl.message(
+      'Family Expense Tracker',
+      name: 'appTitle',
       desc: '',
       args: [],
     );
@@ -450,20 +140,20 @@ class S {
     );
   }
 
-  /// `Category`
-  String get category {
+  /// `Price`
+  String get price {
     return Intl.message(
-      'Category',
-      name: 'category',
+      'Price',
+      name: 'price',
       desc: '',
       args: [],
     );
   }
 
-  /// `has been modified, data not showed yet inorder to save the firestore usage`
+  /// ` has been modified, data not showed yet inorder to save the firestore usage`
   String get hasBeenModifiedDataNotShowedYetInorderToSave {
     return Intl.message(
-      'has been modified, data not showed yet inorder to save the firestore usage',
+      ' has been modified, data not showed yet inorder to save the firestore usage',
       name: 'hasBeenModifiedDataNotShowedYetInorderToSave',
       desc: '',
       args: [],
@@ -510,16 +200,6 @@ class S {
     );
   }
 
-  /// `Sub Category`
-  String get subCategory {
-    return Intl.message(
-      'Sub Category',
-      name: 'subCategory',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Import Expense`
   String get importExpense {
     return Intl.message(
@@ -535,96 +215,6 @@ class S {
     return Intl.message(
       'Step 1. Create data.json file',
       name: 'step1CreateDatajsonFile',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `create a file name`
-  String get createAFileName {
-    return Intl.message(
-      'create a file name',
-      name: 'createAFileName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `data.json`
-  String get datajson {
-    return Intl.message(
-      'data.json',
-      name: 'datajson',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `, then make sure to fill the json format like this markdown below`
-  String get thenMakeSureToFillTheJsonFormatLikeThis {
-    return Intl.message(
-      ', then make sure to fill the json format like this markdown below',
-      name: 'thenMakeSureToFillTheJsonFormatLikeThis',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Step 2. Place the data.json file in the assets/import folder`
-  String get step2PlaceTheDatajsonFileInTheAssetsimportFolder {
-    return Intl.message(
-      'Step 2. Place the data.json file in the assets/import folder',
-      name: 'step2PlaceTheDatajsonFileInTheAssetsimportFolder',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Place your json file in`
-  String get placeYourJsonFileIn {
-    return Intl.message(
-      'Place your json file in',
-      name: 'placeYourJsonFileIn',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `./assets/import/data.json \n\n`
-  String get assetsimportdatajsonNn {
-    return Intl.message(
-      './assets/import/data.json \\n\\n',
-      name: 'assetsimportdatajsonNn',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Step 3. Press this import button below`
-  String get step3PressThisImportButtonBelow {
-    return Intl.message(
-      'Step 3. Press this import button below',
-      name: 'step3PressThisImportButtonBelow',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `If the above requirement already complete, press the below button to start import the data`
-  String get ifTheAboveRequirementAlreadyCompletePressTheBelowButton {
-    return Intl.message(
-      'If the above requirement already complete, press the below button to start import the data',
-      name: 'ifTheAboveRequirementAlreadyCompletePressTheBelowButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Import data.json from /assets/import`
-  String get importDatajsonFromAssetsimport {
-    return Intl.message(
-      'Import data.json from /assets/import',
-      name: 'importDatajsonFromAssetsimport',
       desc: '',
       args: [],
     );
@@ -770,16 +360,6 @@ class S {
     );
   }
 
-  /// `Confirm your password..`
-  String get confirmYourPassword {
-    return Intl.message(
-      'Confirm your password..',
-      name: 'confirmYourPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Confirm password is not same as password`
   String get confirmPasswordIsNotSameAsPassword {
     return Intl.message(
@@ -810,21 +390,11 @@ class S {
     );
   }
 
-  /// `Update Collection Scheme`
-  String get updateCollectionScheme {
+  /// `Update all expense`
+  String get updateAllExpense {
     return Intl.message(
-      'Update Collection Scheme',
-      name: 'updateCollectionScheme',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `You can update scheme objects in the Firestore collection by modifying the content of the func() in lib/util/scheme/ classes`
-  String get youCanUpdateSchemeObjectsInTheFirestoreCollectionBy {
-    return Intl.message(
-      'You can update scheme objects in the Firestore collection by modifying the content of the func() in lib/util/scheme/ classes',
-      name: 'youCanUpdateSchemeObjectsInTheFirestoreCollectionBy',
+      'Update all expense',
+      name: 'updateAllExpense',
       desc: '',
       args: [],
     );
@@ -840,46 +410,6 @@ class S {
     );
   }
 
-  /// `Update all expense`
-  String get updateAllExpense {
-    return Intl.message(
-      'Update all expense',
-      name: 'updateAllExpense',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `click the Update all category button to update each table scheme`
-  String get clickTheUpdateAllCategoryButtonToUpdateEachTable {
-    return Intl.message(
-      'click the Update all category button to update each table scheme',
-      name: 'clickTheUpdateAllCategoryButtonToUpdateEachTable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Update all category`
-  String get updateAllCategory {
-    return Intl.message(
-      'Update all category',
-      name: 'updateAllCategory',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `click the Update all subCategory button to update each table scheme`
-  String get clickTheUpdateAllSubcategoryButtonToUpdateEachTable {
-    return Intl.message(
-      'click the Update all subCategory button to update each table scheme',
-      name: 'clickTheUpdateAllSubcategoryButtonToUpdateEachTable',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Update all subCategory`
   String get updateAllSubcategory {
     return Intl.message(
@@ -890,31 +420,91 @@ class S {
     );
   }
 
-  /// `Choose one`
-  String get chooseOne {
+  /// `Export Expense Data to Spreadsheet`
+  String get exportExpenseDataToSpreadsheet {
     return Intl.message(
-      'Choose one',
-      name: 'chooseOne',
+      'Export Expense Data to Spreadsheet',
+      name: 'exportExpenseDataToSpreadsheet',
       desc: '',
       args: [],
     );
   }
 
-  /// `Import Data`
-  String get importData {
+  /// `Easily track and manage your expenses with our “Export to Spreadsheet” feature! This tool allows you to export all recorded expenses into a structured Excel spreadsheet, ensuring seamless organization and accessibility. Each expense entry, including details like date, name, category, amount, and parent category, is automatically formatted into a readable table.`
+  String get easilyTrackAndManageYourExpensesWithOurExportTo {
     return Intl.message(
-      'Import Data',
-      name: 'importData',
+      'Easily track and manage your expenses with our “Export to Spreadsheet” feature! This tool allows you to export all recorded expenses into a structured Excel spreadsheet, ensuring seamless organization and accessibility. Each expense entry, including details like date, name, category, amount, and parent category, is automatically formatted into a readable table.',
+      name: 'easilyTrackAndManageYourExpensesWithOurExportTo',
       desc: '',
       args: [],
     );
   }
 
-  /// `Reload`
-  String get reload {
+  /// `Download Spread Sheet`
+  String get downloadSpreadSheet {
     return Intl.message(
-      'Reload',
-      name: 'reload',
+      'Download Spread Sheet',
+      name: 'downloadSpreadSheet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The feature currently only works on web`
+  String get theFeatureCurrentlyOnlyWorksOnWeb {
+    return Intl.message(
+      'The feature currently only works on web',
+      name: 'theFeatureCurrentlyOnlyWorksOnWeb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export the Json Formatted expense`
+  String get exportTheJsonFormattedExpense {
+    return Intl.message(
+      'Export the Json Formatted expense',
+      name: 'exportTheJsonFormattedExpense',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export the expense data`
+  String get exportTheExpenseData {
+    return Intl.message(
+      'Export the expense data',
+      name: 'exportTheExpenseData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export Expense to Json`
+  String get exportExpenseToJson {
+    return Intl.message(
+      'Export Expense to Json',
+      name: 'exportExpenseToJson',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Export Expense as Spread Sheet`
+  String get exportExpenseAsSpreadSheet {
+    return Intl.message(
+      'Export Expense as Spread Sheet',
+      name: 'exportExpenseAsSpreadSheet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \nof expenses among multiple users. It is available across Android, iOS, and Web platforms.`
+  String get welcomeToFamilyExpenseTrackerThisAppIsDesignedTo {
+    return Intl.message(
+      'Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \\nof expenses among multiple users. It is available across Android, iOS, and Web platforms.',
+      name: 'welcomeToFamilyExpenseTrackerThisAppIsDesignedTo',
       desc: '',
       args: [],
     );

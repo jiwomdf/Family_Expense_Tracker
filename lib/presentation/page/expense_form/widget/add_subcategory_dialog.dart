@@ -1,5 +1,4 @@
 import 'package:core/domain/model/sub_category_model.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/subcategory/subcategory_bloc.dart';
 import 'package:family_expense_tracker/presentation/widget/text_form_field.dart';
 import 'package:family_expense_tracker/util/app_snackbar_util.dart';
@@ -16,7 +15,7 @@ class AddSubCategoryDialog extends StatefulWidget {
 }
 
 class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
-  SubCategoryModel ddlValue = SubCategoryModel(
+  final SubCategoryModel _ddlValue = SubCategoryModel(
     categoryColor: 0xff443a49,
     categoryName: "",
   );
@@ -27,8 +26,8 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
     return BlocBuilder<SubcategoryBloc, SubcategoryState>(
       builder: (context, state) {
         if (state is SubcategoryUpdated) {
-          context.show(S.of(context).subCategoryInserted);
-          Navigator.of(context, rootNavigator: true).pop(ddlValue);
+          context.show("Sub Category Inserted");
+          Navigator.of(context, rootNavigator: true).pop(_ddlValue);
         } else if (state is SubcategoryError) {
           context.show(state.message);
         }
@@ -51,7 +50,7 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                  child: Text(S.of(context).addSubCategory,
+                  child: Text('Add Category',
                       style: TextUtil(context).urbanist(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -64,7 +63,7 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 6),
-                        child: Text(S.of(context).chooseColor,
+                        child: Text("Choose color",
                             style: TextUtil(context).plusJakarta(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -74,9 +73,9 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                         enableAlpha: false,
                         displayThumbColor: false,
                         hexInputBar: false,
-                        pickerColor: Color(ddlValue.categoryColor),
+                        pickerColor: Color(_ddlValue.categoryColor),
                         onColorChanged: (color) {
-                          setState(() => ddlValue.categoryColor = color.value);
+                          setState(() => _ddlValue.categoryColor = color.value);
                         },
                       ),
                     ],
@@ -87,13 +86,13 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration: textFormFieldStyle(
-                        context: context,
-                        hintText: S.of(context).subCategoryName),
+                        context: context, hintText: "Sub Category name.."),
                     validator: (val) => (val?.isEmpty ?? true)
-                        ? S.of(context).subCategoryCannotBeEmpty
+                        ? 'Sub Category cannot be empty'
                         : null,
                     onChanged: (val) {
-                      setState(() => ddlValue.categoryName = val.toLowerCase());
+                      setState(
+                          () => _ddlValue.categoryName = val.toLowerCase());
                     },
                   ),
                 ),
@@ -106,7 +105,7 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text(S.of(context).close),
+                      child: const Text('Close'),
                     ),
                     TextButton(
                       onPressed: () {
@@ -115,12 +114,12 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                               .read<SubcategoryBloc>()
                               .add(UpdateSubcategoryEvent(SubCategoryModel(
                                 categoryName:
-                                    ddlValue.categoryName.toLowerCase(),
-                                categoryColor: ddlValue.categoryColor,
+                                    _ddlValue.categoryName.toLowerCase(),
+                                categoryColor: _ddlValue.categoryColor,
                               )));
                         }
                       },
-                      child: Text(S.of(context).insert),
+                      child: const Text('Insert'),
                     ),
                   ],
                 ),

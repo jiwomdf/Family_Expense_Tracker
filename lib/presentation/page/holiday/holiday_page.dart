@@ -15,7 +15,7 @@ class HolidayPage extends StatefulWidget {
 }
 
 class _HolidayPageState extends State<HolidayPage> {
-  var isFirstUpComingEvent = false;
+  var _isFirstUpComingEvent = false;
 
   @override
   void initState() {
@@ -54,11 +54,11 @@ class _HolidayPageState extends State<HolidayPage> {
         ((result.date?.toDateGlobalFormat()?.compareTo(DateTime.now())) ?? 0) <
             0;
     return Builder(builder: (context) {
-      if (isUpComingEvent && !isFirstUpComingEvent) {
-        isFirstUpComingEvent = true;
+      if (isUpComingEvent && !_isFirstUpComingEvent) {
+        _isFirstUpComingEvent = true;
       }
       Widget card = cardContainer(isUpComingEvent, context, result);
-      isFirstUpComingEvent = false;
+      _isFirstUpComingEvent = false;
       return card;
     });
   }
@@ -68,7 +68,7 @@ class _HolidayPageState extends State<HolidayPage> {
     BuildContext context,
     HolidayResponse result,
   ) {
-    var isNearestHoliday = isUpComingEvent && isFirstUpComingEvent;
+    var isNearestHoliday = isUpComingEvent && _isFirstUpComingEvent;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

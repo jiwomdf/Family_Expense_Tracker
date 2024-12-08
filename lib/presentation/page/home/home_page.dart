@@ -7,6 +7,7 @@ import 'package:family_expense_tracker/presentation/page/home/widget/card_income
 import 'package:family_expense_tracker/presentation/page/home/widget/list_expense/expense_widget.dart';
 import 'package:family_expense_tracker/presentation/page/home/widget/pie_chart_sub_category_widget.dart';
 import 'package:family_expense_tracker/presentation/page/home/widget/pie_chart_widget.dart';
+import 'package:family_expense_tracker/presentation/widget/filter_widget.dart';
 import 'package:family_expense_tracker/presentation/widget/right_drawer.dart';
 import 'package:family_expense_tracker/presentation/widget/toolbar.dart';
 import 'package:flutter/material.dart';
@@ -60,8 +61,13 @@ class _HomePageState extends State<HomePage> {
                     ],
                   )),
               Padding(
-                padding: EdgeInsets.only(top: 10, left: 16, right: 16),
-                child: ExpenseWidget(),
+                padding: EdgeInsets.only(top: 15, left: 16, right: 16),
+                child: Column(
+                  children: [
+                    FilterWidget(),
+                    ExpenseWidget(),
+                  ],
+                ),
               )
             ],
           ),
@@ -80,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(
             height: 10,
-          )
+          ),
         ],
       ),
     );

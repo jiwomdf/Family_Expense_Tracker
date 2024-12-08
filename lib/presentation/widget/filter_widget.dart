@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilterWidget extends StatefulWidget {
-  static const String defaultSubCategory = "All subCategory";
+  static const String _defaultSubCategory = "All subCategory";
 
   const FilterWidget({super.key});
 
@@ -25,11 +25,11 @@ class _FilterWidgetState extends State<FilterWidget> {
   int _ddlYearValue = DateTime.now().year;
   final SubCategoryModel _ddlSubCategoryValue = SubCategoryModel(
     categoryColor: 0xff443a49,
-    categoryName: FilterWidget.defaultSubCategory,
+    categoryName: FilterWidget._defaultSubCategory,
   );
 
   List<int> _listYear = [];
-  List<SubCategoryModel> subCategoryList = [];
+  final List<SubCategoryModel> _subCategoryList = [];
 
   @override
   void initState() {
@@ -117,12 +117,12 @@ class _FilterWidgetState extends State<FilterWidget> {
     return BlocBuilder<SubcategoryBloc, SubcategoryState>(
       builder: (context, state) {
         if (state is SubcategoryHasData) {
-          subCategoryList.clear();
-          subCategoryList.add(SubCategoryModel(
+          _subCategoryList.clear();
+          _subCategoryList.add(SubCategoryModel(
             categoryColor: 0xff443a49,
-            categoryName: FilterWidget.defaultSubCategory,
+            categoryName: FilterWidget._defaultSubCategory,
           ));
-          subCategoryList.addAll(state.result);
+          _subCategoryList.addAll(state.result);
         } else if (state is SubcategoryError) {
           context.show(state.message);
         }
@@ -140,7 +140,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                   .ifNullOrEmpty("SubCategory")),
             ],
           ),
-          items: subCategoryList.map((SubCategoryModel value) {
+          items: _subCategoryList.map((SubCategoryModel value) {
             return DropdownMenuItem(
                 value: value,
                 child: Row(
@@ -173,7 +173,7 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   void _updateExpenseList(int month, int year, String subCategory) {
     var selectedSubCategory = "";
-    if (FilterWidget.defaultSubCategory != subCategory) {
+    if (FilterWidget._defaultSubCategory != subCategory) {
       selectedSubCategory = subCategory;
     }
     context

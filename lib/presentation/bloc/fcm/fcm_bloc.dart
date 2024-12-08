@@ -7,12 +7,12 @@ part 'fcm_event.dart';
 part 'fcm_state.dart';
 
 class FcmBloc extends Bloc<FcmEvent, FcmState> {
-  final FcmRepository fcmRepository;
+  final FcmRepository _fcmRepository;
 
-  FcmBloc(this.fcmRepository) : super(FcmLoading()) {
+  FcmBloc(this._fcmRepository) : super(FcmLoading()) {
     on<PostFcmEvent>((event, emit) async {
       emit(FcmLoading());
-      final result = await fcmRepository.sendFcm(event.sendFcmRequest);
+      final result = await _fcmRepository.sendFcm(event.sendFcmRequest);
 
       result.fold(
         (failure) {

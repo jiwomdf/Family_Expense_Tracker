@@ -55,7 +55,7 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
-                      child: Text(S.of(context).step1CreateDatajsonFile,
+                      child: Text("Step 1. Create data.json file",
                           style: TextUtil(context).urbanist(
                               fontSize: 18, fontWeight: FontWeight.w500)),
                     ),
@@ -65,20 +65,19 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
                       child: Text.rich(
                         TextSpan(children: [
                           TextSpan(
-                              text: "${S.of(context).createAFileName} ",
+                              text: "create a file name ",
                               style: TextUtil(context).urbanist(
                                   fontSize: 16, fontWeight: FontWeight.w500)),
                           TextSpan(
-                              text: S.of(context).datajson,
+                              text: "data.json",
                               style: TextUtil(context).urbanist(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.blue.oceanBlue,
                               )),
                           TextSpan(
-                              text: S
-                                  .of(context)
-                                  .thenMakeSureToFillTheJsonFormatLikeThis,
+                              text:
+                                  ", then make sure to fill the json format like this markdown below",
                               style: TextUtil(context).urbanist(
                                   fontSize: 16, fontWeight: FontWeight.w500)),
                         ]),
@@ -91,9 +90,7 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10, top: 20),
                       child: Text(
-                          S
-                              .of(context)
-                              .step2PlaceTheDatajsonFileInTheAssetsimportFolder,
+                          "Step 2. Place the data.json file in the assets/import folder",
                           style: TextUtil(context).urbanist(
                               fontSize: 18, fontWeight: FontWeight.w500)),
                     ),
@@ -103,13 +100,13 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
                       child: Text.rich(
                         TextSpan(children: [
                           TextSpan(
-                              text: "${S.of(context).placeYourJsonFileIn} ",
+                              text: "Place your json file in ",
                               style: TextUtil(context).urbanist(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                               )),
                           TextSpan(
-                              text: S.of(context).assetsimportdatajsonNn,
+                              text: "./assets/import/data.json \n\n",
                               style: TextUtil(context).urbanist(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -120,7 +117,7 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10, top: 5),
-                      child: Text(S.of(context).step3PressThisImportButtonBelow,
+                      child: Text("Step 3. Press this import button below",
                           style: TextUtil(context).urbanist(
                               fontSize: 18, fontWeight: FontWeight.w500)),
                     ),
@@ -130,9 +127,8 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
                       child: Text.rich(
                         TextSpan(children: [
                           TextSpan(
-                              text: S
-                                  .of(context)
-                                  .ifTheAboveRequirementAlreadyCompletePressTheBelowButton,
+                              text:
+                                  "If the above requirement already complete, press the below button to start import the data",
                               style: TextUtil(context).urbanist(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -149,8 +145,8 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
                             onPressed: () {
                               importData();
                             },
-                            child: Text(
-                                S.of(context).importDatajsonFromAssetsimport)),
+                            child: const Text(
+                                "Import data.json from /assets/import")),
                       ),
                     )
                   ],
@@ -166,7 +162,7 @@ class _ImportExpensePageState extends State<ImportExpensePage> {
   Future<void> importData() async {
     var listBatchExpense = await parseJsonFromAssets("assets/import/data.json");
 
-    if (mounted) {
+    if (context.mounted) {
       context
           .read<ExpenseBloc>()
           .add(InsertBatchExpenseEvent(listBatchExpense));

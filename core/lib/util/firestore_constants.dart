@@ -1,5 +1,5 @@
 class ExpenseConstants {
-  static const constantName = "expense";
+  static const constantName = "expanse";
 
   static const String id = "id"; //Primary Key
   static const String date = "date";

@@ -7,11 +7,11 @@ part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  final FirestoreRepository firestoreRepository;
+  final FirestoreRepository _firestoreRepository;
 
-  CategoryBloc(this.firestoreRepository) : super(CategoryLoading()) {
+  CategoryBloc(this._firestoreRepository) : super(CategoryLoading()) {
     on<UpdateCategoryEvent>((event, emit) async {
-      var category = await firestoreRepository.updateCategory(
+      var category = await _firestoreRepository.updateCategory(
         categoryName: event.categoryModel.categoryName,
         categoryColor: event.categoryModel.categoryColor,
       );
@@ -25,9 +25,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
 
     on<GetCategoryEvent>((event, emit) async {
       emit(CategoryLoading());
-
-      var category = await firestoreRepository.getCategory();
-
+      var category = await _firestoreRepository.getCategory();
       category.fold((failure) {
         emit(CategoryError(failure.message));
       }, (data) {

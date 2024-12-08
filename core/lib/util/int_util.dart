@@ -23,4 +23,13 @@ extension IntUtil on int {
       return "$this";
     }
   }
+
+  String removeZeroPref() {
+    var strLength = toString().length;
+    if (strLength > 1 && toString().split('')[0] == '0') {
+      return "${toString().split('').sublist(1)}";
+    }
+
+    return "$this";
+  }
 }
