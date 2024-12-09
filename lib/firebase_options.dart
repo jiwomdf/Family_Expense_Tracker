@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -50,19 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCL5_EIq1g2yQ-qduGTWrwZvItLrAKG4Sk',
-    appId: '1:477967220474:android:d61416a3730148299b5343',
-    messagingSenderId: '477967220474',
-    projectId: 'money-expanse-tracker',
-    storageBucket: 'money-expanse-tracker.appspot.com',
+    apiKey: 'AIzaSyAOAPwZBPmh8yfAAO7wiiLnMTilihhI7fU',
+    appId: '1:453487839018:android:59f6b6ce800bba05284053',
+    messagingSenderId: '453487839018',
+    projectId: 'family-expense-tracker-da485',
+    storageBucket: 'family-expense-tracker-da485.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC7HPftoBqQ5kP94_41qq6L7R0xRrYVvEc',
-    appId: '1:477967220474:ios:eccd80664c72bad19b5343',
-    messagingSenderId: '477967220474',
-    projectId: 'money-expanse-tracker',
-    storageBucket: 'money-expanse-tracker.appspot.com',
-    iosBundleId: 'com.programmergabut.lidyaGroupExpanseTracker',
+    apiKey: 'AIzaSyDkwNIq88NGnXdHsDiU4WCjfaHVgJ3oj4E',
+    appId: '1:453487839018:ios:d3c8cc2be2a4b08e284053',
+    messagingSenderId: '453487839018',
+    projectId: 'family-expense-tracker-da485',
+    storageBucket: 'family-expense-tracker-da485.appspot.com',
+    iosBundleId: 'com.programmergabut.familyExpenseTracker',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBAd35wF1w6u2yXepsVctmwIGh_uI5Jhbw',
+    appId: '1:453487839018:web:41ed1722fc3d8104284053',
+    messagingSenderId: '453487839018',
+    projectId: 'family-expense-tracker-da485',
+    authDomain: 'family-expense-tracker-da485.firebaseapp.com',
+    storageBucket: 'family-expense-tracker-da485.appspot.com',
+    measurementId: 'G-NDCGWX18LC',
+  );
+
 }
