@@ -59,7 +59,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/svg/
-    - assets/import/
+    - assets/icon/
 
 flutter_intl:
   enabled: true
