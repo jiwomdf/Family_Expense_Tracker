@@ -1,4 +1,4 @@
-import 'package:family_expense_tracker/app/app.dart';
+import 'package:family_expense_tracker/app/apps/app_home.dart';
 import 'package:family_expense_tracker/presentation/bloc/logout/logout_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/usermodel/userdatamodel_bloc.dart';
 import 'package:family_expense_tracker/presentation/page/export_expense/export_expense_page.dart';
@@ -6,8 +6,8 @@ import 'package:family_expense_tracker/presentation/page/holiday/holiday_page.da
 import 'package:family_expense_tracker/presentation/page/home/widget/profile_widget.dart';
 import 'package:family_expense_tracker/presentation/page/import_expense/import_expense_page.dart';
 import 'package:family_expense_tracker/presentation/page/update_table/update_table_page.dart';
-import 'package:family_expense_tracker/util/app_color_util.dart';
 import 'package:family_expense_tracker/util/ext/text_util.dart';
+import 'package:family_expense_tracker/util/style/app_color_util.dart';
 import 'package:family_expense_tracker/util/version_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +27,7 @@ class _RightDrawerState extends State<RightDrawer> {
   void initState() {
     super.initState();
     context.read<UserDataModelBloc>().add(const GetUserDataModelEvent());
-    _isLight = App.of(context).isLightMode();
+    _isLight = AppHome.of(context).isLightMode();
   }
 
   @override
@@ -42,34 +42,38 @@ class _RightDrawerState extends State<RightDrawer> {
             _username = state.result.getDisplayName();
           } else if (state is UserDataModelError) {}
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  topDrawer(),
-                  switcher(context),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 5),
-                child: Column(
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _heading("Features"),
-                    _holiday(context),
-                    _heading("Data Management"),
-                    _exportData(context),
-                    _importData(context),
-                    _updateTable(context),
-                    _heading("Account"),
-                    _logout(context),
-                    _version(context)
+                    topDrawer(),
+                    switcher(context),
                   ],
                 ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _heading("Features"),
+                      _holiday(context),
+                      _heading("Data Management"),
+                      _exportData(context),
+                      _heading("Setting Firebase"),
+                      _settingFirebaseData(context),
+                      _importData(context),
+                      _updateTable(context),
+                      _heading("Account"),
+                      _logout(context),
+                      _version(context)
+                    ],
+                  ),
+                )
+              ],
+            ),
           );
         }));
   }
@@ -88,6 +92,35 @@ class _RightDrawerState extends State<RightDrawer> {
       ),
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 20),
       child: ProfileWidget(userName: _username),
+    );
+  }
+
+  Padding _settingFirebaseData(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10, top: 10, left: 10),
+      child: InkWell(
+        onTap: () {
+          /** WidgetsBinding.instance.addPostFrameCallback((_) {
+            //await preferences.clear();
+            Phoenix.rebirth(context);
+          }); **/
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 4),
+                child: Icon(Icons.settings),
+              ),
+              Text("Setting Firebase",
+                  style: TextUtil(context)
+                      .urbanist(fontSize: 16, fontWeight: FontWeight.w600)),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -157,9 +190,9 @@ class _RightDrawerState extends State<RightDrawer> {
             setState(() {
               _isLight = value;
               if (_isLight) {
-                App.of(context).changeTheme(ThemeMode.light);
+                AppHome.of(context).changeTheme(ThemeMode.light);
               } else {
-                App.of(context).changeTheme(ThemeMode.dark);
+                AppHome.of(context).changeTheme(ThemeMode.dark);
               }
             });
           }),

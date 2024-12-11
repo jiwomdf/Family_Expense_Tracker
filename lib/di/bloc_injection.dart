@@ -1,3 +1,4 @@
+import 'package:core/util/poultry_registery.dart';
 import 'package:family_expense_tracker/presentation/bloc/category/category_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
 import 'package:family_expense_tracker/presentation/bloc/fcm/fcm_bloc.dart';
@@ -11,14 +12,14 @@ import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
 
-void init() {
-  locator.registerFactory(() => LoginBloc(locator()));
-  locator.registerFactory(() => RegisterBloc(locator()));
-  locator.registerFactory(() => LogoutBloc(locator()));
-  locator.registerFactory(() => UserDataModelBloc(locator()));
-  locator.registerFactory(() => ExpenseBloc(locator()));
-  locator.registerFactory(() => CategoryBloc(locator()));
-  locator.registerFactory(() => SubcategoryBloc(locator()));
-  locator.registerFactory(() => FcmBloc(locator()));
-  locator.registerFactory(() => HolidayBloc(locator()));
+Future<void> init() async {
+  PoultryRegistry.safeRegister<LoginBloc>(LoginBloc(locator()));
+  PoultryRegistry.safeRegister<RegisterBloc>(RegisterBloc(locator()));
+  PoultryRegistry.safeRegister<LogoutBloc>(LogoutBloc(locator()));
+  PoultryRegistry.safeRegister<UserDataModelBloc>(UserDataModelBloc(locator()));
+  PoultryRegistry.safeRegister<ExpenseBloc>(ExpenseBloc(locator()));
+  PoultryRegistry.safeRegister<CategoryBloc>(CategoryBloc(locator()));
+  PoultryRegistry.safeRegister<SubcategoryBloc>(SubcategoryBloc(locator()));
+  PoultryRegistry.safeRegister<FcmBloc>(FcmBloc(locator()));
+  PoultryRegistry.safeRegister<HolidayBloc>(HolidayBloc(locator()));
 }

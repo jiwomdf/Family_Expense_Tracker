@@ -1,15 +1,46 @@
-import 'package:family_expense_tracker/app/app.dart';
-import 'package:family_expense_tracker/app/handle_pwa.dart';
+import 'package:family_expense_tracker/app/apps/app_home.dart';
+import 'package:family_expense_tracker/app/apps/app_setting.dart';
 import 'package:family_expense_tracker/app/init_app_module.dart';
+import 'package:family_expense_tracker/app/init_app_setting_module.dart';
 import 'package:family_expense_tracker/app/init_firebase.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initFirebase();
-  await initAppModule();
+  await initAppSettingModule();
   //FcmBackgroundHandler().init();
-  await handlePwa();
 
-  runApp(const App());
+  runApp(Phoenix(
+    child: Builder(builder: (context) {
+      return initFirebaseFuture();
+    }),
+  ));
+}
+
+FutureBuilder<bool> initFirebaseFuture() {
+  return FutureBuilder(
+      future: initFirebase(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.data == true) {
+            return initAppModuleFuture();
+          } else {
+            return const AppSetting();
+          }
+        }
+        return const SizedBox();
+      });
+}
+
+FutureBuilder<void> initAppModuleFuture() {
+  return FutureBuilder(
+      future: initAppModule(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return const AppHome();
+        } else {
+          return const SizedBox();
+        }
+      });
 }

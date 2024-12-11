@@ -8,6 +8,7 @@ import 'package:family_expense_tracker/presentation/page/home/home_page.dart';
 import 'package:family_expense_tracker/presentation/page/import_expense/import_expense_page.dart';
 import 'package:family_expense_tracker/presentation/page/login/login_page.dart';
 import 'package:family_expense_tracker/presentation/page/register/register_page.dart';
+import 'package:family_expense_tracker/presentation/page/setting_firebase/setting_firebase_page.dart';
 import 'package:family_expense_tracker/presentation/page/update_table/update_table_page.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,8 @@ PageRoute router(RouteSettings settings) {
     case UpdateTablePage.routeName:
       return MaterialPageRoute(builder: (_) => const UpdateTablePage());
     case HolidayPage.routeName:
+      return MaterialPageRoute(builder: (_) => const HolidayPage());
+    case SettingFirebasePage.routeName:
       return MaterialPageRoute(builder: (_) => const HolidayPage());
     case ExpenseFormPage.routeName:
       return MaterialPageRoute(

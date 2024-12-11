@@ -22,9 +22,5 @@
   <string>1.0</string>
   <key>MinimumOSVersion</key>
   <string>12.0</string>
-  <key>NSBonjourServices</key>
-  <array>
-      <string>_dartobservatory._tcp</string>
-  </array>
 </dict>
 </plist>

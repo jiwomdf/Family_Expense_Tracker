@@ -1,10 +1,12 @@
+import 'package:family_expense_tracker/di/bloc_injection.dart' as di;
 import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/register/register_bloc.dart';
 import 'package:family_expense_tracker/presentation/widget/text_form_field.dart';
-import 'package:family_expense_tracker/util/app_snackbar_util.dart';
 import 'package:family_expense_tracker/util/ext/text_util.dart';
+import 'package:family_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/register-page';
@@ -21,32 +23,38 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: BlocListener<RegisterBloc, RegisterState>(
-        listener: (context, state) {
-          if (state is RegisterLoading) {
-            context.buildCircleDialog(true);
-          } else if (state is RegisterHasData) {
-            context.hideDialog();
-            if (state.result) {
-              context.showSb(
-                  SnackBar(content: Text(S.of(context).loginSuccess)), true);
-            } else {
-              context.showSb(
-                  SnackBar(
-                      content:
-                          Text(S.of(context).somethingWentWrongPleaseTryAgain)),
-                  true);
-            }
-          } else if (state is RegisterError) {
-            context.hideDialog();
-            context.showSb(SnackBar(content: Text(state.message)), true);
-          }
-        },
-        child: registerScreen(),
-      ),
-    ));
+    return Provider(
+      create: (context) => di.locator<RegisterBloc>(),
+      builder: (context, child) {
+        return Scaffold(
+            body: SafeArea(
+          child: BlocListener<RegisterBloc, RegisterState>(
+            listener: (context, state) {
+              if (state is RegisterLoading) {
+                context.buildCircleDialog(true);
+              } else if (state is RegisterHasData) {
+                context.hideDialog();
+                if (state.result) {
+                  context.showSb(
+                      SnackBar(content: Text(S.of(context).loginSuccess)),
+                      true);
+                } else {
+                  context.showSb(
+                      SnackBar(
+                          content: Text(
+                              S.of(context).somethingWentWrongPleaseTryAgain)),
+                      true);
+                }
+              } else if (state is RegisterError) {
+                context.hideDialog();
+                context.showSb(SnackBar(content: Text(state.message)), true);
+              }
+            },
+            child: registerScreen(),
+          ),
+        ));
+      },
+    );
   }
 
   Widget registerScreen() {

@@ -1,4 +1,4 @@
-import 'package:family_expense_tracker/util/app_color_util.dart';
+import 'package:family_expense_tracker/util/style/app_color_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +10,12 @@ InputDecoration textFormFieldStyle({
 }) =>
     InputDecoration(
       hintText: hintText,
+      hintStyle: TextStyle(fontSize: 14.0, color: AppColors.grey.lightGray),
+      border: const OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.teal,
+        ),
+      ),
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Theme.of(context).cardColor,

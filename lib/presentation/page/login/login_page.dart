@@ -1,13 +1,15 @@
+import 'package:family_expense_tracker/di/bloc_injection.dart' as di;
 import 'package:family_expense_tracker/generated/l10n.dart';
 import 'package:family_expense_tracker/presentation/bloc/login/login_bloc.dart';
 import 'package:family_expense_tracker/presentation/page/register/register_page.dart';
 import 'package:family_expense_tracker/presentation/widget/text_form_field.dart';
-import 'package:family_expense_tracker/util/app_assets_util.dart';
-import 'package:family_expense_tracker/util/app_snackbar_util.dart';
 import 'package:family_expense_tracker/util/ext/text_util.dart';
+import 'package:family_expense_tracker/util/style/app_assets_util.dart';
+import 'package:family_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login-page';
@@ -25,37 +27,43 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-      child: BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
-          if (state is LoginLoading) {
-            context.buildCircleDialog(true);
-          } else if (state is LoginHasData) {
-            context.hideDialog();
-            context.showSb(
-              SnackBar(
-                  content: Text("${state.result.email} ${state.result.name}")),
-              true,
-            );
-          } else if (state is LoginError) {
-            context.hideDialog();
-            context.showSb(SnackBar(content: Text(state.message)), true);
-          }
-        },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              loginScreen(),
-              SvgPicture.asset(AppAssetsUtil.imgGroup, height: 200),
-            ],
+    return Provider(
+      create: (_) => di.locator<LoginBloc>(),
+      builder: (context, child) {
+        return Scaffold(
+            body: SafeArea(
+          child: BlocListener<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state is LoginLoading) {
+                context.buildCircleDialog(true);
+              } else if (state is LoginHasData) {
+                context.hideDialog();
+                context.showSb(
+                  SnackBar(
+                      content:
+                          Text("${state.result.email} ${state.result.name}")),
+                  true,
+                );
+              } else if (state is LoginError) {
+                context.hideDialog();
+                context.showSb(SnackBar(content: Text(state.message)), true);
+              }
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  loginScreen(context),
+                  SvgPicture.asset(AppAssetsUtil.imgGroup, height: 200),
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
+      },
+    );
   }
 
-  Widget loginScreen() {
+  Widget loginScreen(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Form(
@@ -68,11 +76,26 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(S.of(context).welcomeBack,
-                      style: TextUtil(context).urbanist(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(S.of(context).welcomeBack,
+                          style: TextUtil(context).urbanist(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      GestureDetector(
+                        child: const Icon(Icons.settings),
+                        onTap: () => {
+                          /** WidgetsBinding.instance.addPostFrameCallback((_) {
+                            //await preferences.clear();
+                            Phoenix.rebirth(context);
+                          }) **/
+                        },
+                      )
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Text(

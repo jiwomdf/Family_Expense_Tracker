@@ -1,0 +1,4 @@
+enum RootScreenEnum {
+  home,
+  setting,
+}

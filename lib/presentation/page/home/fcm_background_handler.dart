@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:family_expense_tracker/util/platform_util.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -11,10 +10,10 @@ class FcmBackgroundHandler {
     if (remoteMessage.data.containsKey('data')) {
       String name = '';
       String age = '';
-      if (Platform.isIOS) {
+      if (PlatformUtil.isIOS()) {
         name = remoteMessage.data['name'];
         age = remoteMessage.data['age'];
-      } else if (Platform.isAndroid) {
+      } else if (PlatformUtil.isAndroid()) {
         var data = remoteMessage.data['data'];
         name = data['name'];
         age = data['age'];
@@ -25,7 +24,7 @@ class FcmBackgroundHandler {
 
   Future<void> init() async {
     final firebaseMessaging = FirebaseMessaging.instance;
-    if (Platform.isIOS) {
+    if (PlatformUtil.isIOS()) {
       firebaseMessaging.requestPermission(
         alert: true,
         announcement: false,
@@ -76,10 +75,10 @@ class FcmBackgroundHandler {
   void _handleMessage(RemoteMessage remoteMessage) {
     String name = '';
     String age = '';
-    if (Platform.isIOS) {
+    if (PlatformUtil.isIOS()) {
       name = remoteMessage.data['name'];
       age = remoteMessage.data['age'];
-    } else if (Platform.isAndroid) {
+    } else if (PlatformUtil.isAndroid()) {
       var data = remoteMessage.data['data'];
       name = data['name'];
       age = data['age'];

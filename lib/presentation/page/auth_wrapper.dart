@@ -9,6 +9,10 @@ class AuthWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return wrapper(context);
+  }
+
+  Widget wrapper(BuildContext context) {
     final user = Provider.of<UserModel?>(context);
     if (user == null) {
       return const LoginPage();
