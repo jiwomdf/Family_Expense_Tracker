@@ -29,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Provider(
       create: (_) => di.locator<LoginBloc>(),
+      dispose: (context, bloc) => bloc.close(),
       builder: (context, child) {
         return Scaffold(
             body: SafeArea(

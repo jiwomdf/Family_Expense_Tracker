@@ -25,6 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Provider(
       create: (context) => di.locator<RegisterBloc>(),
+      dispose: (context, bloc) => bloc.close(),
       builder: (context, child) {
         return Scaffold(
             body: SafeArea(

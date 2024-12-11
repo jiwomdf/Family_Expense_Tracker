@@ -1,5 +1,6 @@
 import 'package:core/data/network/response/holiday_response.dart';
 import 'package:core/util/date_format_util.dart';
+import 'package:family_expense_tracker/di/bloc_injection.dart' as di;
 import 'package:family_expense_tracker/presentation/bloc/holidays/holiday_bloc.dart';
 import 'package:family_expense_tracker/util/ext/text_util.dart';
 import 'package:family_expense_tracker/util/style/app_color_util.dart';
@@ -18,34 +19,32 @@ class _HolidayPageState extends State<HolidayPage> {
   var _isFirstUpComingEvent = false;
 
   @override
-  void initState() {
-    super.initState();
-    context.read<HolidayBloc>().add(GetHolidayEvent(DateTime.now().year, "ID"));
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Holiday's Calendar"),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+    return BlocProvider(
+      create: (_) => di.locator<HolidayBloc>()
+        ..add(GetHolidayEvent(DateTime.now().year, "ID")),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Holiday's Calendar"),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        ),
+        body: SafeArea(child:
+            BlocBuilder<HolidayBloc, HolidayState>(builder: (context, state) {
+          if (state is HolidayLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is HolidayHasData) {
+            return ListView.builder(
+                itemCount: state.result.length,
+                itemBuilder: (context, index) {
+                  return listHoliday(state.result[index]);
+                });
+          } else if (state is HolidayError) {
+            return Text(state.message);
+          } else {
+            return const SizedBox();
+          }
+        })),
       ),
-      body: SafeArea(child:
-          BlocBuilder<HolidayBloc, HolidayState>(builder: (context, state) {
-        if (state is HolidayLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is HolidayHasData) {
-          return ListView.builder(
-              itemCount: state.result.length,
-              itemBuilder: (context, index) {
-                return listHoliday(state.result[index]);
-              });
-        } else if (state is HolidayError) {
-          return Text(state.message);
-        } else {
-          return const SizedBox();
-        }
-      })),
     );
   }
 
