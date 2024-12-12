@@ -34,15 +34,12 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 - Fl Chart
 - Get It <br /><br />
 
-## [Optional] How to change the app Firebase project
+## How to change the app Firebase project
 #### This app depends on Firebase Auth and Firestore, so you need to add your own Firebase project as stated below
-- first you may change the android and iOS package by replacing all string of `com.programmergabut.group_expense` on Android and `com.programmergabut.groupExpense` on iOS
 - Create your own firebase project and register the Android, iOS, and Web
-- put the `google-services.json` for Android, `GoogleService-Info.plist` for iOS, and `firebaseConfig` for web
-- Then add your google-services.json in 
-  - `android/app/google-services.json` for Android
-  -  `ios/Runner/GoogleService-Info.plist` for iOS
-  -  `lib/main.dart` in `FirebaseOptions class` for Web
+- open the `google-services.json` for Android, `GoogleService-Info.plist` for iOS, and `firebaseConfig` for web
+- you can see the credential of the firebase options inside those files, you can input it to the first config firebase option screen
+<image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/foptions.png" width="300" height="280"> </image> 
 - Enable Firebase Auth by email and password
 - Enable Firestore and set the rules to `allow read, write: if request.auth != null;`
 - Then to setup the new project you can use `flutterfire configure`, for more detail, you can check this link [Add firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=web)
