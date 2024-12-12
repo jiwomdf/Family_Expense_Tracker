@@ -29,6 +29,7 @@
     }
   },
   "hosting": {
+    "site": "group-expense-tracker",
     "source": ".",
     "ignore": [
       "firebase.json",
