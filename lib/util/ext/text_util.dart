@@ -1,6 +1,6 @@
-import 'package:family_expense_tracker/util/style/app_color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:group_expense_tracker/util/style/app_color_util.dart';
 
 class TextUtil {
   BuildContext? _context;

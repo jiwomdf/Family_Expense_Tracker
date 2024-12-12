@@ -1,11 +1,11 @@
 import 'package:core/data/network/response/holiday_response.dart';
 import 'package:core/util/date_format_util.dart';
-import 'package:family_expense_tracker/di/bloc_injection.dart' as di;
-import 'package:family_expense_tracker/presentation/bloc/holidays/holiday_bloc.dart';
-import 'package:family_expense_tracker/util/ext/text_util.dart';
-import 'package:family_expense_tracker/util/style/app_color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:group_expense_tracker/di/bloc_injection.dart' as di;
+import 'package:group_expense_tracker/presentation/bloc/holidays/holiday_bloc.dart';
+import 'package:group_expense_tracker/util/ext/text_util.dart';
+import 'package:group_expense_tracker/util/style/app_color_util.dart';
 
 class HolidayPage extends StatefulWidget {
   static const routeName = '/holiday-page';

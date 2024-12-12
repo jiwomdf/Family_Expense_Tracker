@@ -1,6 +1,6 @@
 {
-    "name": "family_expense_tracker",
-    "short_name": "family_expense_tracker",
+    "name": "group_expense_tracker",
+    "short_name": "group_expense_tracker",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

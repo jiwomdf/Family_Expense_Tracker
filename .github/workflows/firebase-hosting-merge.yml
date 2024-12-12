@@ -21,6 +21,6 @@ jobs:
             FIREBASE_CLI_EXPERIMENTS: webframeworks
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_FAMILY_EXPENSE_TRACKER_DA485 }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_group_expense_tracker_DA485 }}
           channelId: live
           projectId: family-expense-tracker-da485

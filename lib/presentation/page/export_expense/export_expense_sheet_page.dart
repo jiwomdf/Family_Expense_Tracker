@@ -1,16 +1,16 @@
 import 'package:core/domain/model/expense_category_model.dart';
 import 'package:excel/excel.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
-import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
-import 'package:family_expense_tracker/util/ext/date_format_util.dart';
-import 'package:family_expense_tracker/util/ext/text_util.dart';
-import 'package:family_expense_tracker/util/style/app_assets_util.dart';
-import 'package:family_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:group_expense_tracker/generated/l10n.dart';
+import 'package:group_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
+import 'package:group_expense_tracker/util/ext/date_format_util.dart';
+import 'package:group_expense_tracker/util/ext/text_util.dart';
+import 'package:group_expense_tracker/util/style/app_assets_util.dart';
+import 'package:group_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:universal_html/src/html.dart' as universal_html;
 
 class ExportExpenseSheetPage extends StatefulWidget {
@@ -143,7 +143,7 @@ class _ExportExpenseSheetPageState extends State<ExportExpenseSheetPage> {
               'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', // MIME type for Excel files
         )}'
         ..download =
-            "family_expense_tracker_${DateTime.now().toDateString("yyyy-MM-dd")}.xlsx"
+            "group_expense_tracker_${DateTime.now().toDateString("yyyy-MM-dd")}.xlsx"
         ..style.display = 'none'
         ..click();
     }

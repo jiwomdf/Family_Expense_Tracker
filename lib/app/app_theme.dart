@@ -1,5 +1,5 @@
-import 'package:family_expense_tracker/util/style/app_color_util.dart';
 import 'package:flutter/material.dart';
+import 'package:group_expense_tracker/util/style/app_color_util.dart';
 
 final ThemeData defaultThemeData = ThemeData(
   useMaterial3: true,

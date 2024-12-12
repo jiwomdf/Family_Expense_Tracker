@@ -4,7 +4,7 @@ import 'package:core/data/network/request/update_expense_request.dart';
 import 'package:core/domain/model/expense_category_model.dart';
 import 'package:core/repository/firestore_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:family_expense_tracker/util/ext/date_format_util.dart';
+import 'package:group_expense_tracker/util/ext/date_format_util.dart';
 
 part 'expense_event.dart';
 part 'expense_state.dart';

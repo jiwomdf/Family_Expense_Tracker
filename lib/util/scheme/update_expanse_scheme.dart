@@ -1,6 +1,6 @@
 import 'package:core/domain/model/expense_category_model.dart';
-import 'package:family_expense_tracker/util/ext/int_util.dart';
-import 'package:family_expense_tracker/util/ext/string_util.dart';
+import 'package:group_expense_tracker/util/ext/int_util.dart';
+import 'package:group_expense_tracker/util/ext/string_util.dart';
 
 class UpdateExpenseScheme {
   static const String id = "id";

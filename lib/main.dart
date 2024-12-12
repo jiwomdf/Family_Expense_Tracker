@@ -1,10 +1,10 @@
-import 'package:family_expense_tracker/app/apps/app_home.dart';
-import 'package:family_expense_tracker/app/apps/app_setting.dart';
-import 'package:family_expense_tracker/app/init_app_module.dart';
-import 'package:family_expense_tracker/app/init_app_setting_module.dart';
-import 'package:family_expense_tracker/app/init_firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:group_expense_tracker/app/apps/app_home.dart';
+import 'package:group_expense_tracker/app/apps/app_setting.dart';
+import 'package:group_expense_tracker/app/init_app_module.dart';
+import 'package:group_expense_tracker/app/init_app_setting_module.dart';
+import 'package:group_expense_tracker/app/init_firebase.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

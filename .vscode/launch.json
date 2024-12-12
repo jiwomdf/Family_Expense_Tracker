@@ -11,18 +11,18 @@
             "program": "lib/main.dart"
         },
         {
-            "name": "family_expense_tracker",
+            "name": "group_expense_tracker",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "family_expense_tracker (profile mode)",
+            "name": "group_expense_tracker (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "family_expense_tracker (release mode)",
+            "name": "group_expense_tracker (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

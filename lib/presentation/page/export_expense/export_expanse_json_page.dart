@@ -1,17 +1,17 @@
 import 'dart:convert';
 
 import 'package:core/domain/model/expense_category_model.dart';
-import 'package:family_expense_tracker/generated/l10n.dart';
-import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
-import 'package:family_expense_tracker/util/ext/date_format_util.dart';
-import 'package:family_expense_tracker/util/ext/text_util.dart';
-import 'package:family_expense_tracker/util/style/app_assets_util.dart';
-import 'package:family_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:group_expense_tracker/generated/l10n.dart';
+import 'package:group_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
+import 'package:group_expense_tracker/util/ext/date_format_util.dart';
+import 'package:group_expense_tracker/util/ext/text_util.dart';
+import 'package:group_expense_tracker/util/style/app_assets_util.dart';
+import 'package:group_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:universal_html/html.dart' as html;
 
 class ExportExpenseJsonPage extends StatefulWidget {
@@ -32,7 +32,7 @@ class _ExportExpenseJsonPageState extends State<ExportExpenseJsonPage> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ExpenseHasData) {
           exportData(state.result,
-              "family_expense_tracker_${DateTime.now().toDateString("yyyy-MM-dd")}.json");
+              "group_expense_tracker_${DateTime.now().toDateString("yyyy-MM-dd")}.json");
           context.read<ExpenseBloc>().add(const ResetExpenseEvent());
         }
 

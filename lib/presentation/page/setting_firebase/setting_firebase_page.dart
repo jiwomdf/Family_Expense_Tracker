@@ -1,15 +1,15 @@
 import 'package:core/domain/model/firebase_options_android_model.dart';
 import 'package:core/domain/model/firebase_options_ios_model.dart';
 import 'package:core/domain/model/firebase_options_web_model.dart';
-import 'package:family_expense_tracker/presentation/bloc/setting_firebase/setting_firebase_bloc.dart';
-import 'package:family_expense_tracker/presentation/widget/text_form_field.dart';
-import 'package:family_expense_tracker/util/ext/text_util.dart';
-import 'package:family_expense_tracker/util/platform_util.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:group_expense_tracker/presentation/bloc/setting_firebase/setting_firebase_bloc.dart';
+import 'package:group_expense_tracker/presentation/widget/text_form_field.dart';
+import 'package:group_expense_tracker/util/ext/text_util.dart';
+import 'package:group_expense_tracker/util/platform_util.dart';
 
 class SettingFirebasePage extends StatefulWidget {
   static const routeName = '/setting-firebase-page';

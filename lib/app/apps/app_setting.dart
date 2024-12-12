@@ -1,8 +1,8 @@
-import 'package:family_expense_tracker/di/bloc_injection.dart' as di;
-import 'package:family_expense_tracker/presentation/bloc/setting_firebase/setting_firebase_bloc.dart';
-import 'package:family_expense_tracker/presentation/page/setting_firebase/setting_firebase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:group_expense_tracker/di/bloc_injection.dart' as di;
+import 'package:group_expense_tracker/presentation/bloc/setting_firebase/setting_firebase_bloc.dart';
+import 'package:group_expense_tracker/presentation/page/setting_firebase/setting_firebase_page.dart';
 import 'package:provider/provider.dart';
 
 class AppSetting extends StatefulWidget {

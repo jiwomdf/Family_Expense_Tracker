@@ -3,8 +3,8 @@ Family Expense Tracker is a Flutter family expense tracker app originally develo
 
 
 <image src="assets/record.gif" width="140" height="280"> </image>
-<image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/ios.png" width="140" height="280"> </image>
-<image src="https://github.com/jiwomdf/Family_Expense_Tracker/blob/main/github_assets/Simulator%20Screenshot%20-%20iPhone%2013%20-%202024-09-04%20at%2023.03.51.png" width="140" height="280"> </image>
+<image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/ios.png" width="140" height="280"> </image>
+<image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/Simulator%20Screenshot%20-%20iPhone%2013%20-%202024-09-04%20at%2023.03.51.png" width="140" height="280"> </image>
 <image src="https://firebasestorage.googleapis.com/v0/b/family-expense-tracker-da485.appspot.com/o/web_expense.png?alt=media&token=3fcb6668-a57e-43a1-a7e2-f7e06af79466" width="300" height="280"> </image> 
 
 <br />

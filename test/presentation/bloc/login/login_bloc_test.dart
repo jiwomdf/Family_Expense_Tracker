@@ -1,8 +1,8 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/model/user_model.dart';
 import 'package:dartz/dartz.dart';
-import 'package:family_expense_tracker/presentation/bloc/login/login_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:group_expense_tracker/presentation/bloc/login/login_bloc.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../helper/test_helper.mocks.dart';

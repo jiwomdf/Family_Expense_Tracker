@@ -1,16 +1,16 @@
 import 'package:core/domain/model/expense_category_model.dart';
-import 'package:family_expense_tracker/presentation/page/expense_form/expense_form_page.dart';
-import 'package:family_expense_tracker/presentation/page/export_expense/export_expanse_json_page.dart';
-import 'package:family_expense_tracker/presentation/page/export_expense/export_expense_page.dart';
-import 'package:family_expense_tracker/presentation/page/export_expense/export_expense_sheet_page.dart';
-import 'package:family_expense_tracker/presentation/page/holiday/holiday_page.dart';
-import 'package:family_expense_tracker/presentation/page/home/home_page.dart';
-import 'package:family_expense_tracker/presentation/page/import_expense/import_expense_page.dart';
-import 'package:family_expense_tracker/presentation/page/login/login_page.dart';
-import 'package:family_expense_tracker/presentation/page/register/register_page.dart';
-import 'package:family_expense_tracker/presentation/page/setting_firebase/setting_firebase_page.dart';
-import 'package:family_expense_tracker/presentation/page/update_table/update_table_page.dart';
 import 'package:flutter/material.dart';
+import 'package:group_expense_tracker/presentation/page/expense_form/expense_form_page.dart';
+import 'package:group_expense_tracker/presentation/page/export_expense/export_expanse_json_page.dart';
+import 'package:group_expense_tracker/presentation/page/export_expense/export_expense_page.dart';
+import 'package:group_expense_tracker/presentation/page/export_expense/export_expense_sheet_page.dart';
+import 'package:group_expense_tracker/presentation/page/holiday/holiday_page.dart';
+import 'package:group_expense_tracker/presentation/page/home/home_page.dart';
+import 'package:group_expense_tracker/presentation/page/import_expense/import_expense_page.dart';
+import 'package:group_expense_tracker/presentation/page/login/login_page.dart';
+import 'package:group_expense_tracker/presentation/page/register/register_page.dart';
+import 'package:group_expense_tracker/presentation/page/setting_firebase/setting_firebase_page.dart';
+import 'package:group_expense_tracker/presentation/page/update_table/update_table_page.dart';
 
 PageRoute router(RouteSettings settings) {
   switch (settings.name) {

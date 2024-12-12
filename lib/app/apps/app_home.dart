@@ -1,22 +1,22 @@
 import 'package:core/domain/model/user_model.dart';
 import 'package:core/repository/auth_repository.dart';
-import 'package:family_expense_tracker/app/app_theme.dart';
-import 'package:family_expense_tracker/di/bloc_injection.dart' as di;
-import 'package:family_expense_tracker/generated/l10n.dart';
-import 'package:family_expense_tracker/presentation/bloc/category/category_bloc.dart';
-import 'package:family_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
-import 'package:family_expense_tracker/presentation/bloc/fcm/fcm_bloc.dart';
-import 'package:family_expense_tracker/presentation/bloc/logout/logout_bloc.dart';
-import 'package:family_expense_tracker/presentation/bloc/subcategory/subcategory_bloc.dart';
-import 'package:family_expense_tracker/presentation/bloc/usermodel/userdatamodel_bloc.dart';
-import 'package:family_expense_tracker/presentation/page/auth_wrapper.dart';
-import 'package:family_expense_tracker/router.dart';
-import 'package:family_expense_tracker/util/app/route_observers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:group_expense_tracker/app/app_theme.dart';
+import 'package:group_expense_tracker/di/bloc_injection.dart' as di;
+import 'package:group_expense_tracker/generated/l10n.dart';
+import 'package:group_expense_tracker/presentation/bloc/category/category_bloc.dart';
+import 'package:group_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
+import 'package:group_expense_tracker/presentation/bloc/fcm/fcm_bloc.dart';
+import 'package:group_expense_tracker/presentation/bloc/logout/logout_bloc.dart';
+import 'package:group_expense_tracker/presentation/bloc/subcategory/subcategory_bloc.dart';
+import 'package:group_expense_tracker/presentation/bloc/usermodel/userdatamodel_bloc.dart';
+import 'package:group_expense_tracker/presentation/page/auth_wrapper.dart';
+import 'package:group_expense_tracker/router.dart';
+import 'package:group_expense_tracker/util/app/route_observers.dart';
 import 'package:provider/provider.dart';
 
 class AppHome extends StatefulWidget {

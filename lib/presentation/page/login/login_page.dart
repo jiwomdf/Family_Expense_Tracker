@@ -1,14 +1,14 @@
-import 'package:family_expense_tracker/di/bloc_injection.dart' as di;
-import 'package:family_expense_tracker/generated/l10n.dart';
-import 'package:family_expense_tracker/presentation/bloc/login/login_bloc.dart';
-import 'package:family_expense_tracker/presentation/page/register/register_page.dart';
-import 'package:family_expense_tracker/presentation/widget/text_form_field.dart';
-import 'package:family_expense_tracker/util/ext/text_util.dart';
-import 'package:family_expense_tracker/util/style/app_assets_util.dart';
-import 'package:family_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:group_expense_tracker/di/bloc_injection.dart' as di;
+import 'package:group_expense_tracker/generated/l10n.dart';
+import 'package:group_expense_tracker/presentation/bloc/login/login_bloc.dart';
+import 'package:group_expense_tracker/presentation/page/register/register_page.dart';
+import 'package:group_expense_tracker/presentation/widget/text_form_field.dart';
+import 'package:group_expense_tracker/util/ext/text_util.dart';
+import 'package:group_expense_tracker/util/style/app_assets_util.dart';
+import 'package:group_expense_tracker/util/style/app_snackbar_util.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
