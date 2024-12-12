@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                         S
                             .of(context)
-                            .welcomeToFamilyExpenseTrackerThisAppIsDesignedTo,
+                            .welcomeToGroupExpenseTrackerThisAppIsDesignedTo,
                         style: TextUtil(context).urbanist(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,

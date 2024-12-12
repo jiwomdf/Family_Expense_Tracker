@@ -99,7 +99,7 @@ class _ExportExpenseSheetPageState extends State<ExportExpenseSheetPage> {
     var excel = Excel.createExcel();
 
     // Add data to the first sheet (default name is "Sheet1")
-    Sheet sheet = excel['family_expense_sheet_${DateTime.now().year}'];
+    Sheet sheet = excel['group_expense_sheet_${DateTime.now().year}'];
 
     // Add the header row
     sheet.appendRow([

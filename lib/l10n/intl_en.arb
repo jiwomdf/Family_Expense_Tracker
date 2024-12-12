@@ -2,7 +2,7 @@
   "home": "Home",
   "category": "Category",
   "forSavingTheFirestoreUsageWereNotShowingAnyData": "For saving the firestore usage, we're not showing any data yet, you may press the reload button or change the filter to load the data",
-  "appTitle": "Family Expense Tracker",
+  "appTitle": "Group Expense Tracker",
   "noRecordYetPleaseCreateOne": "No record yet, please create one",
   "dataUpdatedDataNotShowedYetInorderToSaveThe": "Data updated, data not showed yet inorder to save the firestore usage",
   "somethingWentWrong": "Something went wrong",
@@ -44,5 +44,5 @@
   "exportTheExpenseData": "Export the expense data",
   "exportExpenseToJson": "Export Expense to Json",
   "exportExpenseAsSpreadSheet": "Export Expense as Spread Sheet",
-  "welcomeToFamilyExpenseTrackerThisAppIsDesignedTo": "Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \\nof expenses among multiple users. It is available across Android, iOS, and Web platforms."
+  "welcomeToGroupExpenseTrackerThisAppIsDesignedTo": "Welcome to Group Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \\nof expenses among multiple users. It is available across Android, iOS, and Web platforms."
 }

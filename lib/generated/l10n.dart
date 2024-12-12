@@ -80,10 +80,10 @@ class S {
     );
   }
 
-  /// `Family Expense Tracker`
+  /// `Group Expense Tracker`
   String get appTitle {
     return Intl.message(
-      'Family Expense Tracker',
+      'Group Expense Tracker',
       name: 'appTitle',
       desc: '',
       args: [],
@@ -500,11 +500,11 @@ class S {
     );
   }
 
-  /// `Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \nof expenses among multiple users. It is available across Android, iOS, and Web platforms.`
-  String get welcomeToFamilyExpenseTrackerThisAppIsDesignedTo {
+  /// `Welcome to Group Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \nof expenses among multiple users. It is available across Android, iOS, and Web platforms.`
+  String get welcomeToGroupExpenseTrackerThisAppIsDesignedTo {
     return Intl.message(
-      'Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \\nof expenses among multiple users. It is available across Android, iOS, and Web platforms.',
-      name: 'welcomeToFamilyExpenseTrackerThisAppIsDesignedTo',
+      'Welcome to Group Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \\nof expenses among multiple users. It is available across Android, iOS, and Web platforms.',
+      name: 'welcomeToGroupExpenseTrackerThisAppIsDesignedTo',
       desc: '',
       args: [],
     );

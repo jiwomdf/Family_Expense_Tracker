@@ -1,4 +1,4 @@
-package com.programmergabut.family_expense
+package com.programmergabut.group_expense
 
 import io.flutter.embedding.android.FlutterActivity
 

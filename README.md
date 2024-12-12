@@ -1,5 +1,5 @@
-# Family Expense Tracker
-Family Expense Tracker is a Flutter family expense tracker app originally developed for my family’s use, which now I decided to make it open source. The app is designed to simplify tracking expense and enable effortless sharing of expenses among multiple users. It is available across **Android**, **iOS**, and **Web platforms**.
+# Group Expense Tracker
+Group Expense Tracker is a Flutter group expense tracker app originally developed for my family’s use, which now I decided to make it open source. The app is designed to simplify tracking expense and enable effortless sharing of expenses among multiple users. It is available across **Android**, **iOS**, and **Web platforms**.
 
 
 <image src="assets/record.gif" width="140" height="280"> </image>
@@ -35,7 +35,7 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 
 ## [Optional] How to change the app Firebase project
 #### This app depends on Firebase Auth and Firestore, so you need to add your own Firebase project as stated below
-- first you may change the android and iOS package by replacing all string of `com.programmergabut.family_expense` on Android and `com.programmergabut.familyExpenseTracker` on iOS
+- first you may change the android and iOS package by replacing all string of `com.programmergabut.group_expense` on Android and `com.programmergabut.groupExpense` on iOS
 - Create your own firebase project and register the Android, iOS, and Web
 - put the `google-services.json` for Android, `GoogleService-Info.plist` for iOS, and `firebaseConfig` for web
 - Then add your google-services.json in 

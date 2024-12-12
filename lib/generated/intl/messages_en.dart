@@ -25,7 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "alreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("<- Already have account?"),
         "appTitle":
-            MessageLookupByLibrary.simpleMessage("Family Expense Tracker"),
+            MessageLookupByLibrary.simpleMessage("Group Expense Tracker"),
         "budgetMonth": MessageLookupByLibrary.simpleMessage("Budget / Month"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
         "clickTheUpdateAllExpenseButtonToUpdateEachTable":
@@ -103,8 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "updateAllSubcategory":
             MessageLookupByLibrary.simpleMessage("Update all subCategory"),
         "welcomeBack": MessageLookupByLibrary.simpleMessage("Welcome Back"),
-        "welcomeToFamilyExpenseTrackerThisAppIsDesignedTo":
+        "welcomeToGroupExpenseTrackerThisAppIsDesignedTo":
             MessageLookupByLibrary.simpleMessage(
-                "Welcome to Family Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \\nof expenses among multiple users. It is available across Android, iOS, and Web platforms.")
+                "Welcome to Group Expense Tracker, this app is designed to simplify tracking expense and enable effortless sharing \\nof expenses among multiple users. It is available across Android, iOS, and Web platforms.")
       };
 }
