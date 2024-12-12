@@ -5,7 +5,7 @@ Group Expense Tracker is a Flutter group expense tracker app originally develope
 <image src="assets/record.gif" width="140" height="280"> </image>
 <image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/ios.png" width="140" height="280"> </image>
 <image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/white_ios.png" width="140" height="280"> </image>
-<image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/website.png" width="300" height="280"> </image> 
+<image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/web.png" width="300" height="280"> </image> 
 
 
 <br />
