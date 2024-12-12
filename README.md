@@ -11,7 +11,7 @@ Group Expense Tracker is a Flutter group expense tracker app originally develope
 
 ## Web link
 Firebase hosting link <br />
-https://family-expense-tracker-da485.web.app/ <br /><br />
+https://group-expense-tracker.web.app/ <br /><br />
 
 ## Feature
 - Insert and Update expense, category, ect data
