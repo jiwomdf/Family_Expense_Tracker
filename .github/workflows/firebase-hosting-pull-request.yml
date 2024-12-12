@@ -25,4 +25,4 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_group_expense_tracker_DA485 }}
-          projectId: family-expense-tracker-da485
+          projectId: group-expense-tracker-edb5f
