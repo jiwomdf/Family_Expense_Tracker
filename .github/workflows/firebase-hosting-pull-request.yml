@@ -24,5 +24,5 @@ jobs:
             FIREBASE_CLI_EXPERIMENTS: webframeworks
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_group_expense_tracker_DA485 }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GROUP_EXPENSE_TRACKER_EDB5F }}
           projectId: group-expense-tracker-edb5f
