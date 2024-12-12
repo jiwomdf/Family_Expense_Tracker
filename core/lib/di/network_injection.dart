@@ -9,15 +9,15 @@ import 'package:http/http.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 Future<void> init() async {
-  PoultryRegistry.safeRegister<Client>(http.Client());
+  PoultryRegistry.safeRegisterSingleton<Client>(http.Client());
 
   if (!PlatformUtil.isWeb()) {
-    PoultryRegistry.safeRegister<NetworkInfo>(
+    PoultryRegistry.safeRegisterSingleton<NetworkInfo>(
         NetworkInfoImpl(InternetConnectionChecker()));
   }
 
-  PoultryRegistry.safeRegister<DioFactory>(DioFactory());
+  PoultryRegistry.safeRegisterSingleton<DioFactory>(DioFactory());
 
   final dio = await locator<DioFactory>().getDio();
-  PoultryRegistry.safeRegister<ApiService>(ApiService(dio));
+  PoultryRegistry.safeRegisterSingleton<ApiService>(ApiService(dio));
 }

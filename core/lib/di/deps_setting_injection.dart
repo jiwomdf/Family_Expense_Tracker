@@ -7,8 +7,8 @@ final locator = GetIt.instance;
 
 Future<void> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
-  PoultryRegistry.safeRegister<SharedPreferences>(sharedPreferences);
+  PoultryRegistry.safeRegisterSingleton<SharedPreferences>(sharedPreferences);
 
-  PoultryRegistry.safeRegister<FirebaseOptionsPref>(
+  PoultryRegistry.safeRegisterSingleton<FirebaseOptionsPref>(
       FirebaseOptionsPref(prefs: locator()));
 }

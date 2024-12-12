@@ -8,10 +8,12 @@ import 'package:get_it/get_it.dart';
 final locator = GetIt.instance;
 
 Future<void> init() async {
-  PoultryRegistry.safeRegister<AuthRepository>(
+  PoultryRegistry.safeRegisterSingleton<AuthRepository>(
       AuthRepository(firebaseAuth: locator(), authPref: locator()));
-  PoultryRegistry.safeRegister<FirestoreRepository>(
+  PoultryRegistry.safeRegisterSingleton<FirestoreRepository>(
       FirestoreRepository(firebaseAuth: locator()));
-  PoultryRegistry.safeRegister<FcmRepository>(FcmRepository(client: locator()));
-  PoultryRegistry.safeRegister<HolidayRepository>(HolidayRepository(locator()));
+  PoultryRegistry.safeRegisterSingleton<FcmRepository>(
+      FcmRepository(client: locator()));
+  PoultryRegistry.safeRegisterSingleton<HolidayRepository>(
+      HolidayRepository(locator()));
 }
