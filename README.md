@@ -42,7 +42,6 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 <image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/foptions.png" width="300" height="280"> </image> <br>
 - Enable Firebase Auth by email and password
 - Enable Firestore and set the rules to `allow read, write: if request.auth != null;`
-- Then to setup the new project you can use `flutterfire configure`, for more detail, you can check this link [Add firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=web)
 - After all the setup, then run the app smoothly 🥳
 
 it also open for contribution and discussion 🙏
