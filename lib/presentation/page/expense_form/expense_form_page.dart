@@ -365,32 +365,21 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
   bool submitForm() {
     isSnackbarShown = false;
 
-    if (categoryModel?.categoryName.isEmpty == true) {
+    if (categoryModel?.categoryId.isEmpty == true ||
+        categoryModel?.categoryName.isEmpty == true ||
+        categoryModel?.categoryColor == null) {
       isSnackbarShown = true;
-      context.showSb(const SnackBar(content: Text("Category name is empty")),
-          isSnackbarShown);
+      context.showSb(
+          const SnackBar(content: Text("Category is empty")), isSnackbarShown);
       return false;
     }
 
-    if (categoryModel?.categoryColor == null) {
-      isSnackbarShown = true;
-      context.showSb(const SnackBar(content: Text("Category color is empty")),
-          isSnackbarShown);
-      return false;
-    }
-
-    if (subCategoryModel?.subCategoryName.isEmpty == true) {
+    if (subCategoryModel?.subCategoryId.isEmpty == true ||
+        subCategoryModel?.subCategoryName == null ||
+        subCategoryModel?.subCategoryColor == null) {
       isSnackbarShown = true;
       context.showSb(
           const SnackBar(content: Text("Sub Category name is empty")),
-          isSnackbarShown);
-      return false;
-    }
-
-    if (subCategoryModel?.subCategoryColor == null) {
-      isSnackbarShown = true;
-      context.showSb(
-          const SnackBar(content: Text("Sub Category color is empty")),
           isSnackbarShown);
       return false;
     }

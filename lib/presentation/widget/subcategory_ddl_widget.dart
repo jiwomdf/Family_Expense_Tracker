@@ -78,6 +78,7 @@ class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
           }).toList(),
           onChanged: (value) {
             setState(() {
+              _ddlValue.subCategoryId = value?.subCategoryId ?? "";
               _ddlValue.subCategoryName = value?.subCategoryName ?? "";
               _ddlValue.subCategoryColor = value?.subCategoryColor ?? 0;
             });

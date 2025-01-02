@@ -78,6 +78,7 @@ class _CategoryDdlWidgetState extends State<CategoryDdlWidget> {
           }).toList(),
           onChanged: (value) {
             setState(() {
+              _ddlValue.categoryId = value?.categoryId ?? "";
               _ddlValue.categoryName = value?.categoryName ?? "";
               _ddlValue.categoryColor = value?.categoryColor ?? 0;
             });

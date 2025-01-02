@@ -39,8 +39,8 @@ class InsertExpenseRequest {
                 "")
             .toString()
             .toInputFormat(),
-        categoryId: (json["categoryId"] ?? "").toString().toInputFormat(),
-        subCategoryId: (json["subCategoryId"] ?? "").toString().toInputFormat(),
+        categoryId: (json["categoryId"] ?? "").toString(),
+        subCategoryId: (json["subCategoryId"] ?? "").toString(),
         year: (json["year"] ?? "").toString().toInputFormat(),
         month: (json["month"] ?? "").toString().toInputFormat(),
         dayOfMonth: (json["dayOfMonth"] ?? "").toString().toInputFormat(),
