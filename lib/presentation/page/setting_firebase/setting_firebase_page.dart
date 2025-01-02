@@ -20,6 +20,7 @@ class SettingFirebasePage extends StatefulWidget {
 }
 
 class _SettingFirebasePageState extends State<SettingFirebasePage> {
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     if (PlatformUtil.isAndroid()) {
@@ -45,30 +46,33 @@ class _SettingFirebasePageState extends State<SettingFirebasePage> {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Text("Firebase options setting",
-                  style: TextUtil(context).plusJakarta(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  )),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                    "inorder to connect the firebase project to this device, you need to copy the firebase options from the firebase console and paste it here.",
-                    textAlign: TextAlign.justify,
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text("Firebase options setting",
                     style: TextUtil(context).plusJakarta(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     )),
-              ),
-              PlatformUtil.isAndroid()
-                  ? androidWidget(context)
-                  : const SizedBox(),
-              PlatformUtil.isIOS() ? iosWidget(context) : const SizedBox(),
-              kIsWeb ? webWidget(context) : const SizedBox(),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      "inorder to connect the firebase project to this device, you need to copy the firebase options from the firebase console and paste it here.",
+                      textAlign: TextAlign.justify,
+                      style: TextUtil(context).plusJakarta(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      )),
+                ),
+                PlatformUtil.isAndroid()
+                    ? androidWidget(context)
+                    : const SizedBox(),
+                PlatformUtil.isIOS() ? iosWidget(context) : const SizedBox(),
+                kIsWeb ? webWidget(context) : const SizedBox(),
+              ],
+            ),
           ),
         ),
       )),
@@ -155,17 +159,19 @@ class _SettingFirebasePageState extends State<SettingFirebasePage> {
                   width: double.infinity,
                   child: OutlinedButton(
                       onPressed: () {
-                        context.read<SettingFirebaseBloc>().add(
-                                SetSettingFirebaseAndroidEvent(
-                                    FirebaseOptionsAndroidModel(
-                              fName: firebaseNameController.text,
-                              apiKey: apiKeyController.text,
-                              appId: appIdController.text,
-                              messagingSenderId:
-                                  messagingSenderIdController.text,
-                              projectId: projectIdController.text,
-                              storageBucket: storageBucketController.text,
-                            )));
+                        if (_formKey.currentState!.validate()) {
+                          context.read<SettingFirebaseBloc>().add(
+                                  SetSettingFirebaseAndroidEvent(
+                                      FirebaseOptionsAndroidModel(
+                                fName: firebaseNameController.text,
+                                apiKey: apiKeyController.text,
+                                appId: appIdController.text,
+                                messagingSenderId:
+                                    messagingSenderIdController.text,
+                                projectId: projectIdController.text,
+                                storageBucket: storageBucketController.text,
+                              )));
+                        }
                       },
                       child: const Text("Save Android Firebase Options")),
                 ),
@@ -264,18 +270,20 @@ class _SettingFirebasePageState extends State<SettingFirebasePage> {
                   width: double.infinity,
                   child: OutlinedButton(
                       onPressed: () {
-                        context.read<SettingFirebaseBloc>().add(
-                                SetSettingFirebaseIOSEvent(
-                                    FirebaseOptionsIOSModel(
-                              fName: firebaseNameController.text,
-                              apiKey: apiKeyController.text,
-                              appId: appIdController.text,
-                              messagingSenderId:
-                                  messagingSenderIdController.text,
-                              projectId: projectIdController.text,
-                              storageBucket: storageBucketController.text,
-                              iosBundleId: iosBundleIdController.text,
-                            )));
+                        if (_formKey.currentState!.validate()) {
+                          context.read<SettingFirebaseBloc>().add(
+                                  SetSettingFirebaseIOSEvent(
+                                      FirebaseOptionsIOSModel(
+                                fName: firebaseNameController.text,
+                                apiKey: apiKeyController.text,
+                                appId: appIdController.text,
+                                messagingSenderId:
+                                    messagingSenderIdController.text,
+                                projectId: projectIdController.text,
+                                storageBucket: storageBucketController.text,
+                                iosBundleId: iosBundleIdController.text,
+                              )));
+                        }
                       },
                       child: const Text("Save iOS Firebase Options")),
                 ),
@@ -382,19 +390,21 @@ class _SettingFirebasePageState extends State<SettingFirebasePage> {
                   width: double.infinity,
                   child: OutlinedButton(
                       onPressed: () {
-                        context.read<SettingFirebaseBloc>().add(
-                                SetSettingFirebaseWebEvent(
-                                    FirebaseOptionsWebModel(
-                              fName: firebaseNameController.text,
-                              apiKey: apiKeyController.text,
-                              authDomain: authDomainController.text,
-                              projectId: projectIdController.text,
-                              storageBucket: storageBucketController.text,
-                              messagingSenderId:
-                                  messagingSenderIdController.text,
-                              appId: appIdController.text,
-                              measurementId: measurementIdController.text,
-                            )));
+                        if (_formKey.currentState!.validate()) {
+                          context.read<SettingFirebaseBloc>().add(
+                                  SetSettingFirebaseWebEvent(
+                                      FirebaseOptionsWebModel(
+                                fName: firebaseNameController.text,
+                                apiKey: apiKeyController.text,
+                                authDomain: authDomainController.text,
+                                projectId: projectIdController.text,
+                                storageBucket: storageBucketController.text,
+                                messagingSenderId:
+                                    messagingSenderIdController.text,
+                                appId: appIdController.text,
+                                measurementId: measurementIdController.text,
+                              )));
+                        }
                       },
                       child: const Text("Save Web Firebase Options")),
                 ),
@@ -409,10 +419,18 @@ class _SettingFirebasePageState extends State<SettingFirebasePage> {
   Widget textFormStyle({
     required TextEditingController controller,
     required InputDecoration decoration,
+    String? Function(String?)? validator,
   }) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
       child: TextFormField(
+        validator: validator ??
+            (value) {
+              if (value == null || value.isEmpty) {
+                return "Field cannot be null";
+              }
+              return null;
+            },
         controller: controller,
         decoration: decoration,
       ),
