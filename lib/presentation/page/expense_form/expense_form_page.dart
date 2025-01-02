@@ -395,9 +395,9 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
       var insertedDate = date?.toDateString(DateFormatUtil.ddSlashMMSlashyyyy);
       var now = DateTime.now();
       var strYearSplit = (insertedDate ?? "").split("/");
-      var insertedYear = strYearSplit[0];
+      var insertedDayOfMonth = strYearSplit[0];
       var insertedMonth = strYearSplit[1];
-      var insertedDayOfMonth = strYearSplit[2];
+      var insertedYear = strYearSplit[2];
       var timeStamp =
           "${now.hour.addZeroPref()}:${now.minute.addZeroPref()}:${now.second.addZeroPref()} ${now.day.addZeroPref()}/${now.month.addZeroPref()}/${now.year}";
 
