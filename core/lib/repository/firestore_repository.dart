@@ -256,12 +256,14 @@ class FirestoreRepository {
   }
 
   Future<Either<Failure, void>> updateCategory({
+    required String categoryId,
     required String categoryName,
     required int categoryColor,
   }) async {
     try {
-      await _categoryCollection.doc(categoryName).set(
+      await _categoryCollection.doc(categoryId).set(
         {
+          CategoryConstants.categoryId: categoryId,
           CategoryConstants.categoryName: categoryName,
           CategoryConstants.categoryColor: categoryColor,
           CategoryConstants.email: firebaseAuth.currentUser?.email ?? '',
@@ -291,12 +293,14 @@ class FirestoreRepository {
   }
 
   Future<Either<Failure, void>> updateSubCategory({
+    required String subCategoryId,
     required String categoryName,
     required int categoryColor,
   }) async {
     try {
-      await _subCategoryCollection.doc(categoryName).set(
+      await _subCategoryCollection.doc(subCategoryId).set(
         {
+          SubCategoryConstants.subCategoryId: subCategoryId,
           SubCategoryConstants.subCategoryName: categoryName,
           SubCategoryConstants.subCategoryColor: categoryColor,
           SubCategoryConstants.email: firebaseAuth.currentUser?.email ?? '',

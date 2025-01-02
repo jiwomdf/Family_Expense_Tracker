@@ -12,6 +12,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc(this._firestoreRepository) : super(CategoryLoading()) {
     on<UpdateCategoryEvent>((event, emit) async {
       var category = await _firestoreRepository.updateCategory(
+        categoryId: event.categoryModel.categoryId,
         categoryName: event.categoryModel.categoryName,
         categoryColor: event.categoryModel.categoryColor,
       );

@@ -39,6 +39,7 @@ class SubcategoryBloc extends Bloc<SubcategoryEvent, SubcategoryState> {
     on<UpdateSubcategoryEvent>((event, emit) async {
       emit(SubcategoryLoading());
       final result = await _firestoreRepository.updateSubCategory(
+          subCategoryId: event.subCategoryModel.subCategoryId,
           categoryName: event.subCategoryModel.subCategoryName,
           categoryColor: event.subCategoryModel.subCategoryColor);
       result.fold(
