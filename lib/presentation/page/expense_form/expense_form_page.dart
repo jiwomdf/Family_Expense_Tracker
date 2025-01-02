@@ -86,7 +86,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
             BlocListener<ExpenseBloc, ExpenseState>(
               listener: (context, state) {
                 if (state is ExpenseDataChanged) {
-                  Navigator.pop(context);
+                  Navigator.pop(context, state.isSuccess);
                   /* TODO(JIWO), fcm call
                    context.read<FcmBloc>().add(
                         PostFcmEvent(SendFcmRequest(
@@ -105,7 +105,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
             BlocListener<FcmBloc, FcmState>(
               listener: (context, state) {
                 if (state is FcmHasData) {
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 } else if (state is FcmError) {
                   context.show(state.message);
                 }

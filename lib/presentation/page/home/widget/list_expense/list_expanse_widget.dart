@@ -57,8 +57,12 @@ class _ListExpenseWidgetState extends State<ListExpenseWidget> {
               arguments: expenseCategoryModel,
             ).then((completion) {
               if (context.mounted) {
-                context.show(expenseCategoryModel.note +
-                    S.of(context).hasBeenModifiedDataNotShowedYetInorderToSave);
+                if (completion != null) {
+                  context.show(expenseCategoryModel.note +
+                      S
+                          .of(context)
+                          .hasBeenModifiedDataNotShowedYetInorderToSave);
+                }
                 context.read<ExpenseBloc>().add(const ResetExpenseEvent());
               }
             }),
