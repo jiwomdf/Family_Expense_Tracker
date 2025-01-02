@@ -205,13 +205,13 @@ class FirestoreRepository {
         var subCategoryName = "";
         if (category.isNotEmpty) {
           subCategoryName =
-              subCategory.first.get(CategoryConstants.categoryName);
+              subCategory.first.get(SubCategoryConstants.subCategoryName);
         }
 
         var subCategoryColor = subCategoryDefaultColor;
         if (category.isNotEmpty) {
           subCategoryColor =
-              subCategory.first.get(CategoryConstants.categoryColor);
+              subCategory.first.get(SubCategoryConstants.subCategoryColor);
         }
 
         expense.add(ExpenseCategoryModel(
