@@ -28,6 +28,7 @@ void main() {
     'Should emit [UpdateCategoryEvent] when data is updated successfully',
     build: () {
       when(mockFirestoreRepository.updateCategory(
+              categoryId: categoryModel.categoryId,
               categoryName: categoryModel.categoryName,
               categoryColor: categoryModel.categoryColor))
           .thenAnswer((_) async => const Right(null));
@@ -39,6 +40,7 @@ void main() {
     ],
     verify: (bloc) {
       verify(mockFirestoreRepository.updateCategory(
+          categoryId: categoryModel.categoryId,
           categoryName: categoryModel.categoryName,
           categoryColor: categoryModel.categoryColor));
       return UpdateCategoryEvent(categoryModel).props;

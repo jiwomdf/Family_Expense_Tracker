@@ -54,8 +54,10 @@ void main() {
     'Should emit [UpdateSubcategoryEvent] when data is updated successfully',
     build: () {
       when(mockFirestoreRepository.updateSubCategory(
-              categoryName: categoryName, categoryColor: categoryColor))
-          .thenAnswer((_) async => const Right(null));
+        subCategoryId: subCategoryModel.subCategoryId,
+        categoryName: categoryName,
+        categoryColor: categoryColor,
+      )).thenAnswer((_) async => const Right(null));
       return registerBloc;
     },
     act: (bloc) => bloc.add(UpdateSubcategoryEvent(subCategoryModel)),
@@ -65,7 +67,10 @@ void main() {
     ],
     verify: (bloc) {
       verify(mockFirestoreRepository.updateSubCategory(
-          categoryName: categoryName, categoryColor: categoryColor));
+        subCategoryId: subCategoryModel.subCategoryId,
+        categoryName: categoryName,
+        categoryColor: categoryColor,
+      ));
       return UpdateSubcategoryEvent(subCategoryModel).props;
     },
   );
