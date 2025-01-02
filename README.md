@@ -38,11 +38,10 @@ The app use Firestore, Firebase Auth, Firebase Cloud Messaging, and Crashlytics.
 #### This app depends on Firebase Auth and Firestore, so you need to add your own Firebase project as stated below
 - Create your own firebase project and register the Android, iOS, and Web
 - open the `google-services.json` for Android, `GoogleService-Info.plist` for iOS, and `firebaseConfig` for web
-- you can see the credential of the firebase options inside those files, you can input it to the first config firebase option screen
-<image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/foptions.png" width="300" height="280"> </image> 
+- you can see the credential of the firebase options inside those files, you can input it to the first config firebase option screen <br>
+<image src="https://github.com/jiwomdf/group_expense_tracker/blob/main/github_assets/foptions.png" width="300" height="280"> </image> <br>
 - Enable Firebase Auth by email and password
 - Enable Firestore and set the rules to `allow read, write: if request.auth != null;`
-- Then to setup the new project you can use `flutterfire configure`, for more detail, you can check this link [Add firebase to your Flutter app](https://firebase.google.com/docs/flutter/setup?platform=web)
 - After all the setup, then run the app smoothly 🥳
 
 it also open for contribution and discussion 🙏
