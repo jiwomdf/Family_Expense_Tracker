@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:group_expense_tracker/generated/l10n.dart';
 import 'package:group_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
-import 'package:group_expense_tracker/presentation/page/home/widget/list_expense/list_expanse_widget.dart';
+import 'package:group_expense_tracker/presentation/page/home/widget/list_expense/list_expense_widget.dart';
 import 'package:group_expense_tracker/util/ext/color_util.dart';
 import 'package:group_expense_tracker/util/ext/text_util.dart';
 import 'package:group_expense_tracker/util/style/app_assets_util.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:group_expense_tracker/generated/l10n.dart';
 import 'package:group_expense_tracker/presentation/bloc/expense/expense_bloc.dart';
 import 'package:group_expense_tracker/util/ext/text_util.dart';
-import 'package:group_expense_tracker/util/scheme/update_expanse_scheme.dart';
+import 'package:group_expense_tracker/util/scheme/update_expense_scheme.dart';
 
 class UpdateTablePage extends StatefulWidget {
   static const routeName = '/update-table';
