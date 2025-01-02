@@ -6,8 +6,8 @@ class ExpenseConstants {
   static const String email = "email";
   static const String note = "note";
   static const String price = "price";
-  static const String subCategoryName = "subCategoryName";
-  static const String categoryName = "categoryName";
+  static const String subCategoryId = "subCategoryId"; //Foreign Key
+  static const String categoryId = "categoryId"; //Foreign Key
   static const String year = "year";
   static const String month = "month";
   static const String dayOfMonth = "dayOfMonth";
@@ -18,7 +18,8 @@ class ExpenseConstants {
 class CategoryConstants {
   static const constantName = "category";
 
-  static const String categoryName = "categoryName"; //Primary Key
+  static const String categoryId = "categoryId"; //Primary Key
+  static const String categoryName = "categoryName";
   static const String categoryColor = "categoryColor";
   static const String email = "email";
 }
@@ -26,8 +27,9 @@ class CategoryConstants {
 class SubCategoryConstants {
   static const constantName = "subCategory";
 
-  static const String categoryName = "categoryName"; //Primary Key
-  static const String categoryColor = "categoryColor";
+  static const String subCategoryId = "subCategoryId"; //Primary Key
+  static const String subCategoryName = "subCategoryName";
+  static const String subCategoryColor = "subCategoryColor";
   static const String email = "email";
 }
 

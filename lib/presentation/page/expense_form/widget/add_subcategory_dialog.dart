@@ -6,6 +6,7 @@ import 'package:group_expense_tracker/presentation/bloc/subcategory/subcategory_
 import 'package:group_expense_tracker/presentation/widget/text_form_field.dart';
 import 'package:group_expense_tracker/util/ext/text_util.dart';
 import 'package:group_expense_tracker/util/style/app_snackbar_util.dart';
+import 'package:uuid/uuid.dart';
 
 class AddSubCategoryDialog extends StatefulWidget {
   const AddSubCategoryDialog({super.key});
@@ -16,8 +17,9 @@ class AddSubCategoryDialog extends StatefulWidget {
 
 class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
   final SubCategoryModel _ddlValue = SubCategoryModel(
-    categoryColor: 0xff443a49,
-    categoryName: "",
+    subCategoryId: "",
+    subCategoryColor: 0xff443a49,
+    subCategoryName: "",
   );
   final _formKey = GlobalKey<FormState>();
 
@@ -73,9 +75,10 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                         enableAlpha: false,
                         displayThumbColor: false,
                         hexInputBar: false,
-                        pickerColor: Color(_ddlValue.categoryColor),
+                        pickerColor: Color(_ddlValue.subCategoryColor),
                         onColorChanged: (color) {
-                          setState(() => _ddlValue.categoryColor = color.value);
+                          setState(
+                              () => _ddlValue.subCategoryColor = color.value);
                         },
                       ),
                     ],
@@ -92,7 +95,7 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                         : null,
                     onChanged: (val) {
                       setState(
-                          () => _ddlValue.categoryName = val.toLowerCase());
+                          () => _ddlValue.subCategoryName = val.toLowerCase());
                     },
                   ),
                 ),
@@ -113,9 +116,10 @@ class _AddSubCategoryDialogState extends State<AddSubCategoryDialog> {
                           context
                               .read<SubcategoryBloc>()
                               .add(UpdateSubcategoryEvent(SubCategoryModel(
-                                categoryName:
-                                    _ddlValue.categoryName.toLowerCase(),
-                                categoryColor: _ddlValue.categoryColor,
+                                subCategoryId: const Uuid().v4(),
+                                subCategoryName:
+                                    _ddlValue.subCategoryName.toLowerCase(),
+                                subCategoryColor: _ddlValue.subCategoryColor,
                               )));
                         }
                       },

@@ -22,15 +22,22 @@ class CategoryDdlWidget extends StatefulWidget {
 
 class _CategoryDdlWidgetState extends State<CategoryDdlWidget> {
   List<CategoryModel> _categories = CategoryModel.emptyList();
-  CategoryModel _ddlValue =
-      CategoryModel(categoryColor: 0xff443a49, categoryName: "");
+  CategoryModel _ddlValue = CategoryModel(
+    categoryId: "",
+    categoryColor: 0xff443a49,
+    categoryName: "",
+  );
 
   @override
   void initState() {
     context.read<CategoryBloc>().add(const GetCategoryEvent());
 
     _ddlValue = widget.initialData ??
-        CategoryModel(categoryColor: 0xff443a49, categoryName: "");
+        CategoryModel(
+          categoryId: "",
+          categoryColor: 0xff443a49,
+          categoryName: "",
+        );
     super.initState();
   }
 

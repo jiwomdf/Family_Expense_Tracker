@@ -7,8 +7,10 @@ class ExpenseCategoryModel {
   final String note;
   final int price;
   final String date;
+  final String categoryId;
   final String categoryName;
   final int categoryColor;
+  final String subCategoryId;
   final String subCategoryName;
   final int subCategoryColor;
   final String year;
@@ -23,8 +25,10 @@ class ExpenseCategoryModel {
     required this.note,
     required this.price,
     required this.date,
+    required this.categoryId,
     required this.categoryName,
     required this.categoryColor,
+    required this.subCategoryId,
     required this.subCategoryName,
     required this.subCategoryColor,
     required this.year,
@@ -41,10 +45,12 @@ class ExpenseCategoryModel {
     data[ExpenseConstants.note] = note;
     data[ExpenseConstants.price] = price;
     data[ExpenseConstants.date] = date;
-    data[ExpenseConstants.categoryName] = categoryName;
+    data[ExpenseConstants.categoryId] = categoryId;
+    data[CategoryConstants.categoryName] = categoryName;
     data[CategoryConstants.categoryColor] = categoryColor;
-    data[ExpenseConstants.subCategoryName] = subCategoryName;
-    data[SubCategoryConstants.categoryColor] = subCategoryColor;
+    data[ExpenseConstants.subCategoryId] = subCategoryId;
+    data[SubCategoryConstants.subCategoryName] = subCategoryName;
+    data[SubCategoryConstants.subCategoryColor] = subCategoryColor;
     data[ExpenseConstants.year] = year;
     data[ExpenseConstants.month] = month.addZeroPref();
     data[ExpenseConstants.dayOfMonth] = dayOfMonth.addZeroPref();

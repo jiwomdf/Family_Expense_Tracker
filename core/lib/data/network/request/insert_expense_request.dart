@@ -7,8 +7,8 @@ class InsertExpenseRequest {
   final String note;
   final int price;
   final String date;
-  final String categoryName;
-  final String subCategoryName;
+  final String categoryId;
+  final String subCategoryId;
   final String year;
   final String month;
   final String dayOfMonth;
@@ -20,8 +20,8 @@ class InsertExpenseRequest {
     required this.note,
     required this.price,
     required this.date,
-    required this.categoryName,
-    required this.subCategoryName,
+    required this.categoryId,
+    required this.subCategoryId,
     required this.year,
     required this.month,
     required this.dayOfMonth,
@@ -39,9 +39,8 @@ class InsertExpenseRequest {
                 "")
             .toString()
             .toInputFormat(),
-        categoryName: (json["categoryName"] ?? "").toString().toInputFormat(),
-        subCategoryName:
-            (json["subCategoryName"] ?? "").toString().toInputFormat(),
+        categoryId: (json["categoryId"] ?? "").toString().toInputFormat(),
+        subCategoryId: (json["subCategoryId"] ?? "").toString().toInputFormat(),
         year: (json["year"] ?? "").toString().toInputFormat(),
         month: (json["month"] ?? "").toString().toInputFormat(),
         dayOfMonth: (json["dayOfMonth"] ?? "").toString().toInputFormat(),
@@ -55,8 +54,8 @@ class InsertExpenseRequest {
     data[ExpenseConstants.note] = note;
     data[ExpenseConstants.price] = price;
     data[ExpenseConstants.date] = date;
-    data[ExpenseConstants.categoryName] = categoryName;
-    data[ExpenseConstants.subCategoryName] = subCategoryName;
+    data[ExpenseConstants.categoryId] = categoryId;
+    data[ExpenseConstants.subCategoryId] = subCategoryId;
     data[ExpenseConstants.year] = year;
     data[ExpenseConstants.month] = month.addZeroPref();
     data[ExpenseConstants.dayOfMonth] = dayOfMonth.addZeroPref();

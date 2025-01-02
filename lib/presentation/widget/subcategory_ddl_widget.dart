@@ -23,15 +23,20 @@ class SubCategoryDdlWidget extends StatefulWidget {
 class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
   List<SubCategoryModel> _subcategories = SubCategoryModel.emptyList();
   SubCategoryModel _ddlValue = SubCategoryModel(
-    categoryColor: 0xff443a49,
-    categoryName: "",
+    subCategoryId: "",
+    subCategoryColor: 0xff443a49,
+    subCategoryName: "",
   );
 
   @override
   void initState() {
     context.read<SubcategoryBloc>().add(const GetSubcategoryEvent());
     _ddlValue = widget._initialData ??
-        SubCategoryModel(categoryColor: 0xff443a49, categoryName: "");
+        SubCategoryModel(
+          subCategoryId: "",
+          subCategoryColor: 0xff443a49,
+          subCategoryName: "",
+        );
     super.initState();
   }
 
@@ -51,9 +56,9 @@ class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
               SizedBox(
                 height: 15,
                 child: CircleAvatar(
-                    backgroundColor: _ddlValue.categoryColor.toColor()),
+                    backgroundColor: _ddlValue.subCategoryColor.toColor()),
               ),
-              Text((_ddlValue.categoryName).ifEmpty("Choose one")),
+              Text((_ddlValue.subCategoryName).ifEmpty("Choose one")),
             ],
           ),
           items: _subcategories.map((SubCategoryModel value) {
@@ -64,16 +69,17 @@ class _SubCategoryDdlWidgetState extends State<SubCategoryDdlWidget> {
                     SizedBox(
                       height: 15,
                       child: CircleAvatar(
-                          backgroundColor: value.categoryColor.toColor()),
+                          backgroundColor: value.subCategoryColor.toColor()),
                     ),
-                    Text(value.categoryName, overflow: TextOverflow.ellipsis),
+                    Text(value.subCategoryName,
+                        overflow: TextOverflow.ellipsis),
                   ],
                 ));
           }).toList(),
           onChanged: (value) {
             setState(() {
-              _ddlValue.categoryName = value?.categoryName ?? "";
-              _ddlValue.categoryColor = value?.categoryColor ?? 0;
+              _ddlValue.subCategoryName = value?.subCategoryName ?? "";
+              _ddlValue.subCategoryColor = value?.subCategoryColor ?? 0;
             });
             widget.selectedCategory(_ddlValue);
           },

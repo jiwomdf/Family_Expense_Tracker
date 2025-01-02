@@ -17,8 +17,11 @@ void main() {
     mockFirestoreRepository = MockFirestoreRepository();
     categoryBloc = CategoryBloc(mockFirestoreRepository);
 
-    categoryModel =
-        CategoryModel(categoryColor: 0xFFFFFFFF, categoryName: "Groceries");
+    categoryModel = CategoryModel(
+      categoryId: "1",
+      categoryColor: 0xFFFFFFFF,
+      categoryName: "Groceries",
+    );
   });
 
   blocTest<CategoryBloc, CategoryState>(

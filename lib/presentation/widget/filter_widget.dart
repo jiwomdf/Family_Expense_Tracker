@@ -12,6 +12,7 @@ import 'package:group_expense_tracker/util/style/app_snackbar_util.dart';
 
 class FilterWidget extends StatefulWidget {
   static const String _defaultSubCategory = "All subCategory";
+  static const String _defaultSubCategoryId = "ALL_CATEGORY_ID";
 
   const FilterWidget({super.key});
 
@@ -24,8 +25,9 @@ class _FilterWidgetState extends State<FilterWidget> {
   int _ddlMonthValue = 1;
   int _ddlYearValue = DateTime.now().year;
   final SubCategoryModel _ddlSubCategoryValue = SubCategoryModel(
-    categoryColor: 0xff443a49,
-    categoryName: FilterWidget._defaultSubCategory,
+    subCategoryId: FilterWidget._defaultSubCategoryId,
+    subCategoryColor: 0xff443a49,
+    subCategoryName: FilterWidget._defaultSubCategory,
   );
 
   List<int> _listYear = [];
@@ -80,7 +82,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           _updateExpenseList(
             monthVal,
             _ddlYearValue,
-            _ddlSubCategoryValue.categoryName,
+            _ddlSubCategoryValue.subCategoryName,
           );
         },
       ),
@@ -106,7 +108,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           _updateExpenseList(
             _ddlMonthValue,
             _ddlYearValue,
-            _ddlSubCategoryValue.categoryName,
+            _ddlSubCategoryValue.subCategoryName,
           );
         },
       ),
@@ -119,8 +121,9 @@ class _FilterWidgetState extends State<FilterWidget> {
         if (state is SubcategoryHasData) {
           _subCategoryList.clear();
           _subCategoryList.add(SubCategoryModel(
-            categoryColor: 0xff443a49,
-            categoryName: FilterWidget._defaultSubCategory,
+            subCategoryId: FilterWidget._defaultSubCategoryId,
+            subCategoryColor: 0xff443a49,
+            subCategoryName: FilterWidget._defaultSubCategory,
           ));
           _subCategoryList.addAll(state.result);
         } else if (state is SubcategoryError) {
@@ -134,9 +137,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                 height: 15,
                 child: CircleAvatar(
                     backgroundColor:
-                        _ddlSubCategoryValue.categoryColor.toColor()),
+                        _ddlSubCategoryValue.subCategoryColor.toColor()),
               ),
-              Text(_ddlSubCategoryValue.categoryName
+              Text(_ddlSubCategoryValue.subCategoryName
                   .ifNullOrEmpty("SubCategory")),
             ],
           ),
@@ -148,22 +151,24 @@ class _FilterWidgetState extends State<FilterWidget> {
                     SizedBox(
                       height: 15,
                       child: CircleAvatar(
-                          backgroundColor: value.categoryColor.toColor()),
+                          backgroundColor: value.subCategoryColor.toColor()),
                     ),
-                    Text(value.categoryName, overflow: TextOverflow.ellipsis),
+                    Text(value.subCategoryName,
+                        overflow: TextOverflow.ellipsis),
                   ],
                 ));
           }).toList(),
           onChanged: (value) {
             setState(() {
-              _ddlSubCategoryValue.categoryColor =
-                  value?.categoryColor ?? subCategoryDefaultColor;
-              _ddlSubCategoryValue.categoryName = value?.categoryName ?? "";
+              _ddlSubCategoryValue.subCategoryColor =
+                  value?.subCategoryColor ?? subCategoryDefaultColor;
+              _ddlSubCategoryValue.subCategoryName =
+                  value?.subCategoryName ?? "";
             });
             _updateExpenseList(
               _ddlMonthValue,
               _ddlYearValue,
-              _ddlSubCategoryValue.categoryName,
+              _ddlSubCategoryValue.subCategoryName,
             );
           },
         );

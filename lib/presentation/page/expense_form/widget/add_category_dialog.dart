@@ -6,6 +6,7 @@ import 'package:group_expense_tracker/presentation/bloc/category/category_bloc.d
 import 'package:group_expense_tracker/presentation/widget/text_form_field.dart';
 import 'package:group_expense_tracker/util/ext/text_util.dart';
 import 'package:group_expense_tracker/util/style/app_snackbar_util.dart';
+import 'package:uuid/uuid.dart';
 
 class AddCategoryDialog extends StatefulWidget {
   const AddCategoryDialog({super.key});
@@ -16,6 +17,7 @@ class AddCategoryDialog extends StatefulWidget {
 
 class _AddCategoryDialogState extends State<AddCategoryDialog> {
   final CategoryModel _ddlValue = CategoryModel(
+    categoryId: "",
     categoryColor: 0xff443a49,
     categoryName: "",
   );
@@ -98,6 +100,7 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                           context
                               .read<CategoryBloc>()
                               .add(UpdateCategoryEvent(CategoryModel(
+                                categoryId: const Uuid().v4(),
                                 categoryName:
                                     _ddlValue.categoryName.toLowerCase(),
                                 categoryColor: _ddlValue.categoryColor,

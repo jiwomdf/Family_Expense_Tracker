@@ -60,11 +60,13 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
       note = widget._expenseCategory?.note ?? "";
       price = formatter.format(widget._expenseCategory?.price ?? 0);
       categoryModel = CategoryModel(
+          categoryId: widget._expenseCategory?.categoryId ?? "",
           categoryName: widget._expenseCategory?.categoryName ?? "",
           categoryColor: widget._expenseCategory?.categoryColor ?? -1);
       subCategoryModel = SubCategoryModel(
-        categoryName: widget._expenseCategory?.subCategoryName ?? "",
-        categoryColor: widget._expenseCategory?.subCategoryColor ?? -1,
+        subCategoryId: widget._expenseCategory?.subCategoryId ?? "",
+        subCategoryName: widget._expenseCategory?.subCategoryName ?? "",
+        subCategoryColor: widget._expenseCategory?.subCategoryColor ?? -1,
       );
       date = widget._expenseCategory?.date.toDateGlobalFormat();
     }
@@ -377,7 +379,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
       return false;
     }
 
-    if (subCategoryModel?.categoryName.isEmpty == true) {
+    if (subCategoryModel?.subCategoryName.isEmpty == true) {
       isSnackbarShown = true;
       context.showSb(
           const SnackBar(content: Text("Sub Category name is empty")),
@@ -385,7 +387,7 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
       return false;
     }
 
-    if (subCategoryModel?.categoryColor == null) {
+    if (subCategoryModel?.subCategoryColor == null) {
       isSnackbarShown = true;
       context.showSb(
           const SnackBar(content: Text("Sub Category color is empty")),
@@ -416,8 +418,8 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
               note: note,
               price: price.fromRupiah(),
               date: insertedDate ?? '',
-              categoryName: categoryModel?.categoryName ?? "",
-              subCategoryName: subCategoryModel?.categoryName ?? "",
+              categoryId: categoryModel?.categoryId ?? "",
+              subCategoryId: subCategoryModel?.subCategoryId ?? "",
               year: insertedYear,
               month: insertedMonth,
               dayOfMonth: insertedDayOfMonth,
@@ -429,8 +431,8 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
               note: note,
               price: price.fromRupiah(),
               date: insertedDate ?? "",
-              categoryName: categoryModel?.categoryName ?? "",
-              subCategoryName: subCategoryModel?.categoryName ?? "",
+              categoryId: categoryModel?.categoryId ?? "",
+              subCategoryId: subCategoryModel?.subCategoryId ?? "",
               year: insertedYear,
               month: insertedMonth,
               dayOfMonth: insertedDayOfMonth,

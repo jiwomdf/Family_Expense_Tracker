@@ -18,9 +18,18 @@ void main() {
   setUp(() {
     mockFirestoreRepository = MockFirestoreRepository();
     registerBloc = SubcategoryBloc(mockFirestoreRepository);
-    subCategoryModel =
-        SubCategoryModel(categoryName: 'categoryName', categoryColor: 0);
-    subCategoryList = [SubCategoryModel(categoryName: '', categoryColor: 0)];
+    subCategoryModel = SubCategoryModel(
+      subCategoryId: '1',
+      subCategoryName: 'categoryName',
+      subCategoryColor: 0,
+    );
+    subCategoryList = [
+      SubCategoryModel(
+        subCategoryId: '1',
+        subCategoryName: '',
+        subCategoryColor: 0,
+      )
+    ];
   });
 
   blocTest<SubcategoryBloc, SubcategoryState>(

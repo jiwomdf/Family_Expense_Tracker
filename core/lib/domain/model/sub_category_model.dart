@@ -1,10 +1,12 @@
 class SubCategoryModel {
-  String categoryName;
-  int categoryColor;
+  String subCategoryId;
+  String subCategoryName;
+  int subCategoryColor;
 
   SubCategoryModel({
-    required this.categoryName,
-    required this.categoryColor,
+    required this.subCategoryId,
+    required this.subCategoryName,
+    required this.subCategoryColor,
   });
 
   static List<SubCategoryModel> emptyList() {

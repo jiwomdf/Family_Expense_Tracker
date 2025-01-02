@@ -98,18 +98,29 @@ class FirestoreRepository {
 
       for (var doc in expenseSnapShoot.docs) {
         var category = categorySnapShoot.docs.where((itm) {
-          return doc.get(ExpenseConstants.categoryName) ==
-              itm.get(CategoryConstants.categoryName);
+          return doc.get(ExpenseConstants.categoryId) ==
+              itm.get(CategoryConstants.categoryId);
         });
 
         var subCategory = subCategorySnapShoot.docs.where(((itm) {
-          return doc.get(ExpenseConstants.subCategoryName) ==
-              itm.get(SubCategoryConstants.categoryName);
+          return doc.get(ExpenseConstants.subCategoryId) ==
+              itm.get(SubCategoryConstants.subCategoryId);
         }));
+
+        var categoryName = "";
+        if (category.isNotEmpty) {
+          categoryName = category.first.get(CategoryConstants.categoryName);
+        }
 
         var categoryColor = 4278190080;
         if (category.isNotEmpty) {
           categoryColor = category.first.get(CategoryConstants.categoryColor);
+        }
+
+        var subCategoryName = "";
+        if (category.isNotEmpty) {
+          subCategoryName =
+              subCategory.first.get(CategoryConstants.categoryName);
         }
 
         var subCategoryColor = 4288585374;
@@ -124,9 +135,11 @@ class FirestoreRepository {
           note: doc.get(ExpenseConstants.note) ?? '',
           price: doc.get(ExpenseConstants.price) ?? '',
           date: doc.get(ExpenseConstants.date) ?? '',
-          categoryName: doc.get(CategoryConstants.categoryName) ?? '',
+          categoryId: doc.get(ExpenseConstants.categoryId) ?? '',
+          categoryName: categoryName,
           categoryColor: categoryColor,
-          subCategoryName: doc.get(ExpenseConstants.subCategoryName),
+          subCategoryId: doc.get(ExpenseConstants.subCategoryId),
+          subCategoryName: subCategoryName,
           subCategoryColor: subCategoryColor,
           year: doc.get(ExpenseConstants.year) ?? '',
           month: doc.get(ExpenseConstants.month) ?? '',
@@ -170,18 +183,29 @@ class FirestoreRepository {
 
       for (var doc in expenseSnapShoot.docs) {
         var category = categorySnapShoot.docs.where((itm) {
-          return doc.get(ExpenseConstants.categoryName) ==
-              itm.get(CategoryConstants.categoryName);
+          return doc.get(ExpenseConstants.categoryId) ==
+              itm.get(CategoryConstants.categoryId);
         });
 
         var subCategory = subCategorySnapShoot.docs.where(((itm) {
-          return doc.get(ExpenseConstants.subCategoryName) ==
-              itm.get(SubCategoryConstants.categoryName);
+          return doc.get(ExpenseConstants.subCategoryId) ==
+              itm.get(SubCategoryConstants.subCategoryId);
         }));
+
+        var categoryName = "";
+        if (category.isNotEmpty) {
+          categoryName = category.first.get(CategoryConstants.categoryName);
+        }
 
         var categoryColor = categoryDefaultColor;
         if (category.isNotEmpty) {
           categoryColor = category.first.get(CategoryConstants.categoryColor);
+        }
+
+        var subCategoryName = "";
+        if (category.isNotEmpty) {
+          subCategoryName =
+              subCategory.first.get(CategoryConstants.categoryName);
         }
 
         var subCategoryColor = subCategoryDefaultColor;
@@ -196,9 +220,11 @@ class FirestoreRepository {
           note: doc.get(ExpenseConstants.note) ?? '',
           price: doc.get(ExpenseConstants.price) ?? '',
           date: doc.get(ExpenseConstants.date) ?? '',
-          categoryName: doc.get(CategoryConstants.categoryName) ?? '',
+          categoryId: doc.get(ExpenseConstants.categoryId) ?? '',
+          categoryName: categoryName,
           categoryColor: categoryColor,
-          subCategoryName: doc.get(ExpenseConstants.subCategoryName),
+          subCategoryId: doc.get(ExpenseConstants.subCategoryId),
+          subCategoryName: subCategoryName,
           subCategoryColor: subCategoryColor,
           year: doc.get(ExpenseConstants.year) ?? '',
           month: doc.get(ExpenseConstants.month) ?? '',
@@ -253,6 +279,7 @@ class FirestoreRepository {
       return Right(categorySnapshot.docs
           .map(
             (doc) => CategoryModel(
+              categoryId: doc.get(CategoryConstants.categoryId),
               categoryColor: doc.get(CategoryConstants.categoryColor),
               categoryName: doc.get(CategoryConstants.categoryName),
             ),
@@ -270,8 +297,8 @@ class FirestoreRepository {
     try {
       await _subCategoryCollection.doc(categoryName).set(
         {
-          SubCategoryConstants.categoryName: categoryName,
-          SubCategoryConstants.categoryColor: categoryColor,
+          SubCategoryConstants.subCategoryName: categoryName,
+          SubCategoryConstants.subCategoryColor: categoryColor,
           SubCategoryConstants.email: firebaseAuth.currentUser?.email ?? '',
         },
       );
@@ -287,8 +314,9 @@ class FirestoreRepository {
       subCategoryCache = categorySnapshot.docs
           .map(
             (doc) => SubCategoryModel(
-              categoryColor: doc.get(SubCategoryConstants.categoryColor),
-              categoryName: doc.get(SubCategoryConstants.categoryName),
+              subCategoryId: doc.get(SubCategoryConstants.subCategoryId),
+              subCategoryColor: doc.get(SubCategoryConstants.subCategoryColor),
+              subCategoryName: doc.get(SubCategoryConstants.subCategoryName),
             ),
           )
           .toList();
@@ -309,8 +337,9 @@ class FirestoreRepository {
       subCategoryCache = categorySnapshot.docs
           .map(
             (doc) => SubCategoryModel(
-              categoryColor: doc.get(SubCategoryConstants.categoryColor),
-              categoryName: doc.get(SubCategoryConstants.categoryName),
+              subCategoryId: doc.get(SubCategoryConstants.subCategoryId),
+              subCategoryColor: doc.get(SubCategoryConstants.subCategoryColor),
+              subCategoryName: doc.get(SubCategoryConstants.subCategoryName),
             ),
           )
           .toList();
