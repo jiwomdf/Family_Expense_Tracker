@@ -18,6 +18,7 @@ import 'package:group_expense_tracker/presentation/widget/subcategory_ddl_widget
 import 'package:group_expense_tracker/presentation/widget/text_form_field.dart';
 import 'package:group_expense_tracker/util/ext/date_format_util.dart';
 import 'package:group_expense_tracker/util/ext/int_util.dart';
+import 'package:group_expense_tracker/util/ext/status_util.dart';
 import 'package:group_expense_tracker/util/ext/string_util.dart';
 import 'package:group_expense_tracker/util/style/app_color_util.dart';
 import 'package:group_expense_tracker/util/style/app_snackbar_util.dart';
@@ -400,32 +401,42 @@ class _ExpenseFormPageState extends State<ExpenseFormPage> {
     }
 
     if (_formKey.currentState!.validate()) {
-      if (isFromEdit) {
-        var updateDate = date?.toDateString(DateFormatUtil.ddSlashMMSlashyyyy);
-        var now = DateTime.now();
-        var updateTimeStamp =
-            "${now.hour.addZeroPref()}:${now.minute.addZeroPref()}:${now.second.addZeroPref()} ${now.day.addZeroPref()}/${now.month.addZeroPref()}/${now.year}";
+      var insertedDate = date?.toDateString(DateFormatUtil.ddSlashMMSlashyyyy);
+      var now = DateTime.now();
+      var strYearSplit = (insertedDate ?? "").split("/");
+      var insertedYear = strYearSplit[0];
+      var insertedMonth = strYearSplit[1];
+      var insertedDayOfMonth = strYearSplit[2];
+      var timeStamp =
+          "${now.hour.addZeroPref()}:${now.minute.addZeroPref()}:${now.second.addZeroPref()} ${now.day.addZeroPref()}/${now.month.addZeroPref()}/${now.year}";
 
+      if (isFromEdit) {
         context.read<ExpenseBloc>().add(UpdateExpenseEvent(UpdateExpenseRequest(
               id: widget._expenseCategory?.id ?? "",
               note: note,
               price: price.fromRupiah(),
-              date: updateDate ?? '',
+              date: insertedDate ?? '',
               categoryName: categoryModel?.categoryName ?? "",
               subCategoryName: subCategoryModel?.categoryName ?? "",
-              year: updateDate?.split("/")[2] ?? "",
-              month: updateDate?.split("/")[1] ?? "",
-              dayOfMonth: updateDate?.split("/")[0] ?? "",
-              timeStamp: updateTimeStamp,
-              status: "A",
+              year: insertedYear,
+              month: insertedMonth,
+              dayOfMonth: insertedDayOfMonth,
+              timeStamp: timeStamp,
+              status: StatusUtil.UPDATED,
             )));
       } else {
         context.read<ExpenseBloc>().add(InsertExpenseEvent(InsertExpenseRequest(
-            note: note,
-            price: price.fromRupiah(),
-            date: date?.toDateString(DateFormatUtil.ddSlashMMSlashyyyy) ?? '',
-            categoryName: categoryModel?.categoryName ?? "",
-            subCategoryName: subCategoryModel?.categoryName ?? "")));
+              note: note,
+              price: price.fromRupiah(),
+              date: insertedDate ?? "",
+              categoryName: categoryModel?.categoryName ?? "",
+              subCategoryName: subCategoryModel?.categoryName ?? "",
+              year: insertedYear,
+              month: insertedMonth,
+              dayOfMonth: insertedDayOfMonth,
+              timeStamp: timeStamp,
+              status: StatusUtil.INSERTED,
+            )));
       }
 
       return true;

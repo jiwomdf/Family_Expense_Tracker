@@ -1,7 +1,7 @@
 extension StringExtension on String {
   String toInputFormat() {
     if (isEmpty) {
-      return "undefined";
+      return "";
     } else {
       return trim().toLowerCase();
     }
@@ -20,7 +20,7 @@ extension StringExtension on String {
 extension DynamicExtension on dynamic {
   String toInputFormat() {
     if (this == null) {
-      return "undefined";
+      return "";
     } else {
       return toString().trim().toLowerCase();
     }

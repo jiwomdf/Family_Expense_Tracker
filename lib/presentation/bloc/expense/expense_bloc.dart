@@ -17,7 +17,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ExpenseBloc(this._firestoreRepository) : super(ExpenseLoading()) {
     on<InsertExpenseEvent>((event, emit) async {
       var expenses = await _firestoreRepository
-          .insertExpense(event.expenseRequest.toInsertJson());
+          .insertExpense(event.expenseRequest.toJson());
 
       expenses.fold((failure) {
         emit(ExpenseError(failure.message));

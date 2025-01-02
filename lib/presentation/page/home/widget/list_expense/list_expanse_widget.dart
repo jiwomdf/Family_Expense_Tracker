@@ -153,7 +153,7 @@ class _ListExpenseWidgetState extends State<ListExpenseWidget> {
         padding: const EdgeInsets.only(top: 10, right: 10, bottom: 10),
         child: Text(expenseCategoryModel.date
                 .toDateGlobalFormat()
-                ?.toDateString("dd MMM yyyy") ??
+                ?.toDateString(DateFormatUtil.ddMMMyyyy) ??
             ""),
       ),
     );

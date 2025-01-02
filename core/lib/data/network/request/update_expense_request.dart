@@ -1,4 +1,3 @@
-import 'package:core/util/date_format_util.dart';
 import 'package:core/util/firestore_constants.dart';
 import 'package:core/util/string_util.dart';
 
@@ -28,27 +27,6 @@ class UpdateExpenseRequest {
     required this.timeStamp,
     required this.status,
   });
-
-  factory UpdateExpenseRequest.fromJson(Map<String, dynamic> json) =>
-      UpdateExpenseRequest(
-        id: json["id"],
-        note: (json["note"] ?? "undefined").toString().toInputFormat(),
-        price: int.parse(json["price"] ?? 0),
-        date: (json["date"] ?? DateTime.now().toDateString("dd MMM yyyy") ?? "")
-            .toString()
-            .toInputFormat(),
-        categoryName:
-            (json["categoryName"] ?? "undefined").toString().toInputFormat(),
-        subCategoryName:
-            (json["subCategoryName"] ?? "undefined").toString().toInputFormat(),
-        year: (json["year"] ?? "undefined").toString().toInputFormat(),
-        month: (json["month"] ?? "undefined").toString().toInputFormat(),
-        dayOfMonth:
-            (json["dayOfMonth"] ?? "undefined").toString().toInputFormat(),
-        timeStamp:
-            (json["timeStamp"] ?? "undefined").toString().toInputFormat(),
-        status: (json["status"] ?? "undefined").toString().toInputFormat(),
-      );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
