@@ -427,7 +427,7 @@ class _SettingFirebasePageState extends State<SettingFirebasePage> {
         validator: validator ??
             (value) {
               if (value == null || value.isEmpty) {
-                return "Field cannot be null";
+                return "Field cannot be empty, please check the firebase options in firebase for the value";
               }
               return null;
             },
