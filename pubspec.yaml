@@ -2,7 +2,7 @@ name: group_expense_tracker
 description: "A new Flutter project."
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.0.3+3
 
 environment:
   sdk: ">=3.4.1 <4.0.0"
